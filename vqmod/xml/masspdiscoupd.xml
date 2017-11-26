@@ -1,0 +1,40 @@
+<modification>
+    <id>Mass products update: Discounts, Specials</id>
+      <version>2.7</version>
+      <vqmver>2.1.7</vqmver>
+      <author>opencart-market.com</author>		
+
+<file name="admin/controller/common/header.php">
+    <operation>
+	<search position="before"><![CDATA[$this->data['backup'] = $this->url->link('tool/backup', 'token=' . $this->session->data['token'], 'SSL');]]></search>
+	<add><![CDATA[
+	if(version_compare(VERSION, '1.5.4.1', '>')) {
+	$this->language->load('tool/masspdiscoupd');
+	} else {
+    	$this->load->language('tool/masspdiscoupd');
+	}
+	
+	$begin_code='<li><a class="parent">'.$this->language->get('masstxt_menu1').'</a><ul>';
+	$end_code='</ul></li>';
+	if (!isset($middle_code)) { $middle_code=''; }
+	$middle_code.='<li><a href="'.$this->url->link('tool/masspdiscoupd', 'token=' . $this->session->data['token'], 'SSL').'">'.$this->language->get('masstxt_menu_disco_spec').'</a></li>';
+	$this->data['mass_p_u_code']=$begin_code.$middle_code.$end_code;
+	]]></add>
+    </operation>
+</file>
+
+<file name="admin/view/template/common/header.tpl">
+    <operation>
+	<search position="replace"><![CDATA[<li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>]]></search>
+	<add><![CDATA[<li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li><?php echo $mass_p_u_code; ?>]]></add>
+    </operation>
+</file>	
+
+<file name="admin/view/template/common/header.tpl">
+    <operation error="skip">
+	<search position="replace"><![CDATA[<?php echo $mass_p_u_code; ?><?php echo $mass_p_u_code; ?>]]></search>
+	<add><![CDATA[<?php echo $mass_p_u_code; ?>]]></add>
+    </operation>
+</file>
+
+</modification>

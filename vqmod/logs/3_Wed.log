@@ -1,0 +1,17 @@
+---------- Date: 2017-10-18 14:44:55 ~ IP : 93.76.251.217 ----------
+REQUEST URI : /index.php?route=product/search&amp;search=%D0%A1%D0%BF%D0%B8%D0%BD%D0%BD%D0%B8%D0%BD%D0%B3&amp;description=true&amp;sub_category=true
+MOD DETAILS:
+   modFile   : /var/www/fisherway/data/www/test666.fisherway.com.ua/vqmod/xml/automatic-stickers1-2.xml
+   id        : 
+   version   : 1.2
+   vqmver    : 
+   author    : Sergey Milus
+
+File Name    : catalog/controller/product/search.php(2)
+VQModObject::applyMod - EMPTY SEARCH CONTENT ERROR
+
+File Name    : catalog/controller/product/search.php(2)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): 
+----------------------------------------------------------------------
+
+

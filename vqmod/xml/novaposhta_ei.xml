@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<modification>
+		<id>Nova Poshta API 2.0 Express Invoice for OpenCart v. 1.5.3.Х - 1.5.6.4</id>
+    	<version>Express Invoice v. 1.5.3.Х - 1.5.6.4</version>
+    	<vqmver>2.5.0</vqmver>
+    	<author>GMaks</author>
+
+		<file name="admin/controller/sale/order.php">
+    		<operation>
+    			<search position="after" index="1">
+    				<![CDATA[
+    					if ($order_info) {
+    				]]> 
+  				</search>
+    			<add >
+    				<![CDATA[
+    					/* Nova Poshta express invoice*/
+						$this->data['shipping_code'] = $order_info['shipping_code'];
+    	
+    					if ($order_info['shipping_code'] == 'novaposhta.novaposhta') {
+    						$this->language->load('sale/novaposhta_ei');
+				    		$this->data['button_create_ei'] = $this->language->get('button_create_ei');
+				    		$this->data['novaposhta_ei'] = $this->url->link('sale/novaposhta_ei/getForm', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$this->request->get['order_id'], 'SSL');
+    					}
+    					/* Nova Poshta express invoice*/
+					]]>
+        		</add>
+    		</operation>
+  		</file>
+  		
+  		<file name="admin/view/template/sale/order_info.tpl">
+    		<operation error="log">
+    			<search position="replace">
+    				<![CDATA[
+    					<div class="buttons">
+    				]]> 
+  				</search>
+    			<add>
+    				<![CDATA[
+    					<div class="buttons"><?php if ($shipping_code == 'novaposhta.novaposhta') { ?><a href="<?php echo $novaposhta_ei; ?>" class="button" style="background: red" target="_blank"><?php echo $button_create_ei; ?></a><?php } ?>
+    				]]>
+        		</add>
+    		</operation>
+  		</file>
+  		
+  		<file name="admin/controller/sale/order.php">
+    		<operation error="log">
+    			<search position="before" index="1">
+    				<![CDATA[
+    					$this->data['button_invoice']
+    				]]> 
+  				</search>
+    			<add>
+    				<![CDATA[
+    					/* Nova Poshta express invoice*/    	
+    					$this->language->load('sale/novaposhta_ei');
+				    	$this->data['button_ei_list'] = $this->language->get('button_ei_list');
+				    	$this->data['ei_list'] = $this->url->link('sale/novaposhta_ei', 'token=' . $this->session->data['token'], 'SSL');
+    					/* Nova Poshta express invoice*/
+					]]>
+        		</add>
+    		</operation>
+  		</file>
+  		
+  		<file name="admin/view/template/sale/order_list.tpl">
+    		<operation>
+    			<search position="replace">
+    				<![CDATA[
+    					<div class="buttons">
+    				]]> 
+  				</search>
+    			<add>
+    				<![CDATA[
+    					<div class="buttons"><a href="<?php echo $ei_list; ?>" class="button" style="background: red"><?php echo $button_ei_list; ?></a>
+    				]]>
+        		</add>
+    		</operation>
+  		</file>
+	</modification>

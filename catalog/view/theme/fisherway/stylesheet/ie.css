@@ -1,0 +1,87 @@
+@font-face {
+    font-family: 'bravorgregular';
+    src: url('fontsquirrel/bravorg-webfont.eot');
+    src: url('fontsquirrel/bravorg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fontsquirrel/bravorg-webfont.woff2') format('woff2'),
+         url('fontsquirrel/bravorg-webfont.woff') format('woff'),
+         url('fontsquirrel/bravorg-webfont.ttf') format('truetype'),
+         url('fontsquirrel/bravorg-webfont.svg#bravorgregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'open_sans_condensedbold';
+    src: url('fontsquirrel/opensans-condbold-webfont.eot');
+    src: url('fontsquirrel/opensans-condbold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fontsquirrel/opensans-condbold-webfont.woff2') format('woff2'),
+         url('fontsquirrel/opensans-condbold-webfont.woff') format('woff'),
+         url('fontsquirrel/opensans-condbold-webfont.ttf') format('truetype'),
+         url('fontsquirrel/opensans-condbold-webfont.svg#open_sans_condensedbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open_sanscondensed_light';
+    src: url('fontsquirrel/open_sans_condensed__light-webfont.eot');
+    src: url('fontsquirrel/open_sans_condensed__light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fontsquirrel/open_sans_condensed__light-webfont.woff2') format('woff2'),
+         url('fontsquirrel/open_sans_condensed__light-webfont.woff') format('woff'),
+         url('fontsquirrel/open_sans_condensed__light-webfont.ttf') format('truetype'),
+         url('fontsquirrel/open_sans_condensed__light-webfont.svg#open_sanscondensed_light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open_sansCnLtIt';
+    src: url('fontsquirrel/opensans-condlightitalic-webfont.eot');
+    src: url('fontsquirrel/opensans-condlightitalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fontsquirrel/opensans-condlightitalic-webfont.woff2') format('woff2'),
+         url('fontsquirrel/opensans-condlightitalic-webfont.woff') format('woff'),
+         url('fontsquirrel/opensans-condlightitalic-webfont.ttf') format('truetype'),
+         url('fontsquirrel/opensans-condlightitalic-webfont.svg#open_sansCnLtIt') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.slider-box .slider-heading, .competition-box h5{font-family:bravorgregular}
+
+.slider-box .e-slide .price .pr-center,
+.product-info .right-product .price,
+.cart-info tbody .price, .cart-info tbody .total,
+.cart-recommend .rec-product .price,
+.cart-total td,
+.checkout-page  .checkout-registr .info-title,
+.checkout-page  .checkout-cart table tr .total,
+.wrap-set .product-block .set-price{font-family:open_sans_condensedbold}
+
+body,
+input[type='text'], input[type='password'], textarea,
+.mini-cart-info .quantity input[type="text"],
+.coupon input[type="text"],
+.competition-box .comp-registr input[type="text"],
+.product-info .product-desc .product-review textarea,
+.product-info .product-desc .product-review input[type="text"],
+.product-info .product-desc .product-review .button,
+.product-info .rcategory-block .rcategory-product .button,
+.cart-info tbody .quantity input[type="text"],
+.cart-recommend .rec-product .button,
+.cart-total td b,
+.checkout-page  .checkout-registr table tr td input[type="text"],
+.checkout-page  .checkout-registr table tr td select,
+.checkout-page  .checkout-registr .payment-content  table tr td  span,
+.checkout-page  .checkout-registr  .error,
+.options,
+.options h2,
+.options select,
+#cart .cart-recommend .rec-product .price{font-family:open_sanscondensed_light, Arial, Helvetica, sans-serif;}
+
+#searchContainer{height:70px;position:relative;}
+.searchexample{position:absolute;left:0;bottom:0}
+
+#supermenu ul li a.tll,
+#header2 .topmenu .top-help,
+#header2 #searchContainer .phones,
+#header2 #searchContainer #searchin,
+#header2 #searchContainer .button-search{font-family:arial}

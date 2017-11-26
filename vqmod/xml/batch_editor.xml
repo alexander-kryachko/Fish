@@ -1,0 +1,13 @@
+<modification>
+	<id>Batch Editor</id>
+	<version>1.5.*</version>
+	<vqmver>1.0.8</vqmver>
+	<author>Yarik</author>
+	
+	<file name="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[<li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>]]></search>
+			<add><![CDATA[<li><a href="index.php?route=batch_editor/index&token=<?php echo $this->session->data['token']; ?>">Batch Editor</a></li>]]></add>
+		</operation>
+	</file>
+</modification>

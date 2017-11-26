@@ -1,0 +1,601 @@
+<!-- Created using vQmod XML Generator by UKSB - http://uksb.github.com/vqgen/ //-->
+<modification>
+	<id><![CDATA[ADD PRODUCT IN ONE PAGE]]></id>
+	<version><![CDATA[1]]></version>
+	<vqmver><![CDATA[2.3.x]]></vqmver>
+	<author><![CDATA[noan]]></author>
+	<file name="admin/view/template/catalog/product_form.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-data"><?php echo $tab_data; ?></a><a href="#tab-links"><?php echo $tab_links; ?></a><a href="#tab-attribute"><?php echo $tab_attribute; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-profile"><?php echo $tab_profile; ?></a><a href="#tab-discount"><?php echo $tab_discount; ?></a><a href="#tab-special"><?php echo $tab_special; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-reward"><?php echo $tab_reward; ?></a><a href="#tab-design"><?php echo $tab_design; ?></a></div>]]></search>
+			<add><![CDATA[]]></add>
+
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[<div id="tab-general">]]></search>
+			<add><![CDATA[<div id="prod-headingatxt"><?php echo $tab_general; ?></div>]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[<div id="tab-data">]]></search>
+			<add><![CDATA[<div id="prod-headingbtxt"><?php echo $tab_data; ?></div>]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<div id="tab-links">]]></search>
+			<add><![CDATA[<div id="tab-links"><div id="prod-headingctxt"><?php echo $tab_links; ?></div>]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<div id="tab-attribute">]]></search>
+			<add><![CDATA[<div id="tab-attributetxt">
+			<div id="prod-headingdtxt"><?php echo $tab_attribute; ?></div>]]></add>
+		</operation>
+		 <operation>
+            <search position="replace"><![CDATA[<div id="tab-option">]]></search>
+            <add><![CDATA[<div id="tab-optiontxt"><div id="tab-option">
+            <div id="prod-headingetxt"><?php echo $tab_option; ?></div>]]></add>
+        </operation>
+				<operation>
+			<search position="replace"><![CDATA[<div id="tab-profile">]]></search>
+			<add><![CDATA[<div id="tab-profiletxt">
+			<div id="prod-headingptxt"><?php echo $tab_profile; ?></div>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[<div id="tab-profiletxt">]]></search>
+			<add><![CDATA[<div style="clear: both"></div>]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<div id="tab-discount">]]></search>
+			<add><![CDATA[<div id="tab-discounttxt">
+			<div id="prod-headingftxt"><?php echo $tab_discount; ?></div>]]></add>
+		</operation>
+		<operation>
+            <search position="before"><![CDATA[<div id="tab-discounttxt">]]></search>
+            <add><![CDATA[</div><div style="clear: both"></div>]]></add>
+        </operation>
+		<operation>
+			<search position="replace"><![CDATA[<div id="tab-special">]]></search>
+			<add><![CDATA[<div id="tab-specialtxt">
+			<div id="prod-headinggtxt"><?php echo $tab_special; ?></div>]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<div id="tab-image">]]></search>
+			<add><![CDATA[<div id="tab-imagetxt">
+			<div id="prod-headinghtxt"><?php echo $tab_image; ?></div>]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<div id="tab-reward">]]></search>
+			<add><![CDATA[<div id="tab-rewardtxt">
+			<div id="prod-headingitxt"><?php echo $tab_reward; ?></div>]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<div id="tab-design">]]></search>
+			<add><![CDATA[<div id="tab-designtxt">
+			<div id="prod-headingjtxt"><?php echo $tab_design; ?></div>]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="2"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="mdesctxt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="2"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="mkeywordtxt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="2"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="pdesctxt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="2"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="mtagtxt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row1txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row2txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row3txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row4txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row5txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row6txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row7txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row8txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row9txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row10txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row11txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row12txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row13txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row14txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row15txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row16txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row17txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row18txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row19txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row20txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row21txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row22txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row23txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row24txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row25txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row26txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row27txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row28txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row29txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row30txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row31txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row32txt">]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="3"><![CDATA[<tr>]]></search>
+			<add><![CDATA[<tr id="row33txt">]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[<?php echo $footer; ?>]]></search>
+			<add><![CDATA[<script type="text/javascript">
+				function getStorage(key_prefix) {
+					// this function will return us an object with a "set" and "get" method
+					// using either localStorage if available, or defaulting to document.cookie
+					if (window.localStorage) {
+						// use localStorage:
+						return {
+							set: function(id, data) {
+								localStorage.setItem(key_prefix+id, data);
+							},
+							get: function(id) {
+								return localStorage.getItem(key_prefix+id);
+							}
+						};
+					} else {
+						// use document.cookie:
+						return {
+							set: function(id, data) {
+								document.cookie = key_prefix+id+'='+encodeURIComponent(data);
+							},
+									get: function(id, data) {
+								var cookies = document.cookie, parsed = {};
+								cookies.replace(/([^=]+)=([^;]*);?\s*/g, function(whole, key, value) {
+									parsed[key] = unescape(value);
+								});
+								return parsed[key_prefix+id];
+							}
+						};
+					}
+				}
+
+				jQuery(function($) {
+					// a key must is used for the cookie/storage
+					var storedData = getStorage('com_mysite_checkboxes_'); 
+			
+					$('div.check input:checkbox').bind('change',function(){
+						$('#'+this.id+'txt').toggle($(this).is(':checked'));
+						// save the data on change
+						storedData.set(this.id, $(this).is(':checked')?'checked':'not');
+					}).each(function() {
+						// on load, set the value to what we read from storage:
+						var val = storedData.get(this.id);
+						if (val == 'checked') $(this).attr('checked', 'checked');
+						if (val == 'not') $(this).removeAttr('checked');
+						if (val) $(this).trigger('change');
+					});
+    
+				});
+				</script>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[</form>]]></search>
+			<add><![CDATA[<div class="check-box"><div style="background: #eeeeee; height: 50px; font-size:14px; font-weight: bold; padding: 10px 0 0 5px;"> Quick add product option<span class="help">Uncheck the field that you need. Checkboxes state is saved using cookies & JavaScript. If the desired change is not made, Please <a href="JavaScript: location.reload(true);">Refresh page</a></span></div>
+   <div class="check-content">
+		<div class="check">
+			<p><label for="GENERAL"><b><font color="blue">General</font></b></label> <input type="checkbox" value="prodheadinga" id="prod-headinga" checked /> <label for="headinga">heading</label></p>
+			<p><input type="checkbox" value="Meta description check" id="mdesc" checked /> <label for="Meta-description">Meta Description</label></p>  
+			<p><input type="checkbox" value="Meta keywordscheck " id="mkeyword" checked /> <label for="Meta Tag Keywords">Meta Tag Keywords</label></p>
+			<p><input type="checkbox" value="Descriptioncheck " id="pdesc" checked /> <label for="Description">Description</label></p>
+			<p><input type="checkbox" value="Tags" id="mtag" checked /> <label for="Product Tags">Product Tags</label></p>
+	    </div>
+	<div class="check">
+			<p><label for="DATA"><b><font color="blue">Data</font></b> </label><input type="checkbox" value="prodheadingb" id="prod-headingb" checked /> <label for="headingb">heading</label></p>
+			<p><input type="checkbox" value="SKUcheck" id="row1" checked /> <label for="SKU">SKU</label></p>  
+			<p><input type="checkbox" value="UPCcheck" id="row2" checked /> <label for="UPC">UPC</label></p>  
+			<p><input type="checkbox" value="EANcheck" id="row3" checked /> <label for="EAN">EAN</label></p>  
+			<p><input type="checkbox" value="JANcheck" id="row4" checked /> <label for="JAN">JAN</label></p>  
+			<p><input type="checkbox" value="ISBNcheck" id="row5" checked /> <label for="ISBN">ISBN</label></p> 
+			<p><input type="checkbox" value="MPNcheck" id="row6" checked /> <label for="MPN">MPN</label></p> 
+		</div>	
+		<div class="check">	
+			<br>
+			<p><input type="checkbox" value="Locationcheck" id="row7" checked /> <label for="Location">Location</label></p>  
+			<p><input type="checkbox" value="Pricecheck" id="row8" checked /> <label for="Price">Price</label></p>  
+			<p><input type="checkbox" value="Taxcheck" id="row9" checked /> <label for="Tax Class">Tax Class</label></p>  
+			<p><input type="checkbox" value="Quantitycheck" id="row10" checked /> <label for="Quantity">Quantity</label></p>
+			<p><input type="checkbox" value="MQuantitycheck" id="row11" checked /> <label for="Minimum Quantity">Minimum Quantity</label></p>  
+			<p><input type="checkbox" value="Subtractcheck" id="row12" checked /> <label for="Subtract Stock">Subtract Stock</label></p>  
+		</div>	
+		<div class="check">	
+			<br>
+			<p><input type="checkbox" value="Stockcheck" id="row13" checked /> <label for="Out Of Stock Status">Out Of Stock Status</label></p>  
+			<p><input type="checkbox" value="Lengthcheck" id="row14" checked /> <label for="Length Class">Length Class</label></p> 
+			<p><input type="checkbox" value="SEOcheck" id="row15" checked /> <label for="SEO Keyword">SEO Keyword</label></p>
+			<p><input type="checkbox" value="ImageProdcheck" id="row16" checked /> <label for="Image">Image</label></p>
+			<p><input type="checkbox" value="Datecheck" id="row17" checked /> <label for="Date Available">Date Available</label></p>  
+			<p><input type="checkbox" value="Dimensionscheck" id="row18" checked /> <label for="Dimensions">Dimensions</label></p>  
+ 
+		</div>	
+		<div class="check">
+			<br>
+			<p><input type="checkbox" value="Lengthcheck" id="row19" checked /> <label for="Length Class">Length Class</label></p>  
+			<p><input type="checkbox" value="Weightcheck" id="row20" checked /> <label for="Weight">Weight</label></p>  
+			<p><input type="checkbox" value="WeightCcheck" id="row21" checked /> <label for="Weight Class">Weight Class</label></p>  
+			<p><input type="checkbox" value="Statuscheck" id="row22" checked /> <label for="Status">Status</label></p>  
+			<p><input type="checkbox" value="Sortcheck" id="row23" checked /> <label for="Sort Order">Sort Order</label></p>
+			<p><input type="checkbox" value="prodheading" id="prod-headingb" checked /> <label for="prod heading">heading discount</label></p>
+			
+		</div>	
+		<div class="check">
+			<p><label for="Links"><b><font color="blue">Links</font></b></label> <input type="checkbox" value="prodheadingc" id="prod-headingc" checked /> <label for="headingc">heading</label></p>
+			<p><input type="checkbox" value="Manufacturercheck" id="row24" checked /> <label for="Manufacturer">Manufacturer</label></p>  
+			<p><input type="checkbox" value="Categoriescheck" id="row25" checked /><input type="checkbox" value="Categoriescheck" id="row26" checked /> <label for="Categories">Categories/C.Box</label></p>
+			<p><input type="checkbox" value="Filterscheck" id="row27" checked /><input type="checkbox" value="Filterscheck" id="row28" checked /> <label for="Filters">Filters/F.Box</label></p>
+			<p><input type="checkbox" value="Storescheck" id="row29" checked /> <label for="Stores">Stores</label></p>
+			<p><input type="checkbox" value="Downloadscheck" id="row30" checked /><input type="checkbox" value="Downloadscheck" id="row31" checked /> <label for="Downloads">Downloads</label></p>  
+			<p><input type="checkbox" value="Relatedcheck" id="row32" checked /><input type="checkbox" value="Relatedcheck" id="row33" checked /> <label for="Related Products">Related Products/R.P Box</label></p>  
+	
+		</div>	
+		<div class="check">
+			
+			<p><input type="checkbox" value="Attributecheck" id="tab-attribute" checked /> <label for="Attribute"><b><font color="blue">Attribute</font></b></label><input type="checkbox" value="prodheadingd" id="prod-headingd" checked /><label for="headingd">heading</label></p>  
+	
+			<p><input type="checkbox" value="Optioncheck" id="tab-option" checked /> <label for="Option"><b><font color="blue">Option</font></b></label><input type="checkbox" value="prodheadinge" id="prod-headinge" checked /> <label for="headinge">heading</label></p>
+	
+			<p><input type="checkbox" value="Profilecheck" id="tab-profile" checked /> <label for="Profile"><b><font color="blue">Profile</font></b></label><input type="checkbox" value="prodheadingp" id="prod-headingp" checked /> <label for="headingp">heading</label></p>
+			
+			<p><input type="checkbox" value="Discountcheck" id="tab-discount" checked /> <label for="Discount"><b><font color="blue">Discount</font></b></label><input type="checkbox" value="prodheadingf" id="prod-headingf" checked /> <label for="headingf">heading</label></p>
+	
+			<p><input type="checkbox" value="Specialscheck" id="tab-special" checked /> <label for="Specials"><b><font color="blue">Specials</font></b></label><input type="checkbox" value="prodheadingg" id="prod-headingg" checked /> <label for="headingg">heading</label></p>
+	
+			<p><input type="checkbox" value="Imagecheck" id="tab-image" checked /> <label for="Image"><b><font color="blue">Image</font></b></label><input type="checkbox" value="prodheadingh" id="prod-headingh" checked /> <label for="headingh">heading</label></p> 
+	
+			<p><input type="checkbox" value="Rewardcheck" id="tab-reward" checked /> <label for="Reward P"><b><font color="blue">Reward P</font></b></label><input type="checkbox" value="prodheadingi" id="prod-headingi" checked /> <label for="headingi">heading</label></p>
+	
+			<p><input type="checkbox" value="Designcheck" id="tab-design" checked /> <label for="Design"><b><font color="blue">Design</font></b></label><input type="checkbox" value="prodheadingj" id="prod-headingj" checked /> <label for="headingj">heading</label></p>
+	
+	
+		</div>
+	</div>
+</div>]]></add>
+		</operation>
+		<operation>
+			<search position="after" index="1"><![CDATA[<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script>]]></search>
+			<add><![CDATA[
+				<script type="text/javascript" src="view/javascript/jquery/ajaxupload.js"></script>
+				<script type="text/javascript"><!--
+				$(document).ready(function() {    
+					new AjaxUpload('simple-image-upload', {
+						action: 'index.php?route=common/filemanager/upload&token=<?php echo $token; ?>&image=' + encodeURIComponent($('#image').attr('value')),
+						name: 'image',
+						autoSubmit: true,
+						responseType: 'json',
+					  
+						onChange: function(file, extension) {
+							
+							this.setData({'directory': ''});
+						 this.submit();
+						},
+					  
+						onSubmit: function(file, extension) {
+							$('#upload').append('<img src="view/image/loading.gif" class="loading" style="padding-left: 5px;" />');
+						},
+						onComplete: function(file, json) {
+							if (json.success) {
+							$('#image').attr('value','data/'+file);
+								$.ajax({
+									url: 'index.php?route=common/filemanager/image&token=<?php echo $token; ?>&image=' + encodeURIComponent($('#image').attr('value')),
+									dataType: 'text',
+									success: function(text) {
+										$('#thumb').replaceWith('<img src="' + text + '" alt="" id="thumb" />');                        
+									}
+								});
+							}
+							
+							if (json.error) {
+								alert(json.error);
+							}
+									
+				//			$('.loading').remove();	
+						}
+					});
+					
+				});
+				//--></script>
+				]]></add>
+        </operation>
+		<operation>
+			<search position="after" index="1"><![CDATA[
+							<div id="content">
+							]]></search>
+							<add><![CDATA[
+				<script type="text/javascript" src="view/javascript/jquery.filedrop.js"></script>
+				<script type="text/javascript">
+
+				$(function(){
+				  
+				  var params = {
+					  paramname:'image',
+					  data: { directory: '' },
+					  url: 'index.php?route=common/filemanager/upload&token=<?php echo $token; ?>',
+					  error: function(err, file) { alert(err);  },
+					  allowedfiletypes: ['image/jpeg','image/png','image/gif'], 
+					  docOver: function() { borderMe('maroon') },
+					  docLeave: function() { borderMe('white') },
+					  drop: function() { borderMe('white') },
+					};
+					
+				  function borderMe(color) {
+					$('img[id^="thumb"]').each(function (obj) {$(this).css({border: color +' 4px dashed'});});
+				  }
+					
+				  function clear(idx) {
+					$('#thumb'+idx).replaceWith('<img src="<?php echo $no_image; ?>" id="thumb'+ idx +'" />');
+					$('#image'+ idx).attr('value', '');
+				  }
+				  
+				  function _dropfilesThumbs() {
+					borderMe('white');
+					$('img[id^="thumb"]').each(function (obj) {
+					  if($._data(this, "events") && $._data(this, "events").drop) return;
+					  
+					  var objId = $(this).attr('id');
+					  var idx = objId.substr(5,objId.length);
+
+					  $('#image-row'+ idx).bind('DOMSubtreeModified', _dropfilesThumbs);
+					  
+					  $(this).filedrop($.extend(params, {
+						maxfiles: 1,
+						  uploadFinished:function(i,file,response){
+						  if(response.error) {
+							alert(file.name +'\n'+ response.error); 
+							setTimeout(function() {clear(idx);}, 500);
+							return;
+						  }
+						  $.get("index.php?route=common/filemanager/image&token=<?php echo $token; ?>&image=data/"+ file.name, function(data) {
+							 $('#thumb'+idx).replaceWith('<img src="'+ data +'" id="' + 'thumb'+ idx +'" />');
+							 $('#image'+idx).val('data/'+ file.name);
+							 _dropfilesThumbs();
+						  });
+						  
+						  },
+						globalProgressUpdated: function(progress) {
+						  $('#thumb'+idx).replaceWith('<div id="thumb'+ idx +'">'+ (progress==100 ? 'Resizing...' : progress +'%') +'</div>' );
+						},
+					  }))
+					  });
+				  }
+					
+				  // dropbox  
+				  $('#drop').filedrop($.extend(params, {
+					globalProgressUpdated: function(progress) {
+					  $('#drop').html( progress==100 ? 'Resizing...' : progress +'%' );
+					},
+					afterAll: function() {
+					  $('#drop').html('Drop files here...');
+					},
+					 uploadFinished: function(i,file,response){
+					  if(response.error) {
+						alert(file.name +'\n'+ response.error); 
+						return;
+					  }
+					  $.get("index.php?route=common/filemanager/image&token=<?php echo $token; ?>&image=data/"+ file.name, function(data) {
+						 var idx = addImage();
+						 $('#thumb'+idx).replaceWith('<img src="'+ data +'" alt="" id="' + 'thumb'+ idx +'" />');
+						 $('#image'+idx).val('data/'+ file.name);
+						 _dropfilesThumbs();
+					  });
+					},
+				  })); 
+				  
+				  $('#addImage').click(_dropfilesThumbs);
+				  _dropfilesThumbs();
+
+					
+				});
+
+				</script>
+							]]></add>
+		</operation>
+        <operation>
+            <search position="replace" index="1"><![CDATA[<td><div class="image"><img src="<?php echo $thumb; ?>" alt="" id="thumb" /><br />]]></search>
+			<add><![CDATA[<td><div class="image"><div id="simple-image-upload" style="border:4px dashed purple"><img src="<?php echo $thumb; ?>" alt="" id="thumb" /></div>]]></add>
+        </operation>
+		<operation>
+			<search position="replace" index="1"><![CDATA[
+			 <a onclick="addImage();" class="button"><?php echo $button_add_image; ?></a></td>
+			]]></search>
+			<add><![CDATA[
+			<br /><br />
+			<a onclick="addImage();" class="button" id="addImage"><?php echo $button_add_image; ?></a>
+			<a id="drop" class="button">Drop files here...</a> 
+                </td>
+			]]></add>
+		</operation>      
+
+		<operation>
+			<search position="after" index="1"><![CDATA[
+      	$('#images tfoot').before(html);
+			]]></search>
+			<add><![CDATA[
+        image_row++;
+        return image_row-1;
+			]]></add>
+		</operation>      
+  
+  </file>
+	<file name="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[</head>]]></search>
+			<add><![CDATA[<style type="text/css" > #prod-headingatxt,#prod-headingbtxt,#prod-headingctxt,#prod-headingdtxt,#prod-headingetxt,#prod-headingftxt,#prod-headinggtxt,#prod-headinghtxt,#prod-headingitxt,#prod-headingjtxt,#prod-headingptxt  {	-moz-border-bottom-colors: none;    -moz-border-left-colors: none;    -moz-border-right-colors: none;    -moz-border-top-colors: none;    background-color: #F9F9F9;    border-color: #D7D7D7 #D7D7D7 #02A8F6;    border-image: none;    border-style: solid;    border-width: 1px 1px 4px;    color: #f60;
+	font-size: 17px;    font-weight: bold;    line-height: 32px;    padding: 13px 20px;
+	margin-bottom:5px;    text-transform: uppercase; } .check-box{ border: 1px solid #DDDDDD; width:100%; } .check-content{ display:table; padding-left: 10px; padding-top: 10px;} .check { width: 150px; float:left; } #drop {background:purple; width: 50%; float:right; height:80px; text-align: center; margin-top:-30px;}</style>]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/common/footer.tpl">
+        <operation>
+            <search position="before"><![CDATA[
+               </body></html>
+                ]]></search>
+            <add><![CDATA[
+                <script type="text/javascript">
+                    var startPosition = 130;
+                    $(window).scroll(function() {
+                       if($(window).scrollTop() > startPosition) {
+                            width = $('.box div.heading').width();
+                            height = $('.box div.heading').height();
+                           $('.box div.heading').css('position', 'fixed').css('top',0).css('width',width).css('border-radius','0px').css('z-index','2');
+                           $('.box div.content').css('margin-top', height+20);
+                       } else {
+                        $('.box div.heading').removeAttr('style');
+                        $('.box div.content').removeAttr('style');
+                       }
+                    });
+                </script>
+            ]]></add>
+        </operation>
+    </file>
+	
+<script type="text/javascript">
+		function getStorage(key_prefix) {
+			// this function will return us an object with a "set" and "get" method
+			// using either localStorage if available, or defaulting to document.cookie
+			if (window.localStorage) {
+				// use localStorage:
+				return {
+					set: function(id, data) {
+						localStorage.setItem(key_prefix+id, data);
+					},
+					get: function(id) {
+						return localStorage.getItem(key_prefix+id);
+					}
+				};
+			} else {
+				// use document.cookie:
+				return {
+					set: function(id, data) {
+						document.cookie = key_prefix+id+'='+encodeURIComponent(data);
+					},
+							get: function(id, data) {
+						var cookies = document.cookie, parsed = {};
+						cookies.replace(/([^=]+)=([^;]*);?\s*/g, function(whole, key, value) {
+							parsed[key] = unescape(value);
+						});
+						return parsed[key_prefix+id];
+					}
+				};
+			}
+		}
+
+		jQuery(function($) {
+			// a key must is used for the cookie/storage
+			var storedData = getStorage('com_mysite_checkboxes_'); 
+			
+			$('div.check input:checkbox').bind('change',function(){
+				$('#'+this.id+'txt').toggle($(this).is(':checked'));
+				// save the data on change
+				storedData.set(this.id, $(this).is(':checked')?'checked':'not');
+			}).each(function() {
+				// on load, set the value to what we read from storage:
+				var val = storedData.get(this.id);
+				if (val == 'checked') $(this).attr('checked', 'checked');
+				if (val == 'not') $(this).removeAttr('checked');
+				if (val) $(this).trigger('change');
+			});
+    
+		});
+		</script>
+</modification>

@@ -1,0 +1,90 @@
+<!--
+
+Related Products Plus
+Автор: Широков Сергей
+Разработан: http://bnku.net
+Техническая поддержка: bnku@ya.ru
+
+Модификация дает возможность добавлять сопутствующие товары сразу для целой категории товаров.
+После установки модификации, в административной панели на странице редактирования товара на вкладке "Связи" появится чекбокс "Применить к категории" и поле выбора категории.
+
+Если выбрать галочку рядом с "Применить к категории", то все товары, которые находятся в списке, будут добавлены ко всем товарам выбранной категории.
+По умолчанию выбрана главная категория редактируемого товара, если она установлена. Можно выбрать категорию выше по иерархии, тогда сопутствующие товары добавятся всем товарам всех категорий, находящихся ниже ее по иерархии и товарам выбранной категории.
+При этом, если к какому-то товару из выбранной категории уже добавлены сопутствующие, то они перезапишутся (удалятся и добавятся только те, которые были выбраны в форме).
+Если галочка стоит, но при этом не выбрано ни одного сопутствующего товара, ВСЕ уже добавленные сопутствующие товары у ВСЕХ товаров выбранной категории УДАЛЯТСЯ!
+
+Если галочку не выбирать, то изменения будут применены, как и раньше, только к текущему товару.
+
+То есть, начиная работать над какой-то конкретной категорией товаров, рекомендуется такой алгоритм:
+1. сначала добавить общие сопутствующие товары для всей категории (галочка выбрана);
+2. потом, если требуется, добавить другие сопутствующие товары определенным товарам (уже без галочки).
+
+ВНИМАНИЕ!
+Данная модификация защищена Законом Российской Федерации "Об авторском праве и смежных правах", а также Гражданским Кодексом РФ (Глава 70. Авторское право).
+Изменение, распространение данной модификации, а также ее частей возможна только с разрешения автора.
+
+-->
+
+<modification>
+
+    <id>Related Products +</id>
+    <version>0.1</version>
+    <author>http://bnku.net</author>
+
+    <file name="admin/view/template/catalog/product_form.tpl">
+        <operation>
+            <search position="replace"><![CDATA[<div id="product-related" class="scrollbox">]]></search>
+            <add><![CDATA[
+              <input type="checkbox" name="related_category_status">
+              Применить к категории:
+              <select name="related_category_id">
+                <option value="0" selected="selected"><?php echo $text_none; ?></option>
+                <?php foreach ($categories as $product_categories) { ?>
+                <?php if ($product_categories['category_id'] == $main_category_id) { ?>
+                <option value="<?php echo $product_categories['category_id']; ?>" selected="selected"><?php echo $product_categories['name']; ?></option>
+                <?php } else { ?>
+                <option value="<?php echo $product_categories['category_id']; ?>"><?php echo $product_categories['name']; ?></option>
+                <?php } ?>
+                <?php } ?>
+              </select>
+              <div id="product-related" class="scrollbox">
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="admin/model/catalog/product.php">
+        <operation>
+            <search position="replace" offset="8"><![CDATA[if (isset($data['product_related'])) {]]></search>
+            <add><![CDATA[
+    if (isset($data['related_category_status'])){
+
+        $all_related_products = $this->db->query("SELECT *  FROM " . DB_PREFIX . "product_to_category WHERE category_id = " . $data['related_category_id']);
+
+        foreach ($all_related_products->rows as $product_id_all) {
+            if (isset($data['product_related'])) {
+                foreach ($data['product_related'] as $related_id) {
+                    $this->db->query("DELETE FROM " . DB_PREFIX . "product_related WHERE product_id = '" . (int)$product_id_all['product_id'] . "' AND related_id = '" . (int)$related_id . "'");
+                    $this->db->query("INSERT INTO " . DB_PREFIX . "product_related SET product_id = '" . (int)$product_id_all['product_id'] . "', related_id = '" . (int)$related_id . "'");
+                    //$this->db->query("DELETE FROM " . DB_PREFIX . "product_related WHERE product_id = '" . (int)$related_id . "' AND related_id = '" . (int)$product_id_all['product_id'] . "'");
+                    //$this->db->query("INSERT INTO " . DB_PREFIX . "product_related SET product_id = '" . (int)$related_id . "', related_id = '" . (int)$product_id_all['product_id'] . "'");
+                }
+            }else{
+            $this->db->query("DELETE FROM " . DB_PREFIX . "product_related WHERE product_id = '" . (int)$product_id_all['product_id'] . "'");
+            $this->db->query("DELETE FROM " . DB_PREFIX . "product_related WHERE related_id = '" . (int)$product_id_all['product_id'] . "'");
+            }
+        }
+    }
+
+    if (isset($data['product_related'])) {
+        foreach ($data['product_related'] as $related_id) {
+            $this->db->query("DELETE FROM " . DB_PREFIX . "product_related WHERE product_id = '" . (int)$product_id . "' AND related_id = '" . (int)$related_id . "'");
+            $this->db->query("INSERT INTO " . DB_PREFIX . "product_related SET product_id = '" . (int)$product_id . "', related_id = '" . (int)$related_id . "'");
+            //$this->db->query("DELETE FROM " . DB_PREFIX . "product_related WHERE product_id = '" . (int)$related_id . "' AND related_id = '" . (int)$product_id . "'");
+            //$this->db->query("INSERT INTO " . DB_PREFIX . "product_related SET product_id = '" . (int)$related_id . "', related_id = '" . (int)$product_id . "'");
+        }
+    }
+                ]]></add>
+        </operation>
+    </file>
+
+</modification>

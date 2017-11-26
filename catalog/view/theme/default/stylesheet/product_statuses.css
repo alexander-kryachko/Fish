@@ -1,0 +1,118 @@
+.image {
+  position: relative;
+}
+
+/* Product Statuses */
+.product-status img {
+  margin-right: 15px;
+  border: 0;
+}
+.product-status .status-name {
+  position: relative;
+  bottom: 20px;
+}
+
+/* Product Stickers */
+.product-sticker {
+  z-index: 1;
+}
+.product-sticker img {
+  border: 0 !important;
+}
+.product-sticker.left-top {
+  position: absolute;
+}
+.product-sticker.left-bottom {
+  position: relative;
+}
+.product-sticker.right-top {
+  position: relative;
+}
+.product-sticker.right-bottom {
+  position: relative;
+}
+.product-sticker.center {
+  position: relative;
+}
+.product-sticker.left-center {
+  position: relative;
+}
+.product-sticker.right-center {
+  position: relative;
+}
+.product-sticker.center-top { 
+  position: relative;
+}
+.product-sticker.center-bottom {
+  position: relative;
+}
+
+/* Category Statuses */
+.category-status img {
+  margin-right: 3px;
+  border: 0;
+}
+
+/* Category Stickers */
+.category-sticker {
+  z-index: 1;
+}
+.category-sticker img {
+  border: 0 !important;
+}
+.category-sticker.left-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.category-sticker.left-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.category-sticker.right-top {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.category-sticker.right-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.category-sticker.center {
+  margin: auto;  
+  position: absolute;
+  left:0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.category-sticker.left-center {
+  margin: auto;  
+  position: absolute;
+  left:0;
+  top: 0;
+  bottom: 0;
+}
+.category-sticker.right-center {
+  margin: auto;  
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.category-sticker.center-top {
+  margin: auto;  
+  position: absolute;
+  left:0;
+  right: 0;
+  top: 0;
+}
+.category-sticker.center-bottom {
+  margin: auto;  
+  position: absolute;
+  left:0;
+  right: 0;
+  bottom: 0;
+}

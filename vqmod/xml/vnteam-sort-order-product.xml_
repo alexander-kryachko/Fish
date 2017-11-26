@@ -1,0 +1,171 @@
+<modification>
+	<id><![CDATA[vnteam_sort_order]]></id>
+	<version><![CDATA[1.0.0]]></version>
+	<vqmver><![CDATA[2.1.7]]></vqmver>
+	<author><![CDATA[giangnt-vnteam | vnteam.vn]]></author>
+	<file name="admin/view/template/catalog/product_list.tpl">
+		<operation>
+			<search position="before"><![CDATA[<div class="buttons">]]></search>
+			<add><![CDATA[ <div class="buttons"><a onclick="$('#form').attr('action', '<?php echo $sort_submit; ?>'); $('#form').submit();" class="button"><?php echo $text_sort_order;?></a></div>
+]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[<td class="left"><?php if ($sort == 'p.model') { ?>]]></search>
+			<add><![CDATA[<td class="left" width="10px">
+	<?php if ($sort == 'p.sort_order') { ?>
+        <a href="<?php echo $sort_order; ?>" class="<?php echo strtolower($order); ?>"><?php echo $text_sort_order; ?></a>
+    <?php } else { ?>
+        <a href="<?php echo $sort_order; ?>"><?php echo $text_sort_order; ?></a>
+     <?php } ?>
+	</td>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[<td><input type="text" name="filter_model" value="<?php echo $filter_model; ?>" /></td>]]></search>
+			<add><![CDATA[<td><input type="text" name="filter_order" value="<?php echo $filter_order; ?>" /></td>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[<td class="left"><?php echo $product['model']; ?></td>]]></search>
+			<add><![CDATA[<?php  $sort_order = "sort_order[". $product['product_id'] ."]"; ?>
+        <td class="left"><input type="text"  size="5" name="<?php echo  $sort_order ?>"  value="<?php echo $product['sort_order']; ?>" /></td>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[var filter_model = $('input[name=\'filter_model\']').attr('value');]]></search>
+			<add><![CDATA[var filter_order = $('input[name=\'filter_order\']').attr('value');	
+	if (filter_order) {
+		url += '&filter_order=' + encodeURIComponent(filter_order);
+	}]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+			<search position="after"><![CDATA[private function getList() {]]></search>
+			<add><![CDATA[if (isset($this->request->get['filter_order'])) {
+  			$filter_order = $this->request->get['filter_order'];
+  		} else {
+  			$filter_order = null;
+  		}]]></add>
+		</operation>
+		
+		<operation>
+			<search position="after"><![CDATA[$this->data['column_action'] = $this->language->get('column_action');]]></search>
+			<add><![CDATA[$this->data['text_sort_order'] = $this->language->get('text_sort_order');]]></add>
+		</operation>
+		
+		<operation>
+			<search position="after"><![CDATA[$url = '';]]></search>
+			<add><![CDATA[if (isset($this->request->get['filter_order'])) {
+			$url .= '&filter_order=' . (int)$this->request->get['filter_order'];
+}]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$this->data['delete'] = $this->url->link('catalog/product/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');]]></search>
+			<add><![CDATA[$this->data['sort_submit'] = $this->url->link('catalog/product/sort', 'token=' . $this->session->data['token'] . $url, 'SSL');]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA['filter_model'    => $filter_model,]]></search>
+			<add><![CDATA['filter_order'	  => $filter_order,]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA['action'     => $action]]></search>
+			<add><![CDATA['sort_order'  => $result['sort_order'],]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$this->data['filter_model'] = $filter_model;]]></search>
+			<add><![CDATA[$this->data['filter_order'] = $filter_order;]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[public function autocomplete() {]]></search>
+			<add><![CDATA[public function sort(){
+		
+		$this->load->language('catalog/product');
+		$this->document->setTitle($this->language->get('heading_title'));
+		$this->load->model('catalog/product');
+		
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+			
+			$sort_order = $this->request->post['sort_order'];
+			
+			if(count($sort_order > 0)){
+				$this->model_catalog_product->changeSort($sort_order);
+			}
+			
+			$this->session->data['success'] = $this->language->get('text_success');
+			
+			$url = '';
+			
+			if (isset($this->request->get['filter_order'])) {
+				$url .= '&filter_order=' . (int)$this->request->get['filter_order'];
+			}
+							
+			if (isset($this->request->get['filter_name'])) {
+				$url .= '&filter_name=' . $this->request->get['filter_name'];
+			}
+			
+			if (isset($this->request->get['filter_model'])) {
+				$url .= '&filter_model=' . $this->request->get['filter_model'];
+			}
+			
+			if (isset($this->request->get['filter_price'])) {
+				$url .= '&filter_price=' . $this->request->get['filter_price'];
+			}
+			
+			if (isset($this->request->get['filter_quantity'])) {
+				$url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
+			}
+			
+			if (isset($this->request->get['filter_status'])) {
+				$url .= '&filter_status=' . $this->request->get['filter_status'];
+			}
+			if (isset($this->request->get['filter_bestsell'])) {
+				$url .= '&filter_bestsell=' . $this->request->get['filter_bestsell'];
+			}
+			
+			if (isset($this->request->get['sort'])) {
+				$url .= '&sort=' . $this->request->get['sort'];
+			}
+			
+			if (isset($this->request->get['order'])) {
+				$url .= '&order=' . $this->request->get['order'];
+			}
+			
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+		
+			$this->redirect($this->url->link('catalog/product', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			
+		}
+		
+		$this->getList();
+	}]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/catalog/product.php">
+		<operation>
+			<search position="before"><![CDATA[if (!empty($data['filter_name'])) {]]></search>
+			<add><![CDATA[if (isset($data['filter_order']) && !is_null($data['filter_order'])) {
+				$sql .= " AND p.sort_order = '" . (int)$data['filter_order'] . "'";
+			}]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$sort_data = array(]]></search>
+			<add><![CDATA['p.sort_order',]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[public function getTotalProductsByLayoutId($layout_id) {]]></search>
+			<add><![CDATA[public function changeSort($arrSort){		
+		if(count($arrSort) > 0){
+			foreach ($arrSort as $key=>$value){
+				$this->db->query("UPDATE " . DB_PREFIX . "product SET sort_order ='". (int)$value ."'  WHERE product_id = '" . (int)$key . "'");
+			}
+		}
+	}]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/english/catalog/product.php">
+		<operation>
+			<search position="after"><![CDATA[$_['heading_title']          = 'Products';]]></search>
+			<add><![CDATA[$_['text_sort_order']            = 'Sort Order';]]></add>
+		</operation>
+	</file>
+</modification>

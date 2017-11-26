@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<modification>
+	<id>Caching Mod</id>
+	<version>1.5.0</version>
+	<vqmver>1.0.0</vqmver>
+	<author>Jay Gilford - jay@jaygilford.com</author>
+
+	<!-- START LIB CHANGES -->
+	<file name="system/library/response.php">
+		<operation>
+			<search position="before"><![CDATA[$this->output = $output;]]></search>
+			<add><![CDATA[		if(defined('PAGE_CACHING') && PAGE_CACHING) {
+			if(PAGE_CACHE_FILE) {
+				
+				global $caching_restricted_routes;
+				global $request;
+				$current_route = empty($request->get['route']) ? 'common/home' : $request->get['route'];
+				
+				$route_ok = (!in_array($current_route, $caching_restricted_routes));
+				
+				foreach($this->headers as $header) {
+					if(strstr($header, '/1.1 404')) {
+						$route_ok = false;
+						break;
+					}
+				}
+				
+				if (preg_match('/<html\b/i', $output) && $route_ok) {
+					global $timer;
+					if($timer) {
+						$output .= '
+<!-- WITHOUT CACHE: ' . $timer->stop() . ' -->';
+					}
+					$write = utf8_encode($output);
+					if(PAGE_ZLIB) {
+						$gz = gzopen(PAGE_CACHE_FILE,'w9');
+						gzwrite($gz, $write);
+						gzclose($gz);
+					} else {
+						file_put_contents(PAGE_CACHE_FILE, $write);
+					}
+				}
+			}
+		}]]></add>
+		</operation>
+	</file>
+	<!-- END LIB CHANGES -->
+	
+	<!-- START ADMIN CHANGES -->
+	<file name="admin/controller/common/home.php">
+		<operation>
+			<search position="after"><![CDATA[extends Controller]]></search>
+			<add><![CDATA[	public function clearCache() {
+		$cachedir = realpath(dirname(DIR_CATALOG)) . '/pagecache/cachefiles/';
+		$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($cachedir), RecursiveIteratorIterator::CHILD_FIRST);
+		
+		foreach($iterator as $path) {
+			if(!$path->isDir()) {
+				unlink($path->__toString());
+			}
+		}
+		
+		$this->session->data['clear_cache'] = true;
+		if(!isset($this->session->data['token'])) $this->session->data['token'] = '';
+		$this->redirect(HTTPS_SERVER . 'index.php?route=common/home&token=' . $this->session->data['token']);
+	}
+	
+	public function deleteCacheFile() {
+		$files = false;
+		$key = empty($this->request->get['key']) ? '' : preg_replace('~[^a-z0-9]+~', '', $this->request->get['key']);
+		$sub = empty($this->request->get['sub']) ? 0 : 1;
+		if(!empty($key)) {
+			
+			$cachedir = realpath(dirname(DIR_CATALOG)) . '/pagecache/cachefiles/';
+			if($sub) $cachedir .= substr($key, 0, 2) . '/';
+			
+			$files = glob($cachedir . 'cache.' . $key . '*');
+			foreach($files as $file) {
+				@unlink($file);
+			}
+		}
+			
+		if(!empty($files)) {			
+			die('1');
+		} else {
+			die('0');
+		}
+	}
+]]></add>
+		</operation>
+		<operation>
+			<search position="after" offset="5"><![CDATA[function index()]]></search>
+			<add><![CDATA[$this->data['text_clear_cache'] = $this->language->get('text_clear_cache');]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/language/english/common/home.php">
+		<operation>
+			<search position="after"><![CDATA[?php]]></search>
+			<add><![CDATA[$_['text_clear_cache'] = 'Page cache successfully cleared';]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/view/template/common/home.tpl">
+		<operation>
+			<search position="before" offset="1" index="1"><![CDATA[<div class="warning">]]></search>
+			<add><![CDATA[  <?php if (!empty($this->session->data['clear_cache'])) {
+				$this->session->data['clear_cache'] = false; ?>
+  <div class="success"><?php echo $text_clear_cache; ?></div>
+  <?php } ?>]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/controller/common/header.php">
+		<operation>
+			<search position="after"><![CDATA[$this->data['backup']]]></search>
+			<add><![CDATA[$this->data['text_clear_cache'] = $this->language->get('text_clear_cache');
+			if(!isset($this->session->data['token'])) $this->session->data['token'] = '';
+			$this->data['clear_cache'] = HTTPS_SERVER . 'index.php?route=common/home/clearCache&token=' . $this->session->data['token'];]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/language/english/common/header.php">
+		<operation>
+			<search position="after"><![CDATA[?php]]></search>
+			<add><![CDATA[$_['text_clear_cache'] = 'Clear Page Cache';]]></add>
+		</operation>
+	</file>
+	
+	<!--
+	<file name="admin/language/your-language/common/header.php">
+		<operation>
+			<search position="after"><![CDATA[?php]]></search>
+			<add><![CDATA[$_['text_clear_cache'] = 'Clear Page Cache';]]></add>
+		</operation>
+	</file>
+	-->
+	
+	<file name="admin/view/template/common/header.tpl">
+		<operation error="skip">
+			<search position="before"><![CDATA[<li id="help">]]></search>
+			<add><![CDATA[<li><a href="<?php echo $clear_cache; ?>" class="top"><?php echo $text_clear_cache; ?></a></li>]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[onClick="window.open('<?php echo $stores['href']; ?>');"]]></search>
+			<add><![CDATA[onclick="$('#pcsesh-url').attr('value', '<?php echo $stores['href']; ?>');$('#pcsesh').attr('action', '<?php echo $stores['href']; ?>').submit();"]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="after"><![CDATA[<body>]]></search>
+			<add><![CDATA[
+<?php if(!empty($this->request->get['token']) && !empty($this->session->data['token']) && $this->request->get['token'] == $this->session->data['token']): ?>
+<form id="pcsesh" method="post" action="" target="_blank">
+	<input type="hidden" name="pcsesh-pass" value="1" />
+	<input type="hidden" name="session_id" value="<?php echo session_id(); ?>" />
+	<input type="hidden" name="token" value="<?php echo $this->session->data['token']; ?>" />
+	<input id="pcsesh-url" type="hidden" name="pcsesh_url" value="" />
+</form>
+<?php endif; ?>
+]]></add>
+		</operation>
+	</file>
+	
+	<!-- FIX FOR REGISTER GLOBALS ENABLED -->
+	<file name="system/startup.php">
+		<operation>
+			<search position="before"><![CDATA[session.use_cookies]]></search>
+			<add><![CDATA[	if (!session_id()) {]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[session_start]]></search>
+			<add><![CDATA[}]]></add>
+		</operation>
+	</file>
+	
+	<!-- FIX FOR CUSTOMER APPROVAL BUG IN OC-->
+	<file name="admin/view/template/sale/customer_list.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[$('form')]]></search>
+			<add><![CDATA[$('#form')]]></add>
+		</operation>
+	</file>
+	
+	
+	<!-- END ADMIN CHANGES -->
+
+	<!-- TEMPLATE
+	
+	<file name="">
+		<operation>
+			<search position="after"><![CDATA[]]></search>
+			<add><![CDATA[]]></add>
+		</operation>
+	</file>
+	-->
+</modification>

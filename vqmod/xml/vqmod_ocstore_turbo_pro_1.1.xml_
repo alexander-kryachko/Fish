@@ -1,0 +1,708 @@
+<modification>
+
+	<id>Opencart Turbo Pro  1.1.0 For OCstore</id>
+
+	<version>1.5.x</version>
+
+	<vqmver required="true">2.0.0</vqmver>
+
+	<author>www.ocshop.biz</author>
+
+	<file name="system/library/cache.php">
+
+		<operation>
+
+			<search position="replace"><![CDATA[public function set($key, $value) {]]></search>
+
+			<add><![CDATA[public function set($key, $value, $expire = null, $gz_level = 0) {
+
+			
+
+			if (!$expire) $expire = $this->expire;
+
+			]]></add>
+
+		</operation>
+
+		
+
+		<operation>
+
+			<search position="replace"><![CDATA[$file = DIR_CACHE . 'cache.' . preg_replace('/[^A-Z0-9\._-]/i', '', $key) . '.' . (time() + $this->expire);]]></search>
+
+			
+
+			<add><![CDATA[$file = DIR_CACHE . 'cache.' . preg_replace('/[^A-Z0-9\._-]/i', '', $key) . '.' . (time() + $expire);]]></add>
+
+		</operation>
+
+		<!--
+
+		<operation>
+
+			<search position="replace"><![CDATA[$data = unserialize($cache);]]></search>
+
+			
+
+			<add><![CDATA[$data = unserialize(@gzuncompress($cache));]]></add>
+
+			
+
+		</operation>
+
+		
+
+		<operation>
+
+			<search position="replace"><![CDATA[fwrite($handle, serialize($value));]]></search>
+
+			
+
+			<add><![CDATA[
+
+			
+
+			fwrite($handle, gzcompress(serialize($value), $gz_level));]]></add>
+
+			
+
+		</operation>
+-->
+	</file>	
+
+	
+
+	<!--
+
+	<file name="catalog/controller/common/header.php">
+
+		
+
+	
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			$this->load->model('catalog/category');
+
+			]]></search>
+
+			<add><![CDATA[
+
+			$cacheconfig = $this->config->get('cache');
+
+			$language_id = (int)$this->config->get('config_language_id');
+
+			$cache_data = array();
+
+			if (isset($cacheconfig['menu']['status'])) {
+
+				if ($cacheconfig['menu']['status']) {
+
+					$cache_data  = $this->cache->get('menu');
+
+				};
+
+			}
+
+			
+
+			if (!empty($cache_data[$language_id])) {
+
+				$this->data['categories'] = $cache_data[$language_id];
+
+				} else { 
+
+			]]></add>
+
+		</operation>
+
+
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			$this->children = array(
+
+			]]></search>
+
+			<add><![CDATA[
+
+			
+
+			$cache_data[$language_id] = $this->data['categories'];
+
+			$this->cache->set('menu', $cache_data, (int)$cacheconfig['menu']['lifetime'], (int)$this->config->get('gzip'));
+
+			
+
+		}
+
+
+
+			]]></add>
+
+		</operation>
+
+	</file>
+
+	
+
+	-->
+
+	<file name="catalog/controller/module/category.php">
+
+
+
+		
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			$this->load->model('catalog/category');
+
+			]]></search>
+
+			<add><![CDATA[
+
+			//cachemanager
+
+			$cacheconfig = $this->config->get('cache');
+
+			$language_id = (int)$this->config->get('config_language_id');
+
+			$cache_data = array();
+
+			
+
+			if (isset($cacheconfig['categorymodule']['status'])) {
+
+				if ($cacheconfig['categorymodule']['status']) {
+
+					$cache_data  = $this->cache->get('module.categorymodule');
+
+				};
+
+			}
+
+									
+
+			if (!empty($cache_data[$language_id])) {
+
+				$this->data['categories'] = $cache_data[$language_id];
+
+				} else {			
+
+			//cachemanager						
+
+			]]></add>
+
+		</operation>
+
+
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/category.tpl')) {
+
+			]]></search>
+
+			<add><![CDATA[
+
+			$cache_data[$language_id] = $this->data['categories'];
+
+			$this->cache->set('module.categorymodule', $cache_data, (int)$cacheconfig['categorymodule']['lifetime'], (int)$this->config->get('gzip'));
+
+			
+
+		}
+
+
+
+			]]></add>
+
+		</operation>
+
+	</file>
+
+	
+
+		<file name="catalog/controller/module/featured.php">
+
+
+
+		
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			$this->load->model('catalog/product');
+
+			]]></search>
+
+			<add><![CDATA[
+
+			//cachemanager			
+
+			$param = md5(serialize($setting));
+
+			$cacheconfig = $this->config->get('cache');
+
+			$language_id = (int)$this->config->get('config_language_id');
+
+			$cache_data = array();
+
+			
+
+			if (isset($cacheconfig['featuredmodule']['status'])) {
+
+				if ($cacheconfig['featuredmodule']['status']) {
+
+							$cache_data  = $this->cache->get('module.featuredmodule');
+
+				};
+
+			}
+
+													
+
+			if (!empty($cache_data[$language_id][$param])) {
+
+				$this->data['products'] = $cache_data[$language_id][$param];
+
+				} else {			
+
+			//cachemanager									
+
+			]]></add>
+
+		</operation>
+
+
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/featured.tpl')) {
+
+			]]></search>
+
+			<add><![CDATA[
+
+			//cachemanager			
+
+			$cache_data[$language_id][$param] = $this->data['products'];
+
+			$this->cache->set('module.featuredmodule', $cache_data, (int)$cacheconfig['featuredmodule']['lifetime'], (int)$this->config->get('gzip'));
+
+			
+
+		}
+
+			//cachemanager			
+
+			]]></add>
+
+		</operation>
+
+	</file>	
+
+	
+
+	<file name="catalog/controller/module/bestseller.php">
+
+		
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			$this->load->model('catalog/product');
+
+			]]></search>
+
+			<add><![CDATA[
+
+			$param = md5(serialize($setting));
+
+			$cacheconfig = $this->config->get('cache');
+
+			$language_id = (int)$this->config->get('config_language_id');
+
+			$cache_data = array();
+
+			
+
+			if (isset($cacheconfig['bestsellermodule']['status'])) {
+
+				if ($cacheconfig['bestsellermodule']['status']) {
+
+					$cache_data  = $this->cache->get('module.bestsellermodule');
+
+				};
+
+			}
+
+													
+
+			if (!empty($cache_data[$language_id][$param])) {
+
+				$this->data['products'] = $cache_data[$language_id][$param];
+
+				} else {			
+
+									
+
+			]]></add>
+
+		</operation>
+
+
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/bestseller.tpl')) {
+
+			]]></search>
+
+			<add><![CDATA[
+
+			$cache_data[$language_id][$param] = $this->data['products'];
+
+			$this->cache->set('module.bestsellermodule', $cache_data, (int)$cacheconfig['bestsellermodule']['lifetime'], (int)$this->config->get('gzip'));
+
+			
+
+		}
+
+
+
+			]]></add>
+
+		</operation>
+
+	</file>
+
+	
+
+	<file name="catalog/controller/module/latest.php">
+
+		
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			$this->load->model('catalog/product');
+
+			]]></search>
+
+			<add><![CDATA[
+
+			$param = md5(serialize($setting));
+
+			$cacheconfig = $this->config->get('cache');
+
+			$language_id = (int)$this->config->get('config_language_id');
+
+			$cache_data = array();
+
+			
+
+			if (isset($cacheconfig['latestmodule']['status'])) {
+
+				if ($cacheconfig['latestmodule']['status']) {
+
+						$cache_data  = $this->cache->get('module.latestmodule');
+
+				};
+
+			}
+
+													
+
+			if (!empty($cache_data[$language_id][$param])) {
+
+				$this->data['products'] = $cache_data[$language_id][$param];
+
+				} else {			
+
+						
+
+			]]></add>
+
+		</operation>
+
+
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/latest.tpl')) {
+
+			]]></search>
+
+			<add><![CDATA[
+
+			$cache_data[$language_id][$param] = $this->data['products'];
+
+			$this->cache->set('module.latestmodule', $cache_data, (int)$cacheconfig['latestmodule']['lifetime'], (int)$this->config->get('gzip'));
+
+			
+
+		}
+
+
+
+			]]></add>
+
+		</operation>
+
+	</file>
+
+	
+
+	<file name="catalog/controller/module/special.php">
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			$this->load->model('catalog/product');
+
+			]]></search>
+
+			<add><![CDATA[
+
+			$param = md5(serialize($setting));
+
+			$cacheconfig = $this->config->get('cache');
+
+			$language_id = (int)$this->config->get('config_language_id');
+
+			$cache_data = array();
+
+			
+
+			if (isset($cacheconfig['specialmodule']['status'])) {
+
+				if ($cacheconfig['specialmodule']['status']) {
+
+					$cache_data  = $this->cache->get('module.specialmodule');
+
+				};
+
+			}
+
+													
+
+			if (!empty($cache_data[$language_id][$param])) {
+
+				$this->data['products'] = $cache_data[$language_id][$param];
+
+				} else {			
+
+						
+
+			]]></add>
+
+		</operation>
+
+
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/special.tpl')) {
+
+			]]></search>
+
+			<add><![CDATA[
+
+			$cache_data[$language_id][$param] = $this->data['products'];
+
+			$this->cache->set('module.specialmodule', $cache_data, (int)$cacheconfig['specialmodule']['lifetime'], (int)$this->config->get('gzip'));
+
+			
+
+		}
+
+
+
+			]]></add>
+
+		</operation>
+
+	</file>
+
+	<!--
+
+	<file name="catalog/controller/product/category.php">
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			$results = $this->model_catalog_product->getProducts($data);
+
+			]]></search>
+
+			<add><![CDATA[
+
+			//cachemanager			
+
+			$param = md5(serialize($data));
+
+			$cacheconfig = $this->config->get('cache');
+
+			$language_id = (int)$this->config->get('config_language_id');
+
+			$cache_data = array();
+
+			
+
+			if (isset($cacheconfig['productcategory']['status'])) {
+
+				if ($cacheconfig['productcategory']['status']) {
+
+				     $cache_data  = $this->cache->get('product.category.' . $category_id);
+
+				};
+
+			}
+
+													
+
+			if (!empty($cache_data[$language_id][$param])) {
+
+				$this->data['products'] = $cache_data[$language_id][$param]['products'];
+
+				$product_total =          $cache_data[$language_id][$param]['total'];
+
+				} else {			
+
+			//cachemanager						
+
+			]]></add>
+
+		</operation>
+
+
+
+		<operation error="log">
+
+			<search position="after"  offset='2'><![CDATA[
+
+				'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+
+			]]></search>
+
+			<add><![CDATA[
+
+			//cachemanager			
+
+			$cache_data[$language_id][$param]['products'] = $this->data['products'];
+
+			$cache_data[$language_id][$param]['total'] = $product_total;
+
+			$this->cache->set('product.category.' . $category_id, $cache_data, (int)$cacheconfig['productcategory']['lifetime'], (int)$this->config->get('gzip'));
+
+			
+
+		}
+
+			//cachemanager			
+
+			]]></add>
+
+		</operation>
+
+	</file>
+
+	
+
+	<file name="catalog/controller/product/manufacturer.php">
+
+		<operation error="log">
+
+			<search position="before"><![CDATA[
+
+			$results = $this->model_catalog_product->getProducts($data);
+
+			]]></search>
+
+			<add><![CDATA[
+
+			$param = md5(serialize($data));
+
+			$cacheconfig = $this->config->get('cache');
+
+			$language_id = (int)$this->config->get('config_language_id');
+
+			$cache_data = array();
+
+			
+
+			if (isset($cacheconfig['productmanufacturer']['status'])) {
+
+				if ($cacheconfig['productmanufacturer']['status']) {
+
+				     $cache_data  = $this->cache->get('product.manufacturer.' . $manufacturer_id);
+
+				};
+
+			}
+
+													
+
+			if (!empty($cache_data[$language_id][$param])) {
+
+				$this->data['products'] = $cache_data[$language_id][$param]['products'];
+
+				$product_total =          $cache_data[$language_id][$param]['total'];
+
+						} else {			
+
+			]]></add>
+
+		</operation>
+
+
+
+		<operation error="log">
+
+			<search position="after"  offset='2'><![CDATA[
+
+				'href'        => $this->url->link('product/product', '&manufacturer_id=' . $result['manufacturer_id'] . '&product_id=' . $result['product_id'] . $url)
+
+			]]></search>
+
+			<add><![CDATA[
+
+			$cache_data[$language_id][$param]['products'] = $this->data['products'];
+
+			$cache_data[$language_id][$param]['total'] = $product_total;
+
+			$this->cache->set('product.manufacturer.' . $manufacturer_id, $cache_data, (int)$cacheconfig['productmanufacturer']['lifetime'], (int)$this->config->get('gzip'));
+	
+
+		}
+
+			]]></add>
+
+		</operation>
+
+	</file>
+-->
+</modification>

@@ -1,0 +1,15 @@
+---------- Date: 2017-10-29 12:55:24 ~ IP : 77.120.219.169 ----------
+REQUEST URI : /404.html
+MOD DETAILS:
+   modFile   : /var/www/fisherway/data/www/fisherway.com.ua/vqmod/xml/additional.xml
+   id        : additional fix
+   version   : 1.0
+   vqmver    : 1.0.8
+   author    : max
+
+File Name    : catalog/view/theme/*/template/module/cart.tpl(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): <a href="<?php echo $checkout; ?>" class="button"></a>
+
+----------------------------------------------------------------------
+
+

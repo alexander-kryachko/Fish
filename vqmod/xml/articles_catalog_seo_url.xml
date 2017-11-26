@@ -1,0 +1,174 @@
+<modification>
+	<id>Articles Catalog SEO URL</id>
+	<version>1.5</version>
+	<vqmver>2.3.0</vqmver>
+	<author>xprolance</author>
+
+	<file name="catalog/controller/common/seo_url.php">
+		<operation error="abort">
+			<search position="after" offset="2"><![CDATA[if ($url[0] == 'information_id') {]]></search>
+			<add><![CDATA[
+					if ($url[0] == 'article_id') {
+						if (!isset($this->request->get['article'])) {
+							$this->request->get['article'] = $url[1];
+						} else {
+							$this->request->get['article'] .= '_' . $url[1];
+						}
+					}
+			]]></add>
+		</operation>
+
+		<operation error="abort">
+			<search position="after"><![CDATA[$this->request->get['route'] = 'information/information';]]></search>
+			<add><![CDATA[
+			} elseif (isset($this->request->get['article'])) {
+				$this->request->get['route'] = 'information/article';
+			]]></add>
+		</operation>
+
+		<operation error="abort">
+			<search position="replace"><![CDATA[} elseif ($key == 'path') {]]></search>
+			<add><![CDATA[
+				} elseif ($key == 'article') {
+					$articles = explode('_', $value);
+					
+					foreach ($articles as $article) {
+						$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = 'article_id=" . (int)$article . "'");
+				
+						if ($query->num_rows) {
+							$url .= '/' . $query->row['keyword'];
+						}							
+					}
+					
+						unset($data[$key]);
+				} elseif ($key == 'path') {
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/controller/common/seo_pro.php">
+		<operation error="abort">
+			<search position="replace"><![CDATA[if ($url[0] == 'category_id') {]]></search>
+			<add><![CDATA[
+					if ($url[0] == 'article_id') {
+						if (!isset($this->request->get['article'])) {
+						$this->request->get['article'] = $url[1];
+					} else {
+						$this->request->get['article'] .= '_' . $url[1];
+					         }
+					}
+
+					if (!preg_match("/article/i", $route)) {
+
+					if ($url[0] == 'category_id') {
+			]]></add>
+		</operation>
+
+		<operation error="abort">
+			<search position="replace" offset="2"><![CDATA[} elseif (count($url) > 1) {]]></search>
+			<add><![CDATA[
+					} elseif (count($url) > 1) {
+						$this->request->get[$url[0]] = $url[1];
+					}
+					}
+			]]></add>
+		</operation>
+
+		<operation error="abort">
+			<search position="after"><![CDATA[$this->request->get['route'] = 'information/information';]]></search>
+			<add><![CDATA[
+			} elseif (isset($this->request->get['article'])) {
+				$this->request->get['route'] = 'information/article';
+			]]></add>
+		</operation>
+
+		<operation error="abort">
+			<search position="before"><![CDATA[case 'product/category':]]></search>
+			<add><![CDATA[
+			case 'information/article':
+				if (isset($data['article'])) {
+					$article = explode('_', $data['article']);
+					$article = end($article);
+					$data['article'] = $this->getPathArticle($article);
+					if (!$data['article']) return $link;
+				}
+				break;
+			]]></add>
+		</operation>
+
+		<operation error="abort">
+			<search position="before"><![CDATA[case 'path':]]></search>
+			<add><![CDATA[
+				case 'article_id':			
+					unset($data[$key]);
+				break;
+		
+				case 'article':
+					$articles = explode('_', $value);
+					$current = end($articles);
+					$query = $this->db->query("SELECT a.article_id FROM " . DB_PREFIX . "article a LEFT JOIN " . DB_PREFIX . "article_to_store a2s ON (a.article_id = a2s.article_id) WHERE parent_id = '" . (int)$current . "' AND a2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND a.status = '1' LIMIT 1");
+					if (!$query->rows) {
+						$postfix = 1;
+					}
+					foreach ($articles as $article) {
+						$queries[] = 'article_id=' . $article;
+					}
+					unset($data[$key]);
+					break;
+			]]></add>
+		</operation>
+
+		<operation error="abort">
+			<search position="before"><![CDATA[private function getPathByCategory]]></search>
+			<add><![CDATA[
+	private function getPathArticle($article_id) {
+		$article_id = (int)$article_id;
+		if ($article_id < 1) return false;
+
+		static $path = null;
+		if (!is_array($path)) {
+			$path = $this->cache->get('article.seopath');
+			if (!is_array($path)) $path = array();
+		}
+
+		if (!isset($path[$article_id])) {
+			$max_level = 10;
+
+			$sql = "SELECT CONCAT_WS('_'";
+			for ($i = $max_level-1; $i >= 0; --$i) {
+				$sql .= ",t$i.article_id";
+			}
+			$sql .= ") AS path FROM " . DB_PREFIX . "article t0";
+			for ($i = 1; $i < $max_level; ++$i) {
+				$sql .= " LEFT JOIN " . DB_PREFIX . "article t$i ON (t$i.article_id = t" . ($i-1) . ".parent_id)";
+			}
+			$sql .= " WHERE t0.article_id = '" . $article_id . "'";
+
+			$query = $this->db->query($sql);
+
+			$path[$article_id] = $query->num_rows ? $query->row['path'] : false;
+
+			$this->cache->set('article.seopath', $path);
+		}
+
+		return $path[$article_id];
+	}
+			]]></add>
+		</operation>
+
+		<operation error="skip">
+			<search position="replace"><![CDATA['path',]]></search>
+			<add><![CDATA['path','article',]]></add>
+		</operation>
+
+		<operation error="abort">
+			<search position="after" offset="1"><![CDATA[$aliases[$row['query']] = $row['keyword'];]]></search>
+			<add><![CDATA[
+		if (isset($articles) && $this->config->get('article_show_root') == '1') {
+				$seo_url = 'articles';
+		}
+			]]></add>
+		</operation>
+	</file>
+
+</modification>

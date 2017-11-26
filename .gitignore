@@ -1,0 +1,8 @@
+config.php
+admin/config.php
+.idea
+error_log
+adminer-4.3.1-mysql-en.php
+php.ini
+info.php
+.htaccess

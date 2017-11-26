@@ -1,0 +1,38 @@
+<modification>
+	<id>Admin Apply button (suppler)</id>
+	<version>1.0.0</version>
+	<vqmver>1.0.8</vqmver>
+	<author>mstkalenko</author>
+
+	<file name="admin/controller/catalog/suppler.php">
+        <operation>
+            <search position="replace"><![CDATA[
+			$this->redirect($this->url->link('catalog/suppler', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            ]]></search>
+            <add><![CDATA[
+			if(isset($this->request->post['apply']) and $this->request->post['apply'])
+			$this->redirect($this->url->link('catalog/suppler/update', 'token=' . $this->session->data['token'] . '&form_id=' . $this->request->get['form_id'] . $url, 'SSL'));
+			else
+			$this->redirect($this->url->link('catalog/suppler', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            ]]></add>
+        </operation>
+	</file>
+
+
+	<file name="admin/view/template/catalog/suppler_form.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+			<div class="buttons">
+            ]]></search>
+            <add><![CDATA[
+			<div class="buttons"><a onclick="apply()" class="button"><span>Применить</span></a>
+			<script language="javascript">
+				function apply(){
+				$('#form').append('<input type="hidden" id="apply" name="apply" value="1"  />');
+				$('#form').submit();
+				}
+			</script>
+            ]]></add>
+        </operation>
+	</file>
+</modification>

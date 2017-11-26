@@ -1,0 +1,11 @@
+#callme_button > a { 
+position: fixed ;
+right: 0px;
+top: 150px;
+width: 22px;
+z-index: 999;
+cursor: pointer;
+height: 200px;
+padding: 0px;
+}
+#callme_button > a.callme {width: 22px; height: 200px;}

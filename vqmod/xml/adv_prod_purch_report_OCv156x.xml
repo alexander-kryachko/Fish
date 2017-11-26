@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>ADV Products Purchased Report v3.1 for OpenCart v1.5.3.x, v1.5.4.x, v1.5.5.x, v1.5.6.x</id>
+	<version>3.1</version>
+	<vqmver>2.1.6</vqmver>
+	<author>ADV Reports and Statistics (cmerry)</author>
+	<email>opencart.reports@gmail.com</email>
+	<website>http://www.opencartreports.com</website>	
+	<file name="admin/controller/common/header.php">
+        <operation>
+            <search position="after"><![CDATA[
+$this->data['text_report_product_purchased'] = $this->language->get('text_report_product_purchased');
+            ]]></search>
+            <add><![CDATA[
+$this->data['text_report_adv_product_purchased'] = $this->language->get('text_report_adv_product_purchased');
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[
+$this->data['report_product_purchased'] = $this->url->link('report/product_purchased', 'token=' . $this->session->data['token'], 'SSL');
+            ]]></search>
+            <add><![CDATA[
+$this->data['report_adv_product_purchased'] = $this->url->link('report/adv_product_purchased', 'token=' . $this->session->data['token'], 'SSL');
+            ]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/language/*/common/header.php">
+        <operation>
+            <search position="before"><![CDATA[
+?>
+            ]]></search>
+            <add><![CDATA[
+$_['text_report_adv_product_purchased']	= 'ADV Purchased';
+            ]]></add>
+        </operation>
+	</file>
+			
+	<file name="admin/view/template/common/header.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+<li><a href="<?php echo $report_product_purchased; ?>"><?php echo $text_report_product_purchased; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+<li><a href="<?php echo $report_adv_product_purchased; ?>"><?php echo $text_report_adv_product_purchased; ?></a></li> 
+            ]]></add>
+        </operation>			
+	</file>
+	
+	<file name="admin/controller/module/adv_reports.php">
+        <operation>
+            <search position="after"><![CDATA[
+public function index() {
+            ]]></search>
+            <add><![CDATA[
+	$this->data['adv_pp_current_version'] = '3.1';
+            ]]></add>
+        </operation>	
+        <operation>
+            <search position="before"><![CDATA[
+$this->data['token'] = $this->session->data['token'];
+            ]]></search>
+            <add><![CDATA[
+		$this->data['adv_pp_text_ext_name'] = $this->language->get('adv_pp_text_ext_name');
+		$this->data['adv_pp_ext_name'] = $this->language->get('adv_pp_ext_name');
+		$this->data['adv_pp_text_ext_version'] = $this->language->get('adv_pp_text_ext_version');
+		$this->data['adv_pp_ext_version'] = $this->language->get('adv_pp_ext_version');
+		$this->data['adv_pp_ext_type'] = $this->language->get('adv_pp_ext_type');
+		$this->data['adv_pp_text_ext_compatibility'] = $this->language->get('adv_pp_text_ext_compatibility');
+		$this->data['adv_pp_ext_compatibility'] = $this->language->get('adv_pp_ext_compatibility');
+		$this->data['adv_pp_text_ext_url'] = $this->language->get('adv_pp_text_ext_url');
+		$this->data['adv_pp_ext_url'] = 'http://www.opencart.com/index.php?route=extension/extension/info&extension_id=3688';
+		$this->data['adv_pp_text_ext_support'] = $this->language->get('adv_pp_text_ext_support');
+		$this->data['adv_pp_ext_support'] = $this->language->get('adv_pp_ext_support');
+		$this->data['adv_pp_ext_subject'] = sprintf($this->language->get('adv_pp_ext_subject'), $this->language->get('adv_pp_ext_name'));
+		$this->data['adv_pp_text_ext_legal'] = $this->language->get('adv_pp_text_ext_legal');	
+		$this->data['adv_pp_text_copyright'] = $this->language->get('adv_pp_text_copyright');
+            ]]></add>
+        </operation>	
+        <operation>
+            <search position="before"><![CDATA[
+$this->template = 'module/adv_reports.tpl';
+            ]]></search>
+            <add><![CDATA[
+		$adv_pp_check = curl_init();
+ 		     // Set URL to download
+		curl_setopt($adv_pp_check, CURLOPT_URL,"http://opencartreports.com/version/adv_pp_version.xml");
+ 		    // Include header in result? (0 = yes, 1 = no)
+		curl_setopt($adv_pp_check, CURLOPT_HEADER, 0);
+     		// Should cURL return or print out the data? (true = return, false = print)
+		curl_setopt($adv_pp_check, CURLOPT_RETURNTRANSFER, true);
+ 		    // Timeout in seconds
+		curl_setopt($adv_pp_check, CURLOPT_TIMEOUT, 10);
+ 		    // Download the given URL, and return output
+		$adv_pp_output = curl_exec($adv_pp_check);
+    		// Close the cURL resource, and free system resources
+ 		curl_close($adv_pp_check);
+		$adv_pp_analyse = simplexml_load_string($adv_pp_output,null);
+						
+		$this->data['adv_pp_version']['version'] = $adv_pp_analyse->children()->version;
+		$this->data['adv_pp_version']['whats_new'] = $adv_pp_analyse->children()->whats_new;
+            ]]></add>
+        </operation>			
+	</file>	
+
+	<file name="admin/language/*/module/adv_reports.php">
+        <operation>
+            <search position="before"><![CDATA[
+?>
+            ]]></search>
+            <add><![CDATA[
+$_['adv_pp_text_ext_name']				= 'Extension name:';
+$_['adv_pp_ext_name']					= 'ADV Products Purchased Report';
+$_['adv_pp_text_ext_version']			= 'Extension version:';
+$_['adv_pp_ext_version']				= '3.1';
+$_['adv_pp_ext_type']					= 'vQmod';
+$_['adv_pp_text_ext_compatibility']		= 'Extension compatibility:';
+$_['adv_pp_ext_compatibility']			= 'OpenCart v1.5.3.x, v1.5.4.x, v1.5.5.x, v1.5.6.x';
+$_['adv_pp_text_ext_url']				= 'Extension URL:';
+$_['adv_pp_text_ext_support']			= 'Extension support:';
+$_['adv_pp_ext_support']				= 'opencart.reports@gmail.com';
+$_['adv_pp_ext_subject']      			= '%s support needed';
+$_['adv_pp_text_ext_legal']				= 'Extension legal notice:';
+$_['adv_pp_text_copyright']				= 'ADV Reports & Statistics &copy; 2011-2014';
+            ]]></add>
+        </operation>
+	</file>
+		
+	<file name="admin/view/template/module/adv_reports.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+<div id="adv_product_purchased"></div>
+            ]]></search>
+            <add><![CDATA[
+	<div style="border: 1px solid #ff9f00; margin-bottom:10px;">
+      <table class="form">
+       <tr>
+        <td style="min-width:200px;"><?php echo $adv_pp_text_ext_name; ?></td>
+        <td style="min-width:400px;"><b><?php echo $adv_pp_ext_name; ?></b></td>
+       </tr>
+       <tr>
+        <td><?php echo $adv_pp_text_ext_version; ?></td>
+        <td><b><?php echo $adv_pp_ext_version; ?></b> [ <?php echo $adv_pp_ext_type; ?> ] <div id="adv_pp_newversion"></div> <div id="adv_pp_what_is_new"></div></td>
+       </tr>
+       <tr>
+        <td><?php echo $adv_pp_text_ext_compatibility; ?></td>
+        <td><?php echo $adv_pp_ext_compatibility; ?></td>
+       </tr>
+       <tr>
+        <td><?php echo $adv_pp_text_ext_url; ?></td>
+        <td><a href="<?php echo $adv_pp_ext_url; ?>" target="_blank"><?php echo $adv_pp_ext_url ?></a></td>
+       </tr>
+       <tr>
+        <td><?php echo $adv_pp_text_ext_support; ?></td>
+        <td>
+          <a href="mailto:<?php echo $adv_pp_ext_support; ?>?subject=<?php echo $adv_pp_ext_subject; ?>" target="_blank"><?php echo $adv_pp_ext_support; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+          <span style="color:#F00;"><b>!!!</b></span> <a href="view/template/module/adv_reports/adv_extension_help.htm" id="adv_pp_help_notice"><?php echo $text_asking_help; ?></a> <span style="color:#F00;"><b>!!!</b></span>
+        </td>
+       </tr>
+       <tr>
+        <td><?php echo $adv_pp_text_ext_legal; ?></td>
+        <td><?php echo $adv_pp_text_copyright; ?>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="view/template/module/adv_reports/adv_extension_terms.htm" id="adv_pp_legal_notice"><?php echo $text_terms; ?></a></td>
+       </tr>
+      </table>
+	 </div>
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[
+<?php echo $footer; ?>
+            ]]></search>
+            <add><![CDATA[
+<div id="adv_pp_legal_text" style="display:none"></div>
+<div id="adv_pp_help_text" style="display:none"></div>
+<script type="text/javascript">
+jQuery("#adv_pp_legal_notice").click(function(e) {
+    e.preventDefault();
+    jQuery("#adv_pp_legal_text").load(this.href, function() {
+        jQuery(this).dialog({
+            title: '<?php echo $text_terms; ?>',
+            width:  800,
+            height:  600,
+            minWidth:  500,
+            minHeight:  400,
+            modal: true,
+        });
+    });
+    return false;
+});
+jQuery("#adv_pp_help_notice").click(function(e) {
+    e.preventDefault();
+    jQuery("#adv_pp_help_text").load(this.href, function() {
+        jQuery(this).dialog({
+            title: '<?php echo $text_help_request; ?>',
+            width:  800,
+            height:  600,
+            minWidth:  500,
+            minHeight:  400,
+            modal: true,
+        });
+    });
+    return false;
+});
+</script> 			
+<?php if ($adv_pp_version) { ?>
+<?php if ($adv_pp_version['version'] != $adv_pp_current_version) { ?>  
+<script type="text/javascript">
+jQuery('#adv_pp_newversion').append ('<span style=\"color:red\"><strong>There is new version <?php echo $adv_pp_version['version']; ?> for this extesion available!</strong></span>');
+jQuery('#adv_pp_what_is_new').append('<?php echo html_entity_decode(str_replace("@@@","<br>",$adv_pp_version['whats_new']), ENT_QUOTES, 'UTF-8'); ?> ');
+</script>
+<?php } ?>
+<?php } ?>
+            ]]></add>
+        </operation>				
+	</file>		
+</modification>

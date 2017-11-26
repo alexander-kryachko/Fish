@@ -1,0 +1,31 @@
+<p>Memory requirements and execution time requirements to export (especially PDF) can be quite high. If you see error message in export process, it means your web host does set too low values for memory access and time limits to execution of scripts and this values should be increased. If here described methods to increase this values don't help, it is recommend set narrower date range for export.</p>
+<h2>How to increase the memory limit and maximum execution time for scripts?</h2>
+<p>The server settings that should be modified are:</p>
+<ul>
+<li><code class="bold">memory_limit</code> - this setting affects the export functionality. You should increase it in case you receive error like <i>Fatal error: Allowed memory size of XX bytes exhausted...</i></li>
+<li><code class="bold">max_execution_time</code> - it is recommended to use a higher value in case your database has lots of entries. It is estimated that database with thousands of orders takes several minutes to get exported. You should be fine if you set this setting at 600 seconds. This value should be increased in case you receive error like <i>Fatal error: Maximum execution time of XX seconds exceeded...</i></li>
+<li><code class="bold">upload_max_filesize</code> - this setting affects the import functionality and sets the maximum file size your server can accept. Set it accordingly to the file you need to upload</li>
+<li><code class="bold">post_max_size</code> - usually a bit higher than <code>upload_max_filesize</code></li>
+</ul>
+<h4>Method 1: Check your hosting Control Panel to modify this values.</h4>
+<h4>Method 2: Modify your php.ini file with the following entries:</h4>
+<code>
+    memory_limit = 256M<br />
+    max_execution_time = 600<br />
+    upload_max_filesize = 200M<br />
+    post_max_size = 201M
+</code>
+<h4>Method 3: In your /admin/ folder of OpenCart, create a .htaccess file with the following entries:</h4>
+    <code>
+    php_value memory_limit 256M<br />
+    php_value max_execution_time 600<br />
+    php_value upload_max_filesize 200M<br />
+    php_value post_max_size 201M
+    </code>
+<h4>Method 4: Contact your web-host for assistance.</h4> 
+<h4>Method 5: If you <u>really</u> need PDF export, you can export to HTML and print to PDF file on your local computer.</h4>  
+PDF Printer must be installed on your computer: https://www.google.com/search?q=print+to+pdf
+<br /><br />
+<hr>
+<p>You can find additional information in <b>php.net</b></p>
+

@@ -1,0 +1,26 @@
+<!-- Created using vQmod XML Generator by UKSB - http://www.opencart-extensions.co.uk //-->
+<modification>
+	<id><![CDATA[In fo aditional]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.1.5]]></vqmver>
+	<author><![CDATA[noan]]></author>
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+		<operation>
+			<search position="after"><![CDATA[<?php echo $description; ?>]]></search>
+			<add><![CDATA[ 
+			</br></br>
+The price for <em><?php echo $heading_title; ?></em> include VAT.</br>
+The pictures for <em><?php echo $heading_title; ?></em> are for information purposes. Depending on your monitor, colors may differ from the real color.</br>
+However, at some products may appear differences regarding stock and prices, therefore, for a concrete verification, recommend contacting us by phone.</br>
+The data submitted in the order form for <em><?php echo $heading_title; ?></em> are strictly confidential.</br>
+If you want further information please contact us by e-mail or phone.</br>
+All the promotions on this website are valid within our stock availability.</br>
+Thank you for visiting our store.</br>
+
+]]></add>
+		</operation>
+	</file>
+	
+	
+	
+</modification>

@@ -1,0 +1,8 @@
+span.control-label {
+	margin-left: 5px;
+}
+span.control-label:after {
+	color: #1E91CF;
+	content: url('../image/shoputils_help.gif');
+	margin-left: 4px;
+}

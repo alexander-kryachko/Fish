@@ -1,0 +1,92 @@
+<modification>
+	<id>Articles Catalog</id>
+	<version>1.5</version>
+	<vqmver>2.3.0</vqmver>
+	<author>xprolance</author>
+	<file name="admin/controller/common/header.php">
+		<operation error="abort">
+			<search position="after"><![CDATA[$this->data['text_information'] = $this->language->get('text_information');]]></search>
+			<add><![CDATA[$this->data['text_article'] = $this->language->get('text_article');]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="after"><![CDATA[$this->data['information'] = $this->url->link('catalog/information', 'token=' . $this->session->data['token'], 'SSL');]]></search>
+			<add><![CDATA[$this->data['article'] = $this->url->link('catalog/article', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/*/common/header.php">
+		<operation error="abort">
+			<search position="before"><![CDATA[$_['text_information']]]></search>
+			<add><![CDATA[$_['text_article']                    = 'Каталог статей';
+]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/common/header.tpl">
+		<operation error="abort">
+			<search position="after"><![CDATA[<li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>]]></search>
+			<add><![CDATA[<li><a href="<?php echo $article; ?>"><?php echo $text_article; ?></a></li>]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/common/" name="column_left.php,column_right.php,content_top.php,content_bottom.php">
+		<operation error="abort">
+			<search position="after"><![CDATA[$this->load->model('catalog/category');]]></search>
+			<add><![CDATA[$this->load->model('catalog/article');]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="after" offset="1"><![CDATA[$layout_id = $this->model_catalog_information->getInformationLayoutId($this->request->get['information_id']);]]></search>
+			<add><![CDATA[
+		if (substr($route, 0, 20) == 'information/articles') {
+			$layout_id = $this->model_catalog_article->getArticlesLayoutId($route);	
+		}		
+		if (substr($route, 0, 19) == 'information/article' && isset($this->request->get['article'])) {
+			$path = explode('_', (string)$this->request->get['article']);				
+			$layout_id = $this->model_catalog_article->getArticleLayoutId(end($path));	
+		}
+		]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/feed/google_sitemap.php">
+		<operation error="abort">
+			<search position="before"><![CDATA[$output .= '</urlset>';]]></search>
+			<add><![CDATA[
+			$this->load->model('catalog/article');
+
+			$output .= '<url>';
+			$output .= '<loc>' . $this->url->link('information/articles') . '</loc>';
+			$output .= '<changefreq>monthly</changefreq>';
+			$output .= '<priority>0.7</priority>';
+			$output .= '</url>';
+
+			$output .= $this->getArticles(0);
+		]]></add>
+		</operation>
+
+		<operation error="abort">
+			<search index="1" position="after" offset="1"><![CDATA[return $output;]]></search>
+			<add><![CDATA[
+	protected function getArticles($parent_id, $current_path = '') {
+		$output = '';
+
+		$results = $this->model_catalog_article->getArticles($parent_id);
+
+		foreach ($results as $result) {
+			if (!$current_path) {
+				$new_path = $result['article_id'];
+			} else {
+				$new_path = $current_path . '_' . $result['article_id'];
+			}
+
+			$output .= '<url>';
+			$output .= '<loc>' . str_replace('&', '&amp;', str_replace('&amp;', '&', $this->url->link('information/article', 'article=' . $new_path))) . '</loc>';
+			$output .= '<changefreq>monthly</changefreq>';
+			$output .= '<priority>0.7</priority>';
+			$output .= '</url>';
+
+			$output .= $this->getArticles($result['article_id'], $new_path);
+		}
+
+		return $output;
+	}
+		]]></add>
+		</operation>
+	</file>
+</modification>

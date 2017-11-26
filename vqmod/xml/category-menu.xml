@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>Category Menu Pro</id>
+    <version>1.1.3</version>
+    <vqmver>2.4.1</vqmver>
+    <author>iDiY</author>
+    <file name="admin/model/catalog/category.php">
+        <operation>
+            <search position="before"><![CDATA[if (isset($data['image'])) {]]></search>
+            <add><![CDATA[        if (isset($data['menu_icon'])) {
+            $this->db->query("UPDATE " . DB_PREFIX . "category SET menu_icon = '" . $this->db->escape(html_entity_decode($data['menu_icon'], ENT_QUOTES, 'UTF-8')) . "' WHERE category_id = '" . (int)$category_id . "'");
+        }
+        ]]></add>
+        </operation>
+    </file>
+    <file name="admin/controller/catalog/category.php">
+        <operation>
+            <search position="before"><![CDATA[$this->data['entry_top'] = $this->language->get('entry_top');]]></search>
+            <add><![CDATA[        $this->data['entry_icon'] = $this->language->get('entry_icon');]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[if (isset($this->request->post['top'])) {]]></search>
+            <add><![CDATA[        if (isset($this->request->post['menu_icon'])) {
+            $this->data['menu_icon'] = $this->request->post['menu_icon'];
+        } elseif (!empty($category_info)) {
+            $this->data['menu_icon'] = $category_info['menu_icon'];
+        } else {
+            $this->data['menu_icon'] = '';
+        }
+        ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[$this->load->model('tool/image');]]></search>
+            <add><![CDATA[        
+        if (isset($this->request->post['menu_icon']) && file_exists(DIR_IMAGE . $this->request->post['menu_icon'])) {
+            $this->data['icon_thumb'] = $this->model_tool_image->resize($this->request->post['menu_icon'], 100, 100);
+        } elseif (!empty($category_info) && $category_info['menu_icon'] && file_exists(DIR_IMAGE . $category_info['menu_icon'])) {
+            $this->data['icon_thumb'] = $this->model_tool_image->resize($category_info['menu_icon'], 100, 100);
+        } else {
+            $this->data['icon_thumb'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+        }]]></add>
+        </operation>
+    </file>
+    <file name="admin/language/english/catalog/category.php">
+        <operation error="skip">
+            <search position="after"><![CDATA[$_['entry_image']]]></search>
+            <add><![CDATA[$_['entry_icon']             = 'Category Icon:<span class="help">Display in the Category menu</span>';]]></add>
+        </operation>
+    </file>
+    <file name="admin/language/russian/catalog/category.php">
+        <operation error="skip">
+            <search position="after"><![CDATA[$_['entry_image']]]></search>
+            <add><![CDATA[$_['entry_icon']             = 'Иконка категории:<br /><span class="help">Отображается в меню категорий</span>';]]></add>
+        </operation>
+    </file>
+    <file name="admin/view/template/catalog/category_form.tpl">
+        <operation>
+            <search position="before" offset="1"><![CDATA[<td><?php echo $entry_top; ?></td>]]></search>
+            <add><![CDATA[            <tr>
+              <td><?php echo $entry_icon; ?></td>
+              <td valign="top"><div class="image"><img src="<?php echo $icon_thumb; ?>" alt="" id="icon_thumb" />
+                  <input type="hidden" name="menu_icon" value="<?php echo $menu_icon; ?>" id="menu_icon" />
+                  <br />
+                  <a onclick="image_upload('menu_icon', 'icon_thumb');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#icon_thumb').attr('src', '<?php echo $no_image; ?>'); $('#menu_icon').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+            </tr>]]></add>
+        </operation>
+    </file>
+    <file name="catalog/controller/common/header.php">
+        <operation error="skip">
+            <search position="replace"><![CDATA[$product_total = $this->model_catalog_product->getTotalProducts($data);]]></search>
+            <add trim="true"><![CDATA[if ($this->config->get('config_product_count')) { $product_total = $this->model_catalog_product->getTotalProducts($data); }]]></add>
+        </operation>
+    </file>
+</modification>

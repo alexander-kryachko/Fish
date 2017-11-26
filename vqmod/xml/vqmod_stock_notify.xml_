@@ -1,0 +1,268 @@
+<modification>
+	<id>VQMOD NOTIFY IN STOCK BASIC</id>
+	<version>4.2</version>
+	<vqmver>2.X</vqmver>
+	<author>WEBGURUINDIA | HUNTBEE.IN</author>
+
+	<!-- product controller -->
+	<file name="catalog/controller/product/product.php">
+			<operation>
+                <search position="after"><![CDATA[$this->data['text_model'] = $this->language->get('text_model');]]></search>
+                <add><![CDATA[
+				$this->language->load('hb_oosn');
+				$this->data['notify_button'] = $this->language->get('button_notify_button');
+				$this->data['oosn_info_text'] = $this->language->get('oosn_info_text');
+				$this->data['oosn_text_email'] = $this->language->get('oosn_text_email');
+				$this->data['oosn_text_email_plh'] = $this->language->get('oosn_text_email_plh');
+				$this->data['oosn_text_name'] = $this->language->get('oosn_text_name');
+				$this->data['oosn_text_name_plh'] = $this->language->get('oosn_text_name_plh');
+				$this->data['oosn_text_phone'] = $this->language->get('oosn_text_phone');
+				$this->data['oosn_text_phone_plh'] = $this->language->get('oosn_text_phone_plh');
+				
+				$this->data['quantity'] = $product_info['quantity'];
+				
+				$query = $this->db->query("SELECT stock_status_id FROM " . DB_PREFIX . "stock_status WHERE name = '".$product_info['stock_status']."'");
+				$this->data['stock_status_id'] = $query->row['stock_status_id'];
+				
+				if ($this->customer->isLogged()){
+					$this->data['email'] = $this->customer->getEmail();
+					$this->data['fname'] = $this->customer->getFirstName();
+					$this->data['phone'] = $this->customer->getTelephone();
+					}else {
+						$this->data['email'] = $this->data['fname'] =  $this->data['phone'] = '';
+					}
+			]]></add>
+            </operation>
+			
+			<operation error="skip">
+                <search position="replace"><![CDATA[if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {]]></search>
+                <add><![CDATA[if (!$option_value['subtract'] || $option_value['subtract'] || ($option_value['quantity'] > 0)) {]]></add>
+            </operation>
+        </file>		
+		
+		
+		<file name="catalog/view/theme/*/template/product/product.tpl">
+			<operation>
+                <search position="before"><![CDATA[<?php echo $footer; ?>]]>
+                </search>
+                <add><![CDATA[
+						<style type="text/css"><?php echo $this->config->get('hb_oosn_css');?></style>
+						<script type="text/javascript"><!--
+						function checkOptionQty(ovid,oname,sname,oid) {
+							$('#los').show();
+							$('#option_no_stock').html('');
+							$.ajax({
+								  type: 'post',
+								  url: 'index.php?route=product/product_oosn/checkstock',
+								  data: {option_id: oid, option_value_id: ovid, product_id: '<?php echo $product_id; ?>', option_value: oname, option_selected: sname},
+								  dataType: 'json',
+								  success: function(json) {
+										if (json['success']) {
+											  $('#option_no_stock_input').show();
+											  $('#option_no_stock').html(json['success']);
+											  $( "#option_no_stock_input" ).effect( "<?php echo $this->config->get('hb_oosn_pp_effect'); ?>", "fast" );
+											   
+											  $(".options").find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
+											  $(".options").find('select').val('');
+										}
+										if (json['hasqty']) {
+											$('#option_no_stock_input').hide();
+										}
+										if (json['optinfo']) {
+											$('#opt_info').html(json['optinfo']);
+										}
+								  }
+							 });
+							 $('#los').hide();
+						
+						};
+						
+						$('#notify_btn').click(function(){
+							$('#msgoosn').html('');
+							$('#loadgif').show();
+							$.ajax({
+								  type: 'post',
+								  url: 'index.php?route=product/product_oosn',
+								  data: {data: $('#notifyemail').val(),product_id: '<?php echo $product_id; ?>',option_id:$('#notify_option_id').val(), 							option_value_id:$('#notify_option_value_id').val(),
+								  <?php if ($this->config->get('hb_oosn_name_enable') == 'y') {?>
+								  	name: $('#notifyname').val(),
+								  <?php } ?>
+								 
+								  <?php if ($this->config->get('hb_oosn_mobile_enable') == 'y') {?>
+								  phone: $('#notifyphone').val(),
+								  <?php } ?>
+								  option: $('#notifyoption').val() 
+								  
+								  },
+								  dataType: 'json',
+								  success: function(json) {
+										if (json['success']) {
+											  $('#msgoosn').html(json['success']);
+											  $('#loadgif').hide();
+										}
+								  },
+								  error: function() {
+									  alert("There was an error in printing the message.");
+								  }
+							 });
+						
+						 });
+						//--></script> 
+				]]>
+                </add>
+            </operation>
+				
+			<operation>
+                <search position="before"><![CDATA[<?php echo $text_qty; ?>]]>
+                </search>
+                <add><![CDATA[
+				
+						<?php 
+						$hb_oosn_stock_status = $this->config->get('hb_oosn_stock_status');
+						$hb_oosn_product_qty = $this->config->get('hb_oosn_product_qty');
+						if ($hb_oosn_stock_status ==  '0'){ 
+							$stock_status_id = 0;
+						}
+						
+						if (($quantity < $hb_oosn_product_qty) and ($stock_status_id == $hb_oosn_stock_status) and ($options == false)){ ?>
+         				<div id="oosn_info_text" style="padding-top:20px;"><?php echo $oosn_info_text; ?></div><br />
+               			<div>
+						<table style="padding-top:5px; width:100%;">
+						<?php if ($this->config->get('hb_oosn_name_enable') == 'y') {?>
+						<tr>
+							<td><?php echo $oosn_text_name; ?></td>
+							<td><input name="notifyname" type="text" id="notifyname" placeholder="<?php echo $oosn_text_name_plh; ?>" value="<?php echo $fname;?>" /></td>
+						</tr>
+						<?php } ?>
+						<tr>
+							<td><?php echo $oosn_text_email; ?></td>
+							<td><input name="notifyemail" type="text" id="notifyemail" placeholder="<?php echo $oosn_text_email_plh; ?>" value="<?php echo $email;?>" /></td>
+						</tr>
+						<?php if ($this->config->get('hb_oosn_mobile_enable') == 'y') {?>
+						<tr>
+							<td><?php echo $oosn_text_phone; ?></td>
+							<td><input name="notifyphone" type="text" id="notifyphone" placeholder="<?php echo $oosn_text_phone_plh; ?>" value="<?php echo $phone;?>" /></td>
+						</tr>
+						<?php } ?>
+						<tr>
+							<td></td>
+							<td><input name="notify" type="button" class="button" id="notify_btn" value="<?php echo $notify_button;?>" /><br></td>
+						</tr>
+						</table>	
+							<div id='loadgif' style='display:none'><img src='catalog/view/theme/default/image/loading.gif'/></div>
+							<br><div id="msgoosn"></div>
+						</div>
+						<br>
+            			<?php }else { ?>
+						]]>
+                </add>
+            </operation>
+			
+			<operation>
+                <search position="after"><![CDATA[<input type="button" value="<?php echo $button_cart; ?>" id="button-cart" class="button" />]]>
+                </search>
+                <add><![CDATA[ <?php } ?>]]>
+                </add>
+            </operation>
+			
+			<operation>
+                <search position="replace"><![CDATA[<select name="option[<?php echo $option['product_option_id']; ?>]">]]>
+                </search>
+                <add><![CDATA[<select name="option[<?php echo $option['product_option_id']; ?>]" onchange="checkOptionQty(this.value, $('option:selected',this).text(),'<?php echo $option['name']; ?>', <?php echo $option['product_option_id']; ?>)">]]>
+                </add>
+            </operation>
+			
+			<operation>
+                <search position="replace"><![CDATA[<input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>" />]]>
+                </search>
+                <add><![CDATA[<input type="radio" onchange="checkOptionQty(this.value, '<?php echo $option_value['name']; ?>','<?php echo $option['name']; ?>', <?php echo $option['product_option_id']; ?>)" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>" />]]>
+                </add>
+            </operation>
+			
+			<operation>
+                <search position="replace"><![CDATA[<input type="checkbox" name="option[<?php echo $option['product_option_id']; ?>][]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>" />]]>
+                </search>
+                <add><![CDATA[<input type="checkbox" onchange="checkOptionQty(this.value, '<?php echo $option_value['name']; ?>','<?php echo $option['name']; ?>', <?php echo $option['product_option_id']; ?>)" name="option[<?php echo $option['product_option_id']; ?>][]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>" />]]>
+                </add>
+            </operation>
+			
+			<operation>
+                <search position="before"><![CDATA[<?php if ($options) { ?>]]>
+                </search>
+                <add><![CDATA[
+				<div id='los' style='display:none'><img src='catalog/view/theme/default/image/loading.gif'/></div>
+	  			<div id="option_no_stock" ><input type='hidden' id='notify_option_id' value ='0'><input type='hidden' id='notify_option_value_id' value ='0'><input type='hidden' id='notifyoption' value ='0'></div>
+	  			]]>
+                </add>
+            </operation>
+			
+			<operation>
+                <search position="after"><![CDATA[<?php if ($options) { ?>]]>
+                </search>
+                <add><![CDATA[
+				  <div id="option_no_stock_input" style='display:none;'>
+						<div id="oosn_info_text"><div id="opt_info"></div></div><br />
+               			<div>
+						<table style="padding-top:5px; width:100%;">
+						<?php if ($this->config->get('hb_oosn_name_enable') == 'y') {?>
+						<tr>
+							<td><?php echo $oosn_text_name; ?></td>
+							<td><input name="notifyname" type="text" id="notifyname" placeholder="<?php echo $oosn_text_name_plh; ?>" value="<?php echo $fname;?>" /></td>
+						</tr>
+						<?php } ?>
+						<tr>
+							<td><?php echo $oosn_text_email; ?></td>
+							<td><input name="notifyemail" type="text" id="notifyemail" placeholder="<?php echo $oosn_text_email_plh; ?>" value="<?php echo $email;?>" /></td>
+						</tr>
+						<?php if ($this->config->get('hb_oosn_mobile_enable') == 'y') {?>
+						<tr>
+							<td><?php echo $oosn_text_phone; ?></td>
+							<td><input name="notifyphone" type="text" id="notifyphone" placeholder="<?php echo $oosn_text_phone_plh; ?>" value="<?php echo $phone;?>" /></td>
+						</tr>
+						<?php } ?>
+						<tr>
+							<td></td>
+							<td><input name="notify" type="button" class="button" id="notify_btn" value="<?php echo $notify_button;?>" /><br><br></td>
+						</tr>
+						</table>	
+							<div id='loadgif' style='display:none'><img src='catalog/view/theme/default/image/loading.gif'/></div>
+							<br><div id="msgoosn"></div>
+						</div>
+						<br>
+				  </div><br><br>
+	  			]]>
+                </add>
+            </operation>
+			
+        </file>
+	
+		<!-- MENU LINKS -->
+	 	 <file name="admin/controller/common/header.php">
+            <operation>
+                <search position="after"><![CDATA[$this->data['feed'] = $this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL');]]></search>
+                <add><![CDATA[$this->data['oosnotify_link'] = $this->url->link('extension/oosnotify', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+            </operation>
+			
+			<operation>
+                <search position="after"><![CDATA[$this->data['text_feed'] = $this->language->get('text_feed');]]></search>
+                <add><![CDATA[$this->data['text_oosnotify'] = $this->language->get('text_oosnotify');]]></add>
+            </operation>
+        </file>		
+		
+		<file name="admin/language/*/common/header.php">
+            <operation>
+                <search position="before"><![CDATA[$_['text_feed']]]></search>
+                <add><![CDATA[$_['text_oosnotify']                   = 'Customer Stock Alert';]]></add>
+            </operation>
+        </file>
+		
+		<file name="admin/view/template/common/header.tpl">
+            <operation>
+                <search position="before"><![CDATA[<li><a href="<?php echo $feed; ?>"><?php echo $text_feed; ?></a></li>]]>
+                </search>
+                <add><![CDATA[<li><a href="<?php echo $oosnotify_link; ?>"><?php echo $text_oosnotify; ?></a></li>]]>
+                </add>
+            </operation>
+        </file>
+
+</modification>

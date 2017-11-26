@@ -1,0 +1,159 @@
+.name a {
+  color: #38B0E3;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 12px;
+}
+.price {
+  height: 50px;
+  margin-left: 8px;
+  text-align: right;
+  color: #333;
+  font-size: 12px;
+}
+select[name='filter_category_id'] {
+  max-width: 350px;
+}
+
+.image {
+  padding: 0;
+  border: 0;
+}
+.image_container {
+  float: left;
+  height: 47px;
+  min-width: 35px;
+  overflow: hidden;
+  position: relative;
+}
+.image_container img {
+  height: 40px;
+  margin: 3px;
+  border: 1px solid #EEE;
+}
+.image_container .links {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  background: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.7);
+  margin: 4px;
+  padding: 2px;
+  width: 32px;
+}
+.image_container .links a {
+  width: 12px;
+  height: 12px;
+  position: relative;
+  bottom: 0;
+  display: block;
+  float: left;
+}
+.image_container .links .link_main {
+  left: 0;
+  background: url(../image/accept_button.png) no-repeat;
+  margin-right: 5px;
+}
+.image_container .links .link_delete {
+  right: 0;
+  background: url(../image/delete_button.png) no-repeat;
+}
+.image_container .links .link_exclude {
+  right: 0;
+  background: url(../image/exclude_button.png) no-repeat;
+}
+img.new {
+  border-color: #003A88;
+}
+img.main_image {
+  border-color: #1EFF00;
+}
+img.deleted {
+  border-color: red;
+  opacity: 0.3;
+}
+.search_container {
+  clear: both;
+}
+input.button {
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  padding: 2px 7px 2px 7px;
+  background: #003A88;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -khtml-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  border: 1px solid #003A88;
+  cursor: pointer;
+}
+.list tbody td {
+  padding: 10px 5px;
+  background: none;
+}
+tr.odd {
+  background: #F5F7FA;
+}
+
+.imgContainer {
+  width: 220px;
+  float: left;
+  height: 220px;
+  overflow: hidden;
+  margin-right: 5px;
+}
+.imgContainer .title {
+  height: 28px;
+  overflow: hidden;
+}
+.imgContainer .descr {
+  height: 14px;
+  font-weight: bold;
+  overflow: hidden;
+}
+.imgContainer .image {
+  max-height: 124px;
+  padding: 0;
+  overflow: hidden;
+}
+.add-button {
+  display: block;
+  margin-left: 57px;
+  background: url(../image/add_button.png) no-repeat;
+  border: 0;
+  height: 25px;
+  width: 25px;
+  text-indent: 25px;
+  cursor: pointer;
+}
+.add-button:active {
+  border: 1px solid transparent;
+}
+#cboxTitle .add-button {
+  margin-left: 157px;
+  top: 5px;
+  position: relative;
+}
+.paginationContainer {
+  clear: both;
+}
+.paginationContainer a {
+  border: 1px solid #DDD;
+  padding: 4px 10px;
+  font-size: 12px;
+  text-decoration: none;
+  color: #A3A3A3;
+}
+
+.paginationContainer b,
+.paginationContainer a:hover {
+  border: 1px solid #269BC6;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+  color: #269BC6;
+  background: white;
+}

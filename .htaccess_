@@ -1,0 +1,154 @@
+Options +FollowSymLinks
+
+# Запретить листинг директорий
+Options -Indexes
+
+Order Allow,Deny
+Allow from all
+# USA
+deny from 173.234.159
+deny from 52.0-52.31
+
+# Germany
+deny from 136.243.
+deny from 5.9.138
+deny from 81.30
+deny from 78.46-78.47
+deny from 139.19
+deny from 144.76
+deny from 46.4
+
+# Turkey
+deny from 85.96.115
+deny from 94.55
+deny from 193.104
+
+# Canada
+deny from 167.114
+
+#Europe
+deny from 82.145
+
+#Cloud
+deny from 168.235
+
+#Georgia
+deny from 92.54.228
+#Deny from 108.161.183.123
+Deny from 62.201.
+Deny from 219.156.157.98
+Deny from 193.32.13.197
+Deny from 77.120.126.206 #aukro ebuchee
+Deny from 144.76. #yyoserver.de
+Deny from 144.76.68.131 #yyoserver.de
+Deny from 38.99.82.191 
+Deny from 188.165.15.187 #ahrefs
+Deny from 157.55.39.196 #bingbot
+Deny from 199.192.207.146 #chicago
+Deny from 88.198.16. #server.de
+Deny from 207.46.13.25 #msnbot
+Deny from 157.55.39.198 #msnbot
+Deny from 57.55.39.196 #belgium
+Deny from 77.108.80.2
+Deny from 68.180.228.104 #yahoo
+Deny from 188.93.56. #mailru
+Deny from 78.154.174.38 #Nesterchuk Ebuchiy
+Deny from 109.188.125.180 #Russian Shit
+Deny from .search.msn.com
+Deny from 188.165.15. #ahrefs
+Deny from static.
+Deny from 5.9.86.247
+Deny from static.107.156.9.5.clients.your-server.de
+Deny from static.7.16.243.136.clients.your-server.de
+Deny from static.20.12.4.46.clients.your-server.de
+Deny from static.75.32.4.46.clients.your-server.de
+Deny from static.89.36.243.136.clients.your-server.de
+Deny from static.105.87.4.46.clients.your-server.de
+Deny from static.105.183.251.148.clients.your-server.de
+Deny from static.141.90.76.144.clients.your-server.de
+Deny from static.35.63.76.144.clients.your-server.de
+Deny from static.174.124.251.148.clients.your-server.de
+Deny from static.173.124.251.148.clients.your-server.de
+Deny from static.215.5.243.136.clients.your-server.de
+Deny from static.216.123.251.148.clients.your-server.de
+Deny from www4.serverregal.de
+Deny from ip134.ip-5-135-108.eu
+# Deny from 136.243. #recreativ
+Deny from 46.4.32.
+Deny from 87.106.
+Deny from 88.198.
+Deny from 148.251.
+Deny from monitor.
+Deny from hosted-by.
+Deny from 148.251.0.
+
+
+
+
+# Закрыть доступ к файлам шаблонов
+# <FilesMatch "\.(tpl|ini|log|txt)">
+# Order deny,allow
+# Deny from all
+# </FilesMatch>
+
+
+<Files robots.txt>
+Allow from all
+</Files>
+
+# Необходимо для ЧПУ.
+RewriteEngine On
+
+# Редирект с категорий со слешем
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^(.+)/$
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+#Редирект с больших букв в URL
+
+
+
+#Redirect 301 katushka-ryobi-amazon-2000vi.html http://fisherway.com.ua/katushka-ryobi-amazon-2000vi
+
+#редирект с www
+RewriteCond %{HTTP_HOST}	^www\.(.*)	[NC]
+RewriteRule ^(.*)$ http://%1/$1	[R=301,L]
+
+RewriteBase /
+RewriteRule ^sitemap.xml$ index.php?route=feed/google_sitemap [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
+
+#редирект с index.php на морду. Не затрагивает динамические урлы
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP
+RewriteRule ^index\.php$ http://fisherway.com.ua [R=301,L]
+
+#редирект с категорий со слешем в конце
+
+
+
+## EXPIRES CACHING ##
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/jpg "access plus 1 year"
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/gif "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType text/css "access plus 1 month"
+ExpiresByType application/pdf "access plus 1 month"
+ExpiresByType text/x-javascript "access plus 1 month"
+ExpiresByType application/x-shockwave-flash "access plus 1 month"
+ExpiresByType image/x-icon "access plus 1 year"
+ExpiresDefault "access plus 2 days"
+</IfModule>
+## EXPIRES CACHING ##
+### Additional Settings that may need to be enabled for some servers
+### Uncomment the commands by removing the # sign in front of it.
+### If you get an "Internal Server Error 500" after enabling, then restore the # as this means your host doesn't allow that.
+
+# 1. If your cart only allows you to add one item at a time, it is possible register_globals is on. This may work to disable it:
+# php_flag register_globals off
+
+# 2. If your cart has magic quotes enabled, This may work to disable it:
+# php_flag magic_quotes_gpc Off

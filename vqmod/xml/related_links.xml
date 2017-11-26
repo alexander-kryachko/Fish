@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Related Links for Opencart 1.5.5.x - 1.5.6.x</id>
+	<version>1.01</version>
+	<vqmver>2.1.7</vqmver>
+	<author>AlexDW</author>
+	<file name="admin/view/template/catalog/product_form.tpl">		
+		<operation error="abort">
+		<search position="replace"><![CDATA[
+<div id="product-related<?php echo $product_related['product_id']; ?>" class="<?php echo $class; ?>"> <?php echo $product_related['name']; ?><img src="view/image/delete.png" alt="" />
+			]]></search>
+			<add><![CDATA[
+		<!-- RelatedLinks -->
+                  <div id="product-related<?php echo $product_related['product_id']; ?>" class="<?php echo $class; ?>"> <?php echo $product_related['name']; ?><img src="view/image/delete.png" alt="" class="related_del" />
+				<?php if ($product_related['status'] == 2) { ?>
+				  <img src="view/image/two-link.png" alt="" class="related_status" onclick="imgchange(this,'view/image/two-link.png','view/image/one-link.png', <?php echo $product_related['product_id']; ?>);"/>
+				<?php } ?>
+				<?php if ($product_related['status'] == 1) { ?>
+				  <img src="view/image/one-link.png" alt="" class="related_status" onclick="imgchange2(this,'view/image/one-link.png','view/image/two-link.png', <?php echo $product_related['product_id']; ?>);"/>
+				<?php } ?>				  
+				<?php if ($product_related['status'] == 0) { ?>
+					<img src="view/image/slave-link.png" alt="" class="related_status" ;"/>
+				<?php } ?>
+		<!-- RelatedLinks end -->
+			]]></add>
+		</operation>
+		<operation error="abort">
+		<search position="replace"><![CDATA[
+<input type="hidden" name="product_related[]" value="<?php echo $product_related['product_id']; ?>" />
+			]]></search>
+			<add><![CDATA[
+		<!-- RelatedLinks -->
+                    <input type="hidden" name="product_related[<?php echo $product_related['product_id']; ?>]" value="<?php echo $product_related['product_id']; ?>" />
+					<input type="hidden" id="status<?php echo $product_related['product_id']; ?>" name="product_related[<?php echo $product_related['product_id']; ?>][sta]" value="<?php echo $product_related['status']; ?>" />
+		<!-- RelatedLinks end -->
+			]]></add>
+		</operation>
+		<operation error="abort">
+		<search position="replace"><![CDATA[
+$('#product-related').append('<div id="product-related' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" alt="" /><input type="hidden" name="product_related[]" value="' + ui.item.value + '" /></div>');
+			]]></search>
+			<add><![CDATA[
+	// RelatedLinks
+		$('#product-related').append('<div id="product-related' + ui.item.value + '">' + ui.item.label + '<img src="view/image/delete.png" alt="" class="related_del" /><img src="view/image/two-link.png" alt="" class="related_status" onclick="imgchange(this,\'view/image/two-link.png\',\'view/image/one-link.png\', ' + ui.item.value + ');"/><input type="hidden" name="product_related[' + ui.item.value + ']" value="' + ui.item.value + '" /><input type="hidden" id="status' + ui.item.value + '" name="product_related[' + ui.item.value + '][sta]" value="2" /></div>');
+	// RelatedLinks end
+			]]></add>
+		</operation>
+		<operation error="abort">
+		<search position="before"><![CDATA[
+$('#product-related div img').live('click', function() {
+			]]></search>
+			<add><![CDATA[
+// RelatedLinks
+  var x=false;
+  function imgchange(obj,imgX,imgY,num) {
+   if  (x){
+   obj.src=imgX;
+   document.getElementById('status'+num).value = '2'; 
+   } else {
+   obj.src=imgY;
+   document.getElementById('status'+num).value = '1';
+   }
+  x=!x;
+ }
+
+  var x=false;
+  function imgchange2(obj,imgX,imgY,num) {
+   if  (x){
+   obj.src=imgX;
+   document.getElementById('status'+num).value = '1'; 
+   } else {
+   obj.src=imgY;
+   document.getElementById('status'+num).value = '2';
+   }
+  x=!x;
+ }
+// RelatedLinks end
+			]]></add>
+		</operation>
+		<operation error="abort">
+		<search position="replace"><![CDATA[
+$('#product-related div img').live('click', function() {
+			]]></search>
+			<add><![CDATA[
+		// RelatedLinks
+$('#product-related').find('.related_del').live('click', function() {
+		// RelatedLinks end
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/model/catalog/product.php">		
+		<operation error="abort">
+			<search position="replace" index="false"><![CDATA[
+foreach ($data['product_related'] as $related_id) {
+			]]></search>
+			<add><![CDATA[
+	// RelatedLinks
+		foreach ($data['product_related'] as $related_id => $status) {
+	// RelatedLinks end
+			]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="after" index="false"><![CDATA[
+$this->db->query("DELETE FROM " . DB_PREFIX . "product_related WHERE product_id = '" . (int)$product_id . "' AND related_id = '" . (int)$related_id . "'");
+			]]></search>
+			<add><![CDATA[
+	// RelatedLinks
+		if ((int)$status['sta'] > 0) {
+	// RelatedLinks end
+			]]></add>
+		</operation>
+
+		<operation error="abort">
+			<search position="replace" index="false"><![CDATA[
+$this->db->query("DELETE FROM " . DB_PREFIX . "product_related WHERE product_id = '" . (int)$related_id . "' AND related_id = '" . (int)$product_id . "'");
+			]]></search>
+			<add><![CDATA[
+	// RelatedLinks
+				}
+				$this->db->query("DELETE FROM " . DB_PREFIX . "product_related WHERE product_id = '" . (int)$related_id . "' AND related_id = '" . (int)$product_id . "'");
+				if ((int)$status['sta'] != 1) {
+	// RelatedLinks end
+			]]></add>
+		</operation>
+		
+		<operation error="abort">
+			<search position="after" index="false"><![CDATA[
+$this->db->query("INSERT INTO " . DB_PREFIX . "product_related SET product_id = '" . (int)$related_id . "', related_id = '" . (int)$product_id . "'");
+			]]></search>
+			<add><![CDATA[
+	// RelatedLinks
+				}
+	// RelatedLinks end
+			]]></add>
+		</operation>
+		
+		<operation error="abort">
+			<search position="before"><![CDATA[
+public function getTotalProducts($data = array()) {
+			]]></search>
+			<add><![CDATA[
+	// RelatedLinks
+	public function getProductRelatedLinks($product_id) {
+		$product_related_data = array();
+		
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_related WHERE (related_id='" . (int)$product_id . "' OR product_id='" . (int)$product_id . "')  ");
+
+		foreach ($query->rows as $result) {
+			if (($result['product_id'] != $product_id) AND (!in_array($result['product_id'], $product_related_data)) ) {
+			$product_related_data[] = $result['product_id'];
+			}
+			if (($result['related_id'] != $product_id) AND (!in_array($result['related_id'], $product_related_data)) ) {
+			$product_related_data[] = $result['related_id'];
+			}
+		}
+		return $product_related_data;
+	}
+
+	public function getProductRelatedStatus($product_id, $related_id) {
+
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "product_related WHERE (product_id = '" . (int)$product_id . "' AND related_id = '" . (int)$related_id . "') XOR (product_id = '" . (int)$related_id . "' AND related_id = '" . (int)$product_id . "') ");
+		$data = $query->row['total'];
+		
+		if ( $data <2 ) {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "product_related WHERE (product_id = '" . (int)$product_id . "' AND related_id = '" . (int)$related_id . "') ");
+		$data = $query->row['total'];
+		
+		if ( $data <1 ) {
+		$data = 0;
+		}
+		}
+		return $data;
+	}
+	// RelatedLinks end
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/controller/catalog/product.php">
+	
+		<operation error="abort">
+			<search position="after"><![CDATA[
+'product_id' => $related_info['product_id'],
+			]]></search>
+			<add><![CDATA[
+	// RelatedLinks
+'status' 	 => $this->model_catalog_product->getProductRelatedStatus($this->request->get['product_id'], $related_info['product_id']),
+	// RelatedLinks end
+			]]></add>
+		</operation>
+		<operation error="abort">
+			<search position="replace"><![CDATA[
+$products = $this->model_catalog_product->getProductRelated($this->request->get['product_id']);
+			]]></search>
+			<add><![CDATA[
+	// RelatedLinks
+			$products = $this->model_catalog_product->getProductRelatedLinks($this->request->get['product_id']);
+	// RelatedLinks end
+			]]></add>
+		</operation>
+	</file>
+</modification>

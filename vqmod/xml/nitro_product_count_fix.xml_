@@ -1,0 +1,34 @@
+<modification>
+	<id>Totals Fix in the category controllers.</id>
+	<version>1.0</version>
+	<vqmver>2.X</vqmver>
+	<author>iSenseLabs Team | http://isenselabs.com</author>
+	<file name="catalog/controller/common/header.php">
+		<operation error="skip">
+			<search position="replace"><![CDATA[$product_total = ]]></search>
+			<add><![CDATA[$product_total = (getNitroPersistence('Enabled') == 'yes' && getNitroPersistence('ProductCountFix') == 'yes' && !$this->config->get('config_product_count')) ? 0 : ]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/category.php">
+		<operation error="skip">
+			<search position="replace" index="1"><![CDATA[$product_total = ]]></search>
+			<add><![CDATA[$product_total = (getNitroPersistence('Enabled') == 'yes' && getNitroPersistence('ProductCountFix') == 'yes' && !$this->config->get('config_product_count')) ? 0 : ]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/module/category.php">
+		<operation error="skip">
+			<search position="replace"><![CDATA[$product_total = ]]></search>
+			<add><![CDATA[$product_total = (getNitroPersistence('Enabled') == 'yes' && getNitroPersistence('ProductCountFix') == 'yes' && !$this->config->get('config_product_count')) ? 0 : ]]></add>
+		</operation>
+		
+		<operation error="skip">
+			<search position="replace"><![CDATA[$total = ]]></search>
+			<add><![CDATA[$total = (getNitroPersistence('Enabled') == 'yes' && getNitroPersistence('ProductCountFix') == 'yes' && !$this->config->get('config_product_count')) ? 0 : ]]></add>
+		</operation>
+		
+		<operation error="skip">
+			<search position="replace"><![CDATA[$sub_product_total = ]]></search>
+			<add><![CDATA[$sub_product_total = (getNitroPersistence('Enabled') == 'yes' && getNitroPersistence('ProductCountFix') == 'yes' && !$this->config->get('config_product_count')) ? 0 : ]]></add>
+		</operation>
+	</file>
+</modification>

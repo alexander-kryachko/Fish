@@ -1,0 +1,4 @@
+@import "callme_base.css";
+
+#callme_button > a {background: url("../../image/callme/callme_button_green.png") 0px 0px transparent;}
+#callme_button >a:hover {background: url("../../image/callme/callme_button_green.png") 22px 0px transparent; }

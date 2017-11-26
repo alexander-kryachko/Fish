@@ -1,0 +1,33 @@
+<modification>
+    <id>menu_dla_suppler</id>
+    <version>1.0</version>
+    <vqmver>2.1.6</vqmver>
+    <author>cherkas</author>
+	<file name="admin/view/template/catalog/suppler_list.tpl">
+		<operation>
+			<search position="before">
+			<![CDATA[
+				<div class="box">
+			]]>
+			</search>
+			<add>
+			<![CDATA[
+			<div>
+				<form>
+					<p>
+						<select name="item" onChange="this.form.action = this.options[this.selectedIndex].value;"> 
+							<option disabled selected>Выберите пункт</option> 
+							<option value="/vqmod/php/errors.php" STYLE="color:#CC3333">Посмотреть фаил ошибок</option>
+							<option value="/vqmod/php/report.php" STYLE="color:#0000ff">Посмотреть фаил загрузок</option>
+							<option value="/vqmod/php/sos.php">Посмотреть фаил sos</option>
+							<option value="/admin/uploads/ex.xml">Посмотреть фаил ex</option>
+						</select><input type="submit" value="Ок">
+					</p>
+   
+				</form>
+			</div>
+			]]>
+			</add>
+		</operation>
+	</file>
+</modification>

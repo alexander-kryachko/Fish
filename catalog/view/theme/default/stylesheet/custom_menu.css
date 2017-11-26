@@ -1,0 +1,227 @@
+ul.box-category > li > a > img{
+	vertical-align:middle;
+}
+
+.custom_menu {
+	font-family:Arial;
+	font-size:12px;
+	font-weight:400;
+}
+
+.custom_menu .box-heading {
+	font-size:1.2em;
+	font-weight:700;
+	margin:0 0 10px;
+}
+
+.custom_menu .right {
+	border-radius: 0px 5px 5px 0px;
+}
+
+.custom_menu  ul.box-category, ul.box-category ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.custom_menu  ul.box-category > li {
+	position:relative;
+	display:inline-block;
+	border-bottom:none;
+	padding:0;
+}
+
+.custom_menu  ul.box-category > li:first-child {
+	border-radius:5px 0 0 5px;
+}
+
+.custom_menu .right  ul.box-category > li:first-child {
+	border-radius:0px 5px 0 0;
+}
+
+.custom_menu  ul.box-category > li > a {
+	color: #fff;
+    display: block;
+    font-size: 16px;
+    line-height: 14px;
+    padding: 14px 9px;
+    position: relative;
+    text-decoration: none;
+    transition: all 0.4s ease 0s;
+    z-index: 6;
+}
+
+.custom_menu  ul.box-category > li.active > a {
+	font-weight:700;
+}
+
+.custom_menu  ul.box-category > li > a img{
+	padding:0;
+	display:inline-block;
+	margin:-3px 5px -2px 0;
+	vertical-align:top;
+}
+
+.custom_menu  ul.box-category > li:last-child > a {
+	border-bottom:none;
+}
+
+.custom_menu  ul.box-category > li div {
+	visibility:hidden;
+	position:absolute;
+	display: table;
+	z-index:999;
+	top:41px;
+	padding:0 15px 15px 0;
+	margin:0;
+	background:#fff;
+	border: 1px solid #008a9b;
+	border-radius: 0 0 2px 2px;
+	overflow:hidden;
+	opacity:0;
+	left: -150px;
+	width: 500px;
+}
+
+.custom_menu  ul.box-category > li:hover div {
+	visibility:visible;
+	z-index:999;
+	overflow:hidden;
+	opacity:1.0;
+}
+
+.custom_menu  ul.box-category .right {
+	border-radius:5px 0px 0px 5px !important;
+}
+
+.custom_menu ul.box-category > li div ul {
+	position:relative;
+	display: table-cell;
+	vertical-align:top;
+	margin:0;
+	padding:0;
+	border-left:0;
+}
+
+.custom_menu ul.box-category > li a.active {
+	font-weight: bold;
+}
+
+.custom_menu ul.box-category > li ul > li:last-child {
+	border-bottom: none !important;
+}
+
+.custom_menu ul.box-category > li ul > li img{
+	display:inline-block;
+	float:left;
+	vertical-align:bottom;
+	margin:-3px 8px 0px 0;
+	padding:0;
+	line-height:0px;
+}
+
+.custom_menu ul.box-category > li ul > li .first_child{
+	font-weight: bold;
+	color: #008a9b;
+	text-decoration: none;
+	font-size:14px;
+	padding: 5px 5px 5px 0;
+	text-decoration: none;
+	display: block;
+	margin-left: 5px;
+}
+
+.custom_menu ul.box-category > li ul > li > a:hover {
+	text-decoration:underline;
+}
+
+
+.custom_menu ul.box-category > li ul > li > span {
+	display:block;
+	padding-left: 10px;
+}
+
+.custom_menu ul.box-category > li ul > li > span a {
+	font-size: 14px;
+    color: #444;
+    display: block;
+    padding-bottom: 0;
+    padding-left: 7px;
+    padding-top: 4px;
+    text-decoration: none;
+    text-align: left;
+    line-height: 14px;
+}
+
+
+.custom_menu ul.box-category > li ul > li > span a:hover {
+	text-decoration:underline;
+}
+
+.custom_menu ul.box-category > li ul > li:last-child > a {
+	border-bottom:none;
+}
+
+@media screen and (max-width:1040px){
+	.custom_menu  ul.box-category > li div {
+		left: -55px;
+		width: 320px;
+	}
+}
+
+@media screen and (max-width:830px){
+	#supermenu .custom_menu ul.box-category > li div ul {
+	    border-left: 0 none;
+	    display: inline-block;
+	    margin: 0;
+	    padding: 0;
+	    position: relative;
+	    vertical-align: top;
+	    text-align: left;
+	}
+	.custom_menu ul.box-category > li div {
+	    left: auto;
+	    width: 100%;
+	    padding: 5px;
+	    text-align: left;
+	    width: 90%;
+	    position: relative;
+	    display: none;
+	    overflow: none;
+	    margin: 0 auto!important;
+	}
+	ul.box-category > li ul > li{
+		padding-left: 0;
+	}
+
+	.custom_menu ul.box-category > li:hover{
+		width: 100%;
+	}
+
+	.custom_menu  ul.box-category > li:hover div {
+	display: block;
+}
+
+#supermenu .custom_menu ul.box-category > li div ul{
+	width: 40%;
+}
+.custom_menu ul.box-category > li{
+	display: block;
+	}
+.custom_menu  ul.box-category > li div {
+	top:0;
+}
+
+.custom_menu  ul.box-category > li:hover div {
+	top:0;
+}
+#supermenu .custom_menu ul.box-category > li div ul{
+	margin-right: 20px;
+}
+}
+
+@media screen and (max-width:500px){
+	ul.box-category > li ul > li{
+		padding: 0;
+	}
+}

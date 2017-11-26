@@ -1,0 +1,149 @@
+<modification>
+<id>Add searche product SKU in admin product list page</id>
+<version>1.5.5.1</version>
+<vqmver>1.0</vqmver>
+<author>Aleksandr S.</author>
+
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+			<search position="replace" offset="2"><![CDATA[ $filter_model = null;]]></search>
+			<add><![CDATA[
+				$filter_model = null;
+			}
+				if (isset($this->request->get['filter_sku'])) {
+				$filter_sku = $this->request->get['filter_sku'];
+			} else {
+				$filter_sku = null;
+			}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$this->data['column_price']]]></search>
+			<add><![CDATA[$this->data['column_sku']   = $this->language->get('entry_sku');]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$this->data['sort_price']]]></search>
+			<add><![CDATA[
+				$this->data['sort_sku']   = $this->url->link('catalog/product', 'token=' . $this->session->data['token'] . '&sort=p.sku' . $url, 'SSL');
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$this->data['filter_price']]]></search>
+			<add><![CDATA[$this->data['filter_sku']   = $filter_sku;]]></add>
+		</operation>
+		<operation>
+			<search position="replace" offset="2"><![CDATA[$url .= '&filter_model=' . $this->request->get['filter_model'];]]></search>
+			<add><![CDATA[
+				$url .= '&filter_model=' . $this->request->get['filter_model'];
+		}
+				if (isset($this->request->get['filter_sku'])) {
+			$url .= '&filter_sku=' . $this->request->get['filter_sku'];
+		}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[=> $filter_model,]]></search>
+			<add><![CDATA['filter_sku'	  => $filter_sku,]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[=> $result['model'],]]></search>
+			<add><![CDATA['sku'        => $result['sku'],]]></add>
+		</operation>
+		<operation>
+			<search position="replace" offset="2"><![CDATA[ $filter_model = '';]]></search>
+			<add><![CDATA[
+				$filter_model = '';
+			}
+				if (isset($this->request->get['filter_sku'])) {
+				$filter_sku = $this->request->get['filter_sku'];
+			} else {
+				$filter_sku = '';
+			}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_model']) || isset($this->request->get['filter_category_id'])) {]]></search>
+			<add><![CDATA[ if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_model']) || isset($this->request->get['filter_sku']) || isset($this->request->get['filter_category_id'])) {]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/catalog/product.php">
+		<operation>
+			<search position="before"><![CDATA[	if (!empty($data['filter_price'])) {]]></search>
+			<add><![CDATA[
+			if (!empty($data['filter_sku'])) {
+				$sql .= " AND LCASE(p.sku) LIKE '%" . $this->db->escape(utf8_strtolower($data['filter_sku'])) . "%'";
+			}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA['p.price',]]></search>
+			<add><![CDATA[ 	'p.sku',	]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/catalog/product_list.tpl">
+		<operation>
+			<search position="before"><![CDATA[<td class="left"><?php if ($sort == 'p.price') { ?>]]></search>
+			<add><![CDATA[
+			<td class="left"><?php if ($sort == 'p.sku') { ?>
+            <a href="<?php echo $sort_sku; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_sku; ?></a>
+            <?php } else { ?>
+            <a href="<?php echo $sort_sku; ?>"><?php echo $column_sku; ?></a>
+            <?php } ?></td>
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[ <td align="left"><input type="text" name="filter_price"]]></search>
+			<add><![CDATA[			<td><input type="text" name="filter_sku" value="<?php echo $filter_sku; ?>" /></td>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[<td class="left"><?php if ($product['special']) { ?>]]></search>
+			<add><![CDATA[		<td class="left"><?php echo $product['sku']; ?></td>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[<td class="left">{{if special}}]]></search>
+			<add><![CDATA[<td class="left">${sku}</td>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[var filter_price = $('input[name=\'filter_price\']').attr('value');]]></search>
+			<add><![CDATA[	var filter_sku = $('input[name=\'filter_sku\']').attr('value');
+
+	if (filter_sku) {
+		url += '&filter_sku=' + encodeURIComponent(filter_sku);
+}]]></add>
+		</operation>
+		<operation>
+			 <search position="replace" offset="5"><![CDATA[$('.filter input').autocomplete({]]></search>
+		<add><![CDATA[
+		$('.filter input').autocomplete({
+			delay: 500,
+			source: function(request, response) {
+				filter();
+			}
+		});
+		
+		$('input[name=\'filter_sku\']').autocomplete({
+	delay: 0,
+	source: function(request, response) {
+		$.ajax({
+			url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_sku=' +  encodeURIComponent(request.term),
+			dataType: 'json',
+			success: function(json) {		
+				response($.map(json, function(item) {
+					return {
+						label: item.sku,
+						value: item.sku
+					}
+				}));
+			}
+		});
+	}, 
+	select: function(event, ui) {
+		$('input[name=\'filter_sku\']').val(ui.item.label);
+						
+		return false;
+	}
+});]]></add>
+		</operation>
+	</file>
+
+</modification>

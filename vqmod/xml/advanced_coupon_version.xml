@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Advanced Coupon - Opencart Versions 1.5.5.X - 1.5.4.X - 1.5.3.X</id>
+	<version>1.1</version>
+	<vqmver>2.0</vqmver>
+	<author>Opcrat</author>
+	<file name="catalog/controller/checkout/cart.php">
+		<operation>
+			<search position="before"><![CDATA[// Voucher]]></search>
+		<add><![CDATA[
+		$this->language->load('total/advanced_coupon');
+		// Advanced Coupon    
+		if (isset($this->request->post['advanced_coupon']) && $this->validateAdvancedCoupon()) { 
+			$this->session->data['advanced_coupon'][] = $this->request->post['advanced_coupon'];	
+			$this->session->data['success'] = $this->language->get('text_advanced_coupon_success');
+			$this->redirect($this->url->link('checkout/cart'));
+		}
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$this->data['button_coupon'] = $this->language->get('button_coupon');]]></search>
+			<add><![CDATA[
+			$this->data['text_use_advanced_coupon'] = $this->language->get('text_use_advanced_coupon');
+			$this->data['entry_advanced_coupon'] = $this->language->get('entry_advanced_coupon');
+			$this->data['button_advanced_coupon'] = $this->language->get('button_coupon');
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$this->data['voucher_status'] = $this->config->get('voucher_status');]]></search>
+			<add><![CDATA[
+			$this->data['advanced_coupon_status'] = $this->config->get('advanced_coupon_status');
+		]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[function validateVoucher() {]]></search>
+			<add><![CDATA[
+			private function validateAdvancedCoupon() {
+			$this->load->model('checkout/advanced_coupon');
+			
+			// check which language is used by customer
+			$language_id = $this->model_checkout_advanced_coupon->getLanguageId($this->session->data['language']);
+			
+			if($this->request->post['advanced_coupon'] == '') {
+				$this->error['warning'] = $this->language->get('error_advanced_coupon_blank');
+				return false;
+			}
+			
+			$coupon_info = $this->model_checkout_advanced_coupon->getCouponInfo($this->request->post['advanced_coupon']);
+			
+			if($coupon_info->num_rows) {
+				$sub_total = $this->cart->getSubTotal();
+				$code_value = $this->request->post['advanced_coupon'];				
+				$options = unserialize($coupon_info->row['options']);
+				
+				//print "<pre>"; print_r($options); exit;
+				
+				// check whether total set
+				if($options['total'] != 0) {
+					$check_range = substr_count($options['total'], "-");
+					
+					if($check_range > 0) {							
+						$total_range = explode("-", $options['total']);							
+						if($sub_total < $total_range[0] || $sub_total > $total_range[1]) {
+						
+							if($options['advanced_coupon'][$language_id]['error_total_amount_range'] != '') {
+								$this->error['warning'] = $options['advanced_coupon'][$language_id]['error_total_amount_range'];
+							} else {
+								$this->error['warning'] = sprintf($this->language->get('error_total_range'), $total_range[0], $total_range[1]);
+							}
+							return false;								
+						}
+						
+					} else {
+						if($sub_total < $options['total']) {
+							if($options['advanced_coupon'][$language_id]['error_total_amount'] != '') {
+								$this->error['warning'] = $options['advanced_coupon'][$language_id]['error_total_amount'];
+							} else {
+								$this->error['warning'] = sprintf($this->language->get('error_total_value'), $options['total']);
+							}
+							return false;
+						}
+					}
+					
+				}
+				
+				// check whether total quantity set or not
+				if($options['quantity_total'] != 0) {
+					$total_quantity = 0;
+					foreach($this->session->data['cart'] as $key => $value) {
+						$total_quantity += $value;
+					}
+					
+					$count = substr_count($options['quantity_total'], '-');
+					
+					if($count > 0) {
+						$qty_total = explode("-", $options['quantity_total']);								
+						if($total_quantity < $qty_total[0] || $total_quantity > $qty_total[1]) {
+							//$this->error['warning'] = sprintf($this->language->get('text_quantity_total_range'), $qty_total[0], $qty_total[1]);
+							if($options['advanced_coupon'][$language_id]['error_total_quantity_range'] != '') {
+								$this->error['warning'] = $options['advanced_coupon'][$language_id]['error_total_quantity_range'];
+							} else {
+								$this->error['warning'] = sprintf($this->language->get('error_quantity_total_range'), $qty_total[0], $qty_total[1]);
+							}
+							return false;	
+						}	
+					} else {
+						if($total_quantity < $options['quantity_total']) {
+							//$this->error['warning'] = sprintf($this->language->get('text_quantity_total_value'), ($options['quantity_total'] - 1));
+							if($options['advanced_coupon'][$language_id]['error_total_quantity'] != '') {
+								$this->error['warning'] = $options['advanced_coupon'][$language_id]['error_total_quantity'];
+							} else {
+								$this->error['warning'] = sprintf($this->language->get('error_quantity_total_value'), ($options['quantity_total'] - 1));
+							}
+							return false;
+						}
+					}					
+				}
+				
+				// check for login
+				$login_status = $options['logged'];
+				
+				if($login_status == 1) {
+					if(!isset($this->session->data['customer_id'])) {
+						//$this->error['warning'] = $this->language->get('text_login_error');
+						if($options['advanced_coupon'][$language_id]['error_login'] != '') {
+							$this->error['warning'] = $options['advanced_coupon'][$language_id]['error_login'];
+						} else {
+							$this->error['warning'] = $this->language->get('error_login_error');
+						}
+						return false;
+					}
+				}
+				
+				// check for the coupon
+				$coupon_status = $options['coupon_combine'];					
+				if($coupon_status == 0) {
+					if(isset($this->session->data['coupon'])) { // IF OTHER COUPON IS USED WITH ADVANCED COUPON
+						//$this->error['warning'] = $this->language->get('text_coupon_error');
+						if($options['advanced_coupon'][$language_id]['error_other_coupon'] != '') {
+							$this->error['warning'] = $options['advanced_coupon'][$language_id]['error_other_coupon'];
+						} else {
+							$this->error['warning'] = $this->language->get('error_coupon_error');
+						}
+						return false;
+					}
+				}
+				
+				// check for the special products
+				$special_product = $options['special_combine'];
+				$special_product_status = 0;
+				$flag = 0;					
+				if($special_product == 0) {
+					foreach($this->session->data['cart'] as $key => $value) {
+						$product_id = $key;							
+						$special_product_status = $this->model_checkout_advanced_coupon->getSpecialProductInfo($product_id);							
+						if($special_product_status > 0) {
+							$flag = 1; // IF SPECIAL PRODUCT FOUND IN CART
+						}	
+					}
+					if($flag == 1){
+						//$this->error['warning'] = $this->language->get('text_special_product_error');
+						if($options['advanced_coupon'][$language_id]['error_special_product'] != '') {
+							$this->error['warning'] = $options['advanced_coupon'][$language_id]['error_special_product'];
+						} else {
+							$this->error['warning'] = $this->language->get('error_special_product_error');
+						}
+						return false;
+					}
+				}
+				
+				// check for discount product 					
+				$discount_product = $options['discount_combine'];
+				$discount_product_status = 0;
+				$discount_flag = 0;
+				
+				if($discount_product == 0) {
+					foreach($this->session->data['cart'] as $key => $value) {
+						$product_id = $key;							
+						$discount_product_status = $this->model_checkout_advanced_coupon->getDiscountProductInfo($product_id);							
+						if($discount_product_status > 0) {
+							$discount_flag = 1; // IF DISCOUNT PRODUCT FOUND IN CART
+						}	
+					}
+					
+					if($discount_flag == 1){
+						//$this->error['warning'] = $this->language->get('text_discount_product_error');
+						if($options['advanced_coupon'][$language_id]['error_discount_product'] != '') {
+							$this->error['warning'] = $options['advanced_coupon'][$language_id]['error_discount_product'];
+						} else {
+							$this->error['warning'] = $this->language->get('error_discount_product_error');
+						}
+						return false;
+					}
+				}
+				
+				// check for uses total
+				$uses_total = $options['uses_total'];
+				
+				if($uses_total == 0) {
+					//$this->error['warning'] = $this->language->get('text_total_uses_error');
+					if($options['advanced_coupon'][$language_id]['error_total_usage_sale'] != '') {
+						$this->error['warning'] = $options['advanced_coupon'][$language_id]['error_total_usage_sale'];
+					} else {
+						$this->error['warning'] = $this->language->get('error_total_uses_error');
+					}
+					return false;
+				}
+				
+				// check for uses customer
+				$uses_total_customer = $options['uses_customer'];
+				
+				if($uses_total_customer == 0) {
+					if(isset($this->session->data['customer_id'])) {
+						//$this->error['warning'] = $this->language->get('text_customer_uses_error');
+						if($options['advanced_coupon'][$language_id]['error_total_usage_customer'] != '') {
+							$this->error['warning'] = $options['advanced_coupon'][$language_id]['error_total_usage_customer'];
+						} else {
+							$this->error['warning'] = $this->language->get('error_customer_uses_error');
+						}
+						return false;
+					}
+				}
+				
+				
+			} else {
+				// if coupon code is not valid or status is not enablaed
+				$this->error['warning'] = $this->language->get('error_not_found_error');					
+			}
+			
+			
+			
+				$advanced_coupon_info = $this->model_checkout_advanced_coupon->getAdvancedCoupon($this->request->post['advanced_coupon']);			
+				if (!$advanced_coupon_info) {			
+					$this->error['warning'] = $this->language->get('text_advanced_coupon_error');
+				}
+				if (!$this->error) {
+					return true;
+				} else {
+					return false;
+				}		
+			}
+			]]></add>
+		</operation>
+		
+		<operation>
+			<search position="after" offset="5"><![CDATA[if (isset($this->request->get['remove'])) {]]></search>
+			<add><![CDATA[
+				if(count($this->session->data['cart']) <= 0) {
+					unset($this->session->data['advanced_coupon']);
+				}
+			]]></add>
+		</operation>
+		
+		
+	</file>
+	<file name="catalog/view/theme/*/template/checkout/cart.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[<?php if ($coupon_status || $voucher_status || $reward_status || $shipping_status) { ?>]]></search>
+			<add><![CDATA[
+			<?php if ($coupon_status || $advanced_coupon_status || $voucher_status || $reward_status || $shipping_status) { ?>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before"><![CDATA[<?php if ($voucher_status) { ?>]]></search>
+			<add><![CDATA[
+			<?php if ($advanced_coupon_status) { ?>
+     	 		<tr class="highlight">
+        		<td><input type="radio" name="next" value="advanced_coupon" id="use_advanced_coupon" /></td>
+        		<td><label for="use_advanced_coupon"><?php echo $text_use_advanced_coupon; ?></label></td>
+      			</tr>
+      		<?php } ?>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before"><![CDATA[<div id="voucher" class="content" style="display: <?php echo ($next == 'voucher' ? 'block' : 'none'); ?>;">]]></search>
+			<add><![CDATA[
+			<div id="advanced_coupon" class="content" style="display: <?php echo ($next == 'advanced_coupon' ? 'block' : 'none'); ?>;">		
+			<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
+				<?php echo $entry_advanced_coupon; ?>&nbsp;
+				<input type="text" name="advanced_coupon" value="" />
+				<input type="hidden" name="next" value="advanced_coupon" />
+				&nbsp;
+				<input type="submit" value="<?php echo $button_advanced_coupon; ?>" class="button" />
+				</form>
+			</div>
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/checkout/manual.php">
+		<operation>
+			<search position="after"><![CDATA[unset($this->session->data['coupon']);]]></search>
+			<add><![CDATA[
+			unset($this->session->data['advanced_coupon']);
+			]]></add>
+		</operation>
+	</file>	
+</modification>	

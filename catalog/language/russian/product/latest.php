@@ -1,0 +1,25 @@
+<?php
+// Text
+$_['text_refine']       = 'Выберите подкатегорию';
+$_['text_allcategories']= 'Все категории';
+$_['text_empty']        = 'Пока нет новых товаров.';
+$_['text_tax']          = 'Без НДС:';
+$_['text_reviews']      = 'На основе %s отзывов.';
+$_['text_compare']      = 'Сравнение товаров (%s)';
+$_['text_display']      = 'Вид:';
+$_['text_list']         = 'Список';
+$_['text_grid']         = 'Сетка';
+$_['text_sort']         = 'Сортировка:';
+$_['text_default']      = 'По умолчанию';
+$_['text_new_arrivals']	= 'Новые поступления';
+$_['text_name_asc']     = 'Наименование (А -&gt; Я)';
+$_['text_name_desc']    = 'Наименование (Я -&gt; А)';
+$_['text_price_asc']    = 'Цена (по возрастанию)';
+$_['text_price_desc']   = 'Цена (по убыванию)';
+$_['text_rating_asc']   = 'Рейтинг (по возрастанию)';
+$_['text_rating_desc']  = 'Рейтинг (по убыванию)';
+$_['text_model_asc']    = 'Модель (А -&gt; Я)';
+$_['text_model_desc']   = 'Модель (Я -&gt; А)';
+$_['text_limit']        = 'На странице:';
+$_['text_separator']    = ' / ';
+?>

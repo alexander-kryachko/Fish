@@ -1,0 +1,42 @@
+.col-6{
+    width: 48%;
+    float: left;
+    padding: 5px 15px;
+}
+.rate_separator{
+    border-top: 1px solid #e5e5e5;
+    height: 10px;
+}
+.rate-star{
+    width: 8px;
+    height: 7px;
+    background: url("../image/shop_rate/rate-stars.png") top center no-repeat;
+    background-size: 100%;
+    display: inline-block;
+}
+.rate-star.big-stars{
+    width: 13px;
+    height: 12px;
+}
+.rate-star.star-change{
+    background-position: bottom;
+}
+.rates_table_email{
+    font-size: 12px;
+    color: #a7a7a7;
+}
+a.button.remove{
+    background: #E02626;
+}
+a.button.enabled{
+    background: #00ab5a;
+}
+a.button.disabled{
+    background: #b5b5b5;
+}
+.text-success{
+    color: #449d44;
+}
+.text-danger{
+    color: #f56b6b;
+}

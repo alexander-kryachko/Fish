@@ -1,0 +1,260 @@
+<!-- Created using vQmod XML Generator by UKSB - http://www.opencart-extensions.co.uk //-->
+<modification>
+	<id><![CDATA[SUPPLER]]></id>
+	<version><![CDATA[]]></version>
+	<vqmver><![CDATA[]]></vqmver>
+	<author><![CDATA[usergio]]></author>
+	<file name="admin/model/catalog/product.php">
+		<operation>
+			<search position="before" ><![CDATA[public function getProducts($data = array()) {]]></search>
+			<add><![CDATA[public function getMaxModel() {		
+		$query = $this->db->query("SELECT max(product_id) FROM " . DB_PREFIX . "product");			
+		return $query->row;
+	} /*suppler*/ ]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+			<search position="after" offset="1"><![CDATA[$product_info = $this->model_catalog_product->getProduct($this->request->get['product_id']);]]></search>
+			<add><![CDATA[ else {
+			$row = $this->model_catalog_product->getMaxModel();
+			$max_model = $row['max(product_id)'];
+			$next_code = $max_model + 1;
+			$next_code = $next_code."-";
+		} /*suppler*/	]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="1"><![CDATA[$this->data['model'] = '';]]></search>
+			<add><![CDATA[$this->data['model'] = $next_code; /*suppler*/]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/common/header.php">
+		<operation>
+			<search position="after"><![CDATA[$this->data['text_manufacturer'] = $this->language->get('text_manufacturer');]]></search>
+			<add><![CDATA[
+	$this->data['text_suppler'] = $this->language->get('text_suppler'); /*suppler*/]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$this->data['manufacturer'] = $this->url->link('catalog/manufacturer', 'token=' . $this->session->data['token'], 'SSL');]]></search>
+			<add><![CDATA[
+    $this->data['suppler'] = $this->url->link('catalog/suppler', 'token=' . $this->session->data['token'], 'SSL'); /*suppler*/]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/report/product_purchased.php">
+		<operation>
+			<search position="before" index="1"><![CDATA[$url = '';]]></search>
+			<add><![CDATA[
+		if (isset($this->request->get["filter_model"])) {
+			$filter_model = $this->request->get["filter_model"];
+		} else {
+			$filter_model = "0";
+		} /*suppler*/ ]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$this->data['breadcrumbs'] = array();]]></search>
+			<add><![CDATA[
+		if (isset($this->request->get["filter_model"])) {
+			$url .= "&filter_model =" . $this->request->get["filter_model"];
+		}  /*suppler*/ ]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA['filter_order_status_id' => $filter_order_status_id,]]></search>
+			<add><![CDATA[
+			"filter_model"           => $filter_model, /*suppler*/]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$this->data['products'][] = array(]]></search>
+			<add><![CDATA[
+		$row = $this->model_report_product->getBasePrice($result["model"]);
+			$bprice = 0;
+			if (isset($row["bprice"]) and !empty($row["bprice"])) $bprice = $row["bprice"]; /*suppler*/ ]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$this->data['products'][] = array(]]></search>
+			<add><![CDATA[
+			"bprice"     => $bprice, /*suppler*/]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$this->data['entry_status'] = $this->language->get('entry_status');]]></search>
+			<add><![CDATA[
+		$this->data["column_profit"] = $this->language->get("column_profit");
+		$this->data["entry_supp"] = $this->language->get("entry_supp");
+		$this->data["text_total"] = $this->language->get("text_total"); /*suppler*/ ]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$pagination = new Pagination();]]></search>
+			<add><![CDATA[
+		if (isset($this->request->get["filter_model"])) {
+			$url .= "&filter_model =" . $this->request->get["filter_model"];
+		} /*suppler*/ ]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/sale/order.php">
+		<operation>
+			<search position="before"><![CDATA[$product_data[] = array(]]></search>
+			<add><![CDATA[
+					$prod = $this->model_sale_order->getOrderWarranty($product["product_id"]);
+					if (!isset($prod["text"])) $prod["text"] = "";  /*suppler*/	]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$product_data[] = array(]]></search>
+			<add><![CDATA[						"warranty" => $prod["text"], /*suppler*/]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA['voucher'            => $voucher_data,]]></search>
+			<add><![CDATA[					"firstname"			 => $order_info["firstname"],
+					"lastname"			 => $order_info["lastname"],
+					"store_owner"	     => $this->config->get("config_owner"), /*suppler*/ ]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/sale/order.php">
+		<operation>
+			<search position="before"><![CDATA[public function getOrderProducts($order_id) {]]></search>
+			<add><![CDATA[
+	public function getOrderWarranty($product_id) {
+		$n1 = "Warranty";
+		$n2 = "Гаран";
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_attribute a LEFT JOIN " . DB_PREFIX . "attribute_description d ON (d.attribute_id = a.attribute_id) WHERE a.product_id = '" . $product_id . "' AND (d.name LIKE '" . $n1 . "%' OR d.name LIKE '" . $n2 . "%')");
+		
+		return $query->row;		
+	} /*suppler*/]]></add>
+		</operation>		
+	</file>
+	<file name="admin/language/english/common/header.php">
+		<operation>
+			<search position="before"><![CDATA[$_['text_module']]]></search>
+			<add><![CDATA[$_['text_suppler']                	   = 'Suppliers'; ]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/english/catalog/product.php">
+		<operation>
+			<search position="replace"><![CDATA['Model';]]></search>
+			<add><![CDATA["Product code"; /*suppler*/]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA['Model';]]></search>
+			<add><![CDATA["Product code:"; /*suppler*/]]></add>
+		</operation>		
+	</file>
+	<file name="admin/language/english/report/product_purchased.php">
+		<operation>
+			<search position="replace" index="1"><![CDATA['Model';]]></search>
+			<add><![CDATA["Product code"; /*suppler*/]]></add>
+		</operation>		
+		<operation>
+			<search position="before"><![CDATA[$_['entry_status']]]></search>
+			<add><![CDATA[$_["column_profit"]     = "Profit";		
+$_["text_total"]        = "Total:";
+$_["entry_supp"]        = "Supplier ID:"; /*suppler*/]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/russian/product/product.php">
+		<operation>
+			<search position="replace" index="1"><![CDATA['Модель:';]]></search>
+			<add><![CDATA["Код товара:"; /*suppler*/]]></add>
+		</operation>		
+	</file>
+	<file name="admin/language/russian/catalog/product.php">
+		<operation>
+			<search position="replace"><![CDATA['Модель';]]></search>
+			<add><![CDATA["Код товара"; /*suppler*/]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA['Модель:';]]></search>
+			<add><![CDATA["Код товара:"; /*suppler*/]]></add>
+		</operation>		
+	</file>
+	<file name="admin/language/russian/common/header.php">
+		<operation>
+			<search position="before"><![CDATA[$_['text_module']]]></search>
+			<add><![CDATA[$_["text_suppler"]                	   = "Поставщики"; /*suppler*/]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/russian/report/product_purchased.php">		
+		<operation>
+			<search position="replace"><![CDATA['Модель';]]></search>
+			<add><![CDATA["Код товара"; /*suppler*/]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$_['entry_status']]]></search>
+			<add><![CDATA[
+$_["column_profit"]     = "Прибыль";		
+$_["text_total"]        = "Всего:";
+$_["entry_supp"]        = "Код поставщика:"; /*suppler*/]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/report/product.php">
+		<operation>
+			<search position="before"><![CDATA[public function getPurchased($data = array()) {]]></search>
+			<add><![CDATA[
+	public function getProductID($model) {	
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product WHERE `model` = '" . $model . "'");
+	
+		return $query->row;
+	}
+		
+	public function getBasePrice($model) {
+		$row = $this->getProductID($model);		
+		if (!empty($row)) {
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "suppler_base_price WHERE `product_id` = '" .  $row["product_id"] . "'");	
+			return $query->row;
+		} else return "";	
+	} /*suppler*/
+]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$sql .= " GROUP BY op.model ORDER BY total DESC";]]></search>
+			<add><![CDATA[
+		if (!empty($data["filter_model"])) {
+			$sql .=" AND op.model LIKE  '%-" . $data["filter_model"] . "'";		
+		} /*suppler*/]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/view/template/report/product_purchased.tpl">
+		<operation>
+			<search position="before"><![CDATA[<td style="text-align: right;"><a onclick="filter();" class="button"><?php echo $button_filter; ?></a></td>]]></search>
+			<add><![CDATA[
+	    		<td><?php echo $entry_supp; ?>
+	    <input type="text" name="filter_model" value="0" id="data_model" size="3" /></td>  <!--*suppler*-->]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[<td class="right"><?php echo $column_total; ?></td>]]></search>
+			<add><![CDATA[
+		    <td class="right"><?php echo $column_profit; ?></td> <!--*suppler*-->]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[ <?php if ($products) { ?>]]></search>
+			<add><![CDATA[<?php $summa = 0.0; $profit = 0.0; if ($products) { ?>  <!--*suppler*-->]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<td class="right"><?php echo $product['total']; ?></td>]]></search>
+			<add><![CDATA[	
+            		<td class="right"><?php echo $product["total"]; $s = $product["total"]; $s = trim(preg_replace ("/[^0-9.]/","",$s)); $s = preg_replace("| +|", "", $s); $s = (float)str_replace(",",".",$s); $summa = $summa+$s; ?></td> 
+		<td class="right"><?php $p = $product["bprice"]*$product["quantity"]; $d = $s-$p; if ($p == 0) $d = 0; $profit = $profit+$d; echo $d; ?></td>  <!--*suppler*-->]]></add>
+		</operation>
+		<operation>
+			<search position="before" index="2"><![CDATA[<?php } else { ?>]]></search>
+			<add><![CDATA[
+          <tr>		
+            <td colspan="4" class="right"><b><?php echo $text_total."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $summa; ?></b> </td>
+            <td colspan="4" class="right"><b><?php echo $text_total."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . (int)$profit; ?></b> </td>
+          </tr> <!--*suppler*-->]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[location = url;]]></search>
+			<add><![CDATA[
+	var filter_model = $('input[name=\'filter_model\']').attr('value');	
+	if (filter_model) {
+		url += '&filter_model=' + encodeURIComponent(filter_model);
+	} /*suppler*/]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[<li><a href="<?php echo $manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>]]></search>
+			<add><![CDATA[
+		  <li><a href="<?php echo $suppler; ?>"><?php echo $text_suppler; ?></a></li> <!-- *suppler* -->]]></add>
+		</operation>
+	</file>		
+</modification>

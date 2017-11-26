@@ -1,0 +1,94 @@
+<modification>
+    <id>color_button_suppler</id>
+    <version>1.0</version>
+    <vqmver>2.1.6</vqmver>
+    <author>cherkas and xxFOXxx</author>
+	<file name="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="before">
+			<![CDATA[
+				</head>
+			]]>
+			</search>
+			<add>
+			<![CDATA[
+				<style type="text/css">
+					#supplerbutton1 {background:#00CD00; color:#000;}
+					#supplerbutton2 {background:#EE6363; color:#000;}
+					#supplerbutton3 {background:#EEC900; color:#000;}
+					#supplerbutton4 {background:#EE6363; color:#000;}   
+					#supplerbutton5 {background:#1C86EE; color:#000;}      
+					#supplerbutton6 {background:#00CD00; color:#000;}        
+					#supplerbutton7 {background:#00CD00; color:#000;}        
+				</style>
+			]]>
+			</add>
+		</operation>
+	</file>	
+	<file name="admin/view/template/catalog/suppler_list.tpl">
+		<operation>
+			<search position="replace">
+			<![CDATA[
+				<div class="buttons"><a onclick="location = '<?php echo $insert; ?>'" class="button"><?php echo $button_insert; ?></a><a  onclick="$('#form').submit();" class="button"><?php echo $button_delete; ?></a></div>
+			]]>
+			</search>
+			<add>
+			<![CDATA[
+			<div class="buttons"><a onclick="location = '<?php echo $insert; ?>'" class="button"  id="supplerbutton1"><?php echo $button_insert; ?></a><a  onclick="$('#form').submit();" class="button"  id="supplerbutton2"><?php echo $button_delete; ?></a></div>
+			]]>
+			</add>
+		</operation>
+	</file>
+	<file name="admin/view/template/catalog/suppler_form.tpl">
+		<operation>
+			<search position="replace">
+			<![CDATA[
+				<a onclick="$('#form').submit();" class="button"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button"><?php echo $button_cancel; ?></a></div>
+			]]>
+			</search>
+			<add>
+			<![CDATA[
+			<a onclick="$('#form').submit();" class="button" id="supplerbutton3"><?php echo $button_save; ?></a><a onclick="location = '<?php echo $cancel; ?>';" class="button" id="supplerbutton4"><?php echo $button_cancel; ?></a></div>
+			]]>
+			</add>
+		</operation>
+		<operation>
+			<search position="replace">
+			<![CDATA[
+				<a onclick="apply()" class="button">
+			]]>
+			</search>
+			<add>
+			<![CDATA[
+			<a onclick="apply()" class="button" id="supplerbutton5">
+			]]>
+			</add>
+		</operation>		
+		<operation>
+			<search position="replace">
+			<![CDATA[
+				<a onclick="$('#form1').submit();" class="button"><?php echo $button_base; ?></a>
+			]]>
+			</search>
+			<add>
+			<![CDATA[
+			<a onclick="$('#form1').submit();" class="button" id="supplerbutton6"><?php echo $button_base; ?></a>
+			]]>
+			</add>
+		</operation>
+	</file>
+	<file name="admin/view/template/catalog/suppler_base.tpl">
+		<operation>
+			<search position="replace">
+			<![CDATA[
+				<a onclick="$('#form').submit();" class="button">
+			]]>
+			</search>
+			<add>
+			<![CDATA[
+			<a onclick="$('#form').submit();" class="button" id="supplerbutton7">
+			]]>
+			</add>
+		</operation>
+	</file>	
+</modification>

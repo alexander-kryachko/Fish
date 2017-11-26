@@ -1,0 +1,4 @@
+product/compare
+account/login
+account/logout
+module/viewed

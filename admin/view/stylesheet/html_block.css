@@ -1,0 +1,66 @@
+.js {
+	border-bottom: 1px dotted;
+	display: inline-block;
+	line-height: 1em;
+	height: 1em;
+	cursor: pointer;
+	background: none;
+	padding: 0;
+	position: relative;
+	text-decoration: none !important;
+	letter-spacing: -0.299px;
+}
+.js:hover {
+	border-color: transparent;
+}
+.show {
+	display:  block;
+}
+.hide {
+	display:  none;
+}
+.theme-more {
+	position: relative;
+	top: -30px;
+}
+.html-block-content-content textarea {
+	width: 100%;
+}
+.html-block-content-content .message {
+	height: 320px;
+	vertical-align: top
+}
+.html-block-content-content .help {
+	margin-bottom: 30px;
+	display: inline;
+}
+.html-block-content-content .link {
+	margin-top: 0;
+}
+td.html_block_id select {
+	width: 150px;
+}
+p.help {
+	margin: 0;
+	font-size: 0.9166em;
+}
+#vtabs a {
+	position: relative;
+}
+#vtabs a.selected img {
+	right: 15px;
+}
+#vtabs a b {
+	margin-right: 20px;
+	float: right;
+}
+#vtabs a img {
+	position: absolute;
+	right: 14px;
+	top: 50%;
+	margin-top: -8px;
+}
+table.list .title {
+	font-style: italic;
+	font-weight: bold;
+}

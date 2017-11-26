@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+        <id>Search MR</id>
+        <version>1.0.0</version>
+        <vqmver>1.0.9</vqmver>
+        <author>sv2109@gmail.com</author>
+        <file name="catalog/controller/product/search.php">
+                
+                <operation>
+                
+                        <search position="after"><![CDATA[
+$this->load->model('catalog/product');
+                        ]]></search>
+                        
+                        <add><![CDATA[
+// Morphology Relevance Search
+$this->load->model('catalog/search_mr');
+$search_model = 'model_catalog_search_mr';
+if (isset($this->request->get['filter_tag'])) {
+  $search_model = 'model_catalog_product';
+}                          
+                        ]]></add>
+                        
+                </operation>
+
+                <operation>
+                
+                        <search position="replace"><![CDATA[                          
+$product_total = $this->model_catalog_product->getTotalProducts($data);
+                        ]]></search>
+                        
+                        <add><![CDATA[
+$data['search_mr_options'] = $this->config->get('search_mr_options');                          
+$product_total = $this->$search_model->getTotalProducts($data);
+                        ]]></add>
+                        
+                </operation>
+
+                <operation>
+                
+                        <search position="replace"><![CDATA[
+$results = $this->model_catalog_product->getProducts($data);
+                        ]]></search>
+                        
+                        <add><![CDATA[
+$data['search_mr_options'] = $this->config->get('search_mr_options');                          
+$results = $this->$search_model->getProducts($data);
+                        ]]></add>
+                        
+                </operation>
+                                                                                                                                
+        </file>        
+
+</modification>

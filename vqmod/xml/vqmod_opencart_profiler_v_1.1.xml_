@@ -1,0 +1,114 @@
+<modification>
+	<id>Opencart Profiler 1.1 for 1.5.1 -  1.5.5.x</id>
+	<version>1.5.x</version>
+	<vqmver required="true">1.0.0</vqmver>
+	<author>OCShop|| Please visit modules.ocshop.biz</author>
+	
+				<file name="system/startup.php">
+					<operation error="log">
+						<search position="after"><![CDATA[error_reporting(E_ALL);]]></search>
+							<add><![CDATA[
+								$time = microtime();
+								$GLOBALS['start'] = $time;
+						]]></add>
+					</operation>
+				</file>
+
+		
+				<file name="system/library/response.php">
+				<operation error="log">
+					<search position="after"><![CDATA[echo $ouput;]]></search>
+								
+						<add><![CDATA[
+						$time = microtime();
+						$time = explode(' ', $time);
+						$time = $time[1] + $time[0];
+						$finish = $time;
+
+						$start = explode(' ', $GLOBALS['start']);
+						$start = $start[1] + $start[0];
+						$total_time = round(($finish - $start), 4);
+										
+					
+							
+							
+						
+							
+							
+							$queries = $GLOBALS['sql'];
+													
+										echo '<div id="debug" style="position:relative; bottom:0; z-index:1000; width:100%;min-height:100px; padding:20px; background: darkred; "><div style="width:1000px;margin:0 auto;">';
+										echo '<div style="color:white; font-size:14px; line-height:20px">Total time ' . $total_time. ' seconds | ';
+										echo 'Total queries:' . count($GLOBALS['sql']) . '</div>';
+										foreach ($queries as $query) {
+										$sql = explode ('[sep]', $query);
+										
+											$querytime = round($sql[1],4);
+											
+											$controller = $sql[2];
+											
+											if ($querytime > 0.004) {
+												echo '<div style=" width:990px; color:red; font-size:12px;background:white;margin-bottom:0px;padding:2px;"> query time:' . $querytime  . ' seconds | controller: <span style="color:black;">'.$controller. '</span> </div>'; 
+											} else { 
+												echo '<div style=" width:990px; color:grey; font-size:12px;background:white;margin-bottom:0px;padding:2px;"> query time:' . $querytime  . ' seconds | controller:  <span style="color:black;">'.$controller. '</span> </div>'; 
+											};
+											
+											echo '<div style=" width:990px; color:#666; font-size:10px;background:white;margin-bottom:2px;padding:1px 2px; border-top:1px solid #ddd">' . $sql[0] . '</div>';
+											
+											};
+														
+										echo '</div></div>';
+								
+							
+							
+
+							]]></add>
+						</operation>
+					</file>		
+
+			
+					<file name="system/engine/controller.php">
+						<operation error="log">
+							<search position="before"><![CDATA[	$this->registry = $registry;]]></search>
+							<add><![CDATA[
+							$GLOBALS['controller_name'] = get_class ($this);
+						
+							]]></add>
+						</operation>
+					</file>		
+					
+					<file name="system/library/db.php">
+					<operation error="log">
+							<search position="after"><![CDATA[public function query($sql) {]]></search>
+							
+							<add><![CDATA[$starttime = microtime(true);
+							
+							
+							]]></add>
+						</operation>
+						
+						<operation error="log">
+							<search position="replace"><![CDATA[return $this->driver->query($sql);]]></search>
+								<add><![CDATA[
+								
+								    
+							    $result = $this->driver->query($sql);
+								
+								$finishtime = microtime(true) - $starttime;
+
+								
+								if (!isset($GLOBALS['controller_name'])) $GLOBALS['controller_name'] = '';
+								$GLOBALS['sql'][] = $sql. '[sep]'. $finishtime . '[sep]'.	 ($GLOBALS['controller_name']) ;
+								
+								//print_r ($GLOBALS['controller_name']);
+								 
+								 return $result;
+								
+								]]></add>
+						</operation>
+					</file>		
+				
+				
+
+		
+</modification>

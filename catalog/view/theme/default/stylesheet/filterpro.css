@@ -1,0 +1,168 @@
+#filterpro_box .box-content {
+    padding:0;
+}
+#filterpro .option_box {
+    border-radius: 7px 7px 7px 7px;
+    display: block;
+    min-width: 167px;
+    padding: 5px 5px 0;
+    vertical-align: top;
+}
+
+#filterpro .price_limit {
+    border: 0;
+    color: #38B0E3;
+    font-weight: bold;
+    width: 100%;
+}
+#filterpro #slider-range {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+#filterpro .ui-widget-header {
+    background: none repeat scroll 0 0 #38B0E3;
+    border: 0 none;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+#filterpro select {
+    width: 126px;
+}
+
+#filterpro .ui-state-hover, #filterpro .ui-state-focus, #filterpro .ui-state-active {
+    border: 1px solid #38B0E3;
+    background: none repeat scroll 0 0 #d9f2fc;
+}
+
+#filterpro .price_slider {
+    height: 68px;
+    padding: 5px;
+}
+
+#filterpro .price_slider  input {
+    width: 50px;
+    min-width: 50px;
+    background: none;
+}
+
+#filterpro .option_values {
+    padding-top: 5px;
+}
+
+#filterpro .option_name, #filterpro .attribute_group_name {
+    background: url("../image/filter-bullet-down.png") no-repeat scroll right center transparent;
+    border-bottom: 1px solid #DBDEE1;
+    cursor: pointer;
+    padding: 5px;
+}
+#filterpro .attribute_group_name{
+    padding-left: 0;
+}
+
+#filterpro .hided {
+    background: url("../image/filter-bullet-up.png") no-repeat scroll right center transparent;
+    cursor: pointer;
+}
+
+#filterpro_box .clear_filter {
+    border-bottom: 1px dashed;
+    text-decoration: none;
+    float: right;
+}
+
+#filterpro .collapsible{
+    padding-left: 5px;
+    padding-top: 5px;
+    position: relative;
+}
+
+#filterpro ul.box-filter > li ul{
+    padding-bottom: 0;
+}
+
+#filterpro ul.box-filter span{
+    margin-bottom: 0;
+}
+
+#filterpro img {
+    cursor: pointer;
+}
+
+#column-left + #column-right + #content .product-grid > div.loadmask {
+    width: 100%;
+}
+
+#filterpro input {
+    margin: 4px 3px;
+    padding: 0;
+}
+#filterpro table {
+    margin-bottom: 5px;
+    width: 100%;
+}
+#filterpro .attribute-tooltip.selected, .attribute-group-tooltip.selected, .option-tooltip.selected {
+	border: 2px solid transparent !important;
+}
+
+#filterpro .box-filter span{
+    font-weight: normal;
+}
+#filterpro .option_box .collapsible input[type="checkbox"].option_value:disabled + img {
+    opacity: 0.2;
+
+}
+#filterpro .option_box .collapsible img.selected {
+    border: 1px solid #5F5F5F;
+    margin: -1px;
+}
+
+#filterpro div.option_box div.collapsible table tbody tr td label span.label-value, #filterpro .box-filter.option_box .collapsible li label span.label-value, #filter_categories  .label-value {
+    font-weight: bold;
+    padding-top: 6px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#filterpro_box .option_box table tr td, #filterpro .box-filter.option_box .collapsible li {
+    position: relative;
+}
+#checklist {
+   margin-bottom: 5px;
+}
+
+#checklist .head {
+    font-weight: bold;
+}
+#checklist > div {
+    border-bottom: 1px solid #eee;
+    color: #787878;
+    padding: 8px 5px;
+    position: relative;
+}
+#checklist .value {
+   margin-left: 12px;
+}
+#checklist .close {
+    cursor: pointer;
+    margin-left: 8px;
+    position: absolute;
+    right: 10px;
+}
+#showmore {
+    background: none repeat scroll 0 0 #f7f9fa;
+    border-radius: 3px;
+    color: #97d2ff;
+    display: inline-block;
+    margin-bottom: 28px;
+    padding: 16px 1px;
+    text-align: center;
+    width: 100%;
+}
+#showmore a {
+    border-bottom: 1px dashed;
+    font-size: 20px;
+    text-decoration: none;
+}

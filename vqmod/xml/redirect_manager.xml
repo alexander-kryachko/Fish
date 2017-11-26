@@ -1,0 +1,54 @@
+<modification>
+	
+	<id>Redirect Manager</id>
+	<version>156.2</version>
+	<vqmver>2.4.1</vqmver>
+	<author>Clear Thinking</author>
+	<email>johnathan@getclearthinking.com</email>
+	<website>http://www.getclearthinking.com</website>
+	
+	<file name="catalog/controller/common/header.php">
+		<operation error="skip">
+			<search position="after"><![CDATA[
+				function index() {
+			]]></search>
+			<add trim="true"><![CDATA[
+				// Clear Thinking: Redirect Manager
+				if ($this->config->get('redirect_manager_status')) {
+					$preserve_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "redirect` WHERE from_url LIKE '%?%'");
+					$request_uri = (!$preserve_query->num_rows) ? explode('?', urldecode($this->request->server['REQUEST_URI'])) : array(urldecode($this->request->server['REQUEST_URI']));
+					$query_string = (!empty($request_uri[1])) ? $request_uri[1] : '';
+					
+					$from = 'http' . (isset($this->request->server['HTTPS']) && $this->request->server['HTTPS'] != 'off' ? 's' : '') . '://' . $this->request->server['HTTP_HOST'] . $request_uri[0];
+					if (substr($from, -1) == '/') $from = substr($from, 0, -1);
+					
+					$wildcard_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "redirect` WHERE from_url LIKE '%*%'");
+					if ($wildcard_query->num_rows) {
+						$redirect_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "redirect` WHERE ('" . $this->db->escape($from) . "' LIKE REPLACE(REPLACE(from_url, '_', '\_'), '*', '%') OR '" . $this->db->escape($from) . "/' LIKE REPLACE(REPLACE(from_url, '_', '\_'), '*', '%')) AND active = 1 AND (date_start = '0000-00-00' OR date_start < NOW()) AND (date_end = '0000-00-00' OR date_end > NOW())");
+					} else {
+						$redirect_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "redirect` WHERE ('" . $this->db->escape($from) . "' = from_url OR '" . $this->db->escape($from) . "/' = from_url) AND active = 1 AND (date_start = '0000-00-00' OR date_start < NOW()) AND (date_end = '0000-00-00' OR date_end > NOW())");
+					}
+					
+					if ($redirect_query->num_rows) {
+						$this->db->query("UPDATE `" . DB_PREFIX . "redirect` SET times_used = times_used+1 WHERE redirect_id = " . (int)$redirect_query->row['redirect_id']);
+						if (substr($redirect_query->row['from_url'], -1) == '/') $redirect_query->row['from_url'] = substr($redirect_query->row['from_url'], 0, -1);
+						
+						$from_wildcards = explode('|', str_replace(explode('*', $redirect_query->row['from_url']), '|', $from . '/'));
+						$to_wildcards = explode('*', $redirect_query->row['to_url']);
+						
+						$to = '';
+						for ($i = 0; $i < count($to_wildcards); $i++) {
+							$to .= $from_wildcards[$i] . $to_wildcards[$i];
+						}
+						if ($query_string) $to .= (strpos($redirect_query->row['to_url'], '?')) ? '&' . $query_string : '?' . $query_string;
+						
+						header('Location: ' . str_replace('&amp;', '&', $to), true, $redirect_query->row['response_code']);
+						exit();
+					}
+				}
+				// end
+			]]></add>
+		</operation>
+	</file>
+	
+</modification>

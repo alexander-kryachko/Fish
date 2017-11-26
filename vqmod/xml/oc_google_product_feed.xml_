@@ -1,0 +1,1070 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+
+	<id>Add Google Product Feed v1.5.x</id>
+	<version>2.5.0</version>
+	<vqmver>2.1.7</vqmver>
+	<author>justcurious - phil.brighton@virgin.net</author>
+	
+	<file name="admin/language/*/*.php">
+
+		<!-- Tab Name -->
+		<operation error="skip">
+            <search position="replace"><![CDATA[
+$_['tab_reward']              = 'Reward Points';
+            ]]></search>
+            <add><![CDATA[
+$_['tab_reward']              = 'Reward Pts';
+			]]></add>
+        </operation>
+
+		<operation>
+            <search position="after"><![CDATA[
+$_['tab_reward']
+            ]]></search>
+            <add><![CDATA[
+$_['tab_feed']             	  = 'Feed Data';
+$_['text_browse']             = 'Browse Files';
+$_['text_clear']              = 'Clear Image';
+			]]></add>
+        </operation>
+
+		<operation>
+            <search position="before"><![CDATA[
+$_['button_add_discount']
+            ]]></search>
+            <add><![CDATA[
+$_['button_add_variant']     = 'Add Variant';
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/language/*/catalog/product.php">
+
+		<!-- Labels for additional fields -->
+		<operation>
+            <search position="after"><![CDATA[
+$_['entry_tag']
+            ]]></search>
+            <add><![CDATA[
+$_['entry_google_product_category'] = 'Google Product Category:<br/><span class="help">Click on the "+" icon to open a new window showing the Google categories. Select the category which best describes this product, and copy and paste the information showing in the <strong><span style="color: rgb(0, 0, 255)">XML</span></strong>&nbsp;box.';
+$_['entry_brand']       = 'Brand:';
+$_['entry_gtin']        = 'Global Trade Item Number:<br /><span class="help">Enter the UPC, EAN, ISBN or JAN number here.</span>';
+$_['entry_mpn']         = 'Manufacturer Part Number:';
+$_['entry_list']        = 'List on Google Shopping:<br /><span class="help">Select <strong>No</strong> if you don\'t want this item included in your product feed.</span>';
+$_['entry_gender']      = 'Gender:';
+$_['entry_agegroup']    = 'Age Group:';
+$_['entry_colour']      = 'Colour:<br /><span class="help">Leave this blank if the colour attribute is not relevant for this item or if you are completing the Product Variants section below.</span>';
+$_['entry_size']        = 'Size:<br /><span class="help">Leave this blank if the size attribute is not relevant for this item or if you are completing the Product Variants section below.</span>';
+$_['entry_condition']   = 'Condition:<br /><span class="help">You can specify the condition of this product here.</span>';
+$_['entry_oos_status']  = 'Out of Stock Status:<br/><span class="help">Please select the status you would like to be shown in your product feed when there is no stock.</span>';
+$_['entry_availability_date']  = 'Availability Date:<br/><span class="help">For Pre-order items only. Out of Stock Status should be set to "Preorder"</span>';
+$_['entry_size_system'] = 'Size System:<br/><span class="help">For Apparel Items. Check the Google Product Specification for your country - some of the available values can not be used in some countries.</span>';
+$_['entry_size_type']    = 'Size Type:<br/><span class="help">For Apparel Items.</span>';
+$_['entry_is_bundle']    = 'Is Bundle:<br/><span class="help">Is this a "bundle" containing more than one product.<br />Check the Google Product Specification for the additional requirements for this attribute.</span>';
+$_['entry_identifier_exists']     = 'Identifier Exists:<br/><span class="help">Please select the status you would like to be shown for this product.</span>';
+$_['entry_custom_labels']     = 'Custom Labels:<br/><span class="help">Set up your custom labels by going to<br /><strong>Extensions | Product Feeds | Google Product Feed</strong></span>';
+$_['entry_variant']   	= '<h1 style="color: #ff8000">Product Variants:</h1><span class="help">Enter all combinations of variations here. For example if there are three different colours (red, green, blue) each with three different sizes (S, M, L) and two different patterns (stripes, circles) there would be 3 x 3 x 2 entries (18) ie.<br /><br />Small  Red  Circle<br />Medium  Red  Circle<br />Large  Red  Circle<br />Small Red Stripes<br />etc...<br /><br />Leave blank any attributes that are not relevant.<br /><br />If you sell clothing (aparrel) and you have colour, pattern or material variants you are required to provide a main image showing the variant. Adding an image in this section will override the product\'s main image for each variant allowing you to comply with Google\'s policy.</span>';
+$_['entry_adwords']     = '<h1 style="color: #ff8000">Google Adwords:</h1><span class="help">Use this section only if you are subscribing to Google Adwords Product Ad Listings. Find out more <a href="http://support.google.com/adwords/answer/2454022" target="_blank">here</a>.</span>';
+$_['entry_adwords_grouping']     = 'Adwords Grouping:';
+$_['entry_adwords_labels']     = 'Adwords Labels:<br /><span class="help">Up to 10 Adwords Labels are allowed. Seperate your labels using a comma eg. <br /><span style="font-family: courier new; color: blue;">Clothing, Tops, T Shirts</span><br />If you enter more than the allowed number of labels, only the first 10 will included in the feed.</span>';
+$_['entry_adwords_redirect']     = 'Adwords Redirect:<br/><span class="help">Select "<strong>Yes</strong>" to track website traffic coming from Google Shopping (only works if you are using Google Adwords Product Listing Ads).</span>';
+$_['entry_information'] = '<h1 style="color: #ff8000">Other information:</h1><span class="help">Google are very specific about their requirements for product feeds and it is extremely important that you adhere to their specifications otherwise your whole feed may be rejected.<br />
+<br />It is strongly recommended that you familiarise yourself with Googles\' policies on Product Feeds before deciding which fields to complete.<br />
+<br />Check out the Google Products Specification <a href="http://support.google.com/merchants/bin/answer.py?hl=en&answer=188494#GB" target="_blank">here</a><br />
+<br />There is a useful Summary of Attribute Requirements <a href="http://support.google.com/merchants/bin/answer.py?hl=en&answer=1344057&topic=2473824&ctx=topic#GB" target="_blank">here</a><br />
+<br />This <a href="http://support.google.com/merchants/bin/answer.py?hl=en&answer=160161&topic=2473824&ctx=topic" target="_blank">link</a> explains the different Unique Product Identifiers available (Global Trade Item Numbers and Manufacturers Part Numbers)<br />
+<br />Clothing (Apparel) has a particular specification and this is summarised <a href="http://support.google.com/merchants/bin/answer.py?hl=en&answer=1347943&topic=2473824&ctx=topic" target="_blank">here</a>.<br /><br /><strong>For help with common problems go <a href="http://www.showmeademo.co.uk/help/troubleshooting.htm" target="_blank">here</a>.</strong></span>';
+$_['text_general']        			= '<h1 style="color: #ff8000">General:</h1>';
+$_['text_true']        				= 'TRUE';
+$_['text_false']        			= 'FALSE';
+$_['text_custom_labels_group']  	= 'Custom Labels Group ';
+$_['text_do_not_change']      		= 'Do Not Change';
+$_['error_warning_gpf_disabled']    = 'Warning! Google Product Feed is Disabled. Go to <strong>Extensions | Product Feeds | Google Product Feed</strong> to enable!';
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/catalog/product_form.tpl">
+
+
+		<!-- Give the form a name -->
+        <operation>
+            <search position="replace"><![CDATA[
+    <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
+            ]]></search>
+            <add><![CDATA[
+    <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" name="form">
+			]]></add>
+        </operation>
+
+		<!-- Add an additional Tab for Product Feed on the update/add product template -->
+        <operation>
+            <search position="replace"><![CDATA[
+      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-data"><?php echo $tab_data; ?></a>
+            ]]></search>
+            <add><![CDATA[	
+      <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-data"><?php echo $tab_data; ?></a><a href="#tab_feed"><?php echo $tab_feed; ?></a>
+			]]></add>
+        </operation>
+
+		<!-- Hide MPN field from Data page -->
+        <operation error="skip">
+            <search position="before" offset="1"><![CDATA[
+              <td><?php echo $entry_mpn; ?></td>
+            ]]></search>
+            <add><![CDATA[
+    <!-- Hide MPN Input Field
+			]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="after" offset="1"><![CDATA[
+              <td><input type="text" name="mpn" value="<?php echo $mpn; ?>" /></td>
+            ]]></search>
+            <add><![CDATA[
+    end of Hide MPN Input Field -->
+			]]></add>
+        </operation>
+
+		<!-- Product Feed Tab Data Input-->		
+		<operation>
+            <search position="before"><![CDATA[
+      <div id="tab-links">
+            ]]></search>
+            <add><![CDATA[
+      <div id="tab_feed">
+	  <input type="hidden" value="<?php echo $google_product_feed_currency; ?>" name="google_product_feed_currency" />
+	  <input type="hidden" value="<?php echo $google_product_feed_lang; ?>" name="google_product_feed_lang" />
+	  <input type="hidden" value="<?php echo $google_product_feed_copy_manufacturer; ?>" name="config_copy_manufacturer" />
+
+		<?php if($google_product_feed_status != 1){ ?>
+			<div class="warning"><?php echo $error_warning_gpf_disabled; ?></div>
+		<?php } ?>
+
+		<table class="form">
+		  <tr>
+			<td><?php echo $text_general; ?></td>
+			<td>&nbsp;</td>
+		  </tr>
+          <tr>
+            <td width="40%"><?php echo $entry_list; ?></td>
+            <td width="60%"><select name="gpf_status">
+                <?php if ($gpf_status=='1') { ?>
+                <option value="1" selected="selected"><?php echo $text_yes; ?></option>
+                <option value="0"><?php echo $text_no; ?></option>
+                <?php } else { ?>
+                <option value="1"><?php echo $text_yes; ?></option>
+                <option value="0" selected="selected"><?php echo $text_no; ?></option>
+                <?php } ?>
+              </select></td>
+			</td>
+          </tr>
+		 <tr>
+			<td><?php echo $entry_google_product_category; ?></td>
+			<td><input type="text" name="google_product_category" style="width:400px;" value="<?php echo $google_product_category; ?>" />
+			<a onclick = "googleTaxonomy()" title="click here to select a category">
+			<img src="view/image/plus.png" width="24" height=" 24"style="margin: 15px 15px 0;"></a>
+			</td>
+		  </tr>
+		<tr>
+         <tr>
+            <td width="40%"><?php echo $entry_brand; ?></td>
+            <td width="60%"><input type="text" name="brand" value="<?php echo $brand; ?>" />
+			</td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_gtin; ?></td>
+            <td><input type="text" name="gtin" value="<?php echo $gtin; ?>" /></td>
+          </tr>
+		  <tr>
+            <td><?php echo $entry_mpn; ?></td>
+            <td><input type="text" name="mpn" value="<?php echo $mpn; ?>" /></td>
+          </tr>
+		  <tr>
+            <td><?php echo $entry_gender; ?></td>
+					<td><select name="gender">
+					  <?php foreach($available_genders as $av_genders) { ?>
+					  <?php if ($gender == $av_genders) { ?>
+					  <option value="<?php echo $av_genders; ?>" selected="selected"><?php echo $av_genders; ?></option>
+					  <?php } else { ?>
+					  <option value="<?php echo $av_genders; ?>"><?php echo $av_genders; ?></option>
+					  <?php } ?>
+					  <?php } ?>
+					</select></td>
+          </tr>
+		  <tr>
+            <td><?php echo $entry_agegroup; ?></td>
+					<td><select name="agegroup">
+					  <?php foreach($available_agegroup as $av_age) { ?>
+					  <?php if ($agegroup == $av_age) { ?>
+					  <option value="<?php echo $av_age; ?>" selected="selected"><?php echo $av_age; ?></option>
+					  <?php } else { ?>
+					  <option value="<?php echo $av_age; ?>"><?php echo $av_age; ?></option>
+					  <?php } ?>
+					  <?php } ?>
+					</select></td>
+          </tr>
+		  <tr>
+            <td><?php echo $entry_colour; ?></td>
+            <td><input type="text" name="colour" value="<?php echo $colour; ?>" /></td>
+          </tr>
+		  <tr>
+            <td><?php echo $entry_size; ?></td>
+            <td><input type="text" name="size" value="<?php echo $size; ?>" /></td>
+          </tr>
+		  <tr>
+					<td><?php echo $entry_size_system; ?></td>
+					<td><select name="gpf_size_system">
+					  <?php foreach($available_size_systems as $av_ss) { ?>
+					  <?php if ($gpf_size_system == $av_ss) { ?>
+					  <option value="<?php echo $av_ss; ?>" selected="selected"><?php echo $av_ss; ?></option>
+					  <?php } else { ?>
+					  <option value="<?php echo $av_ss; ?>"><?php echo $av_ss; ?></option>
+					  <?php } ?>
+					  <?php } ?>
+					</select></td>
+          </tr>
+		  <tr>
+					<td><?php echo $entry_size_type; ?></td>
+					<td><select name="gpf_size_type" style="float: left; margin-right: 50px;">
+					  <?php foreach($available_size_types as $av_st) { ?>
+					  <?php if ($gpf_size_type == $av_st) { ?>
+					  <option value="<?php echo $av_st; ?>" selected="selected"><?php echo $av_st; ?></option>
+					  <?php } else { ?>
+					  <option value="<?php echo $av_st; ?>"><?php echo $av_st; ?></option>
+					  <?php } ?>
+					  <?php } ?>
+					</select></td>
+          </tr>
+		  <tr>
+					<td><?php echo $entry_condition; ?></td>
+					<td><select name="condition">
+					  <?php foreach($available_conditions as $av_cond) { ?>
+					  <?php if ($condition == $av_cond) { ?>
+					  <option value="<?php echo $av_cond; ?>" selected="selected"><?php echo $av_cond; ?></option>
+					  <?php } else { ?>
+					  <option value="<?php echo $av_cond; ?>"><?php echo $av_cond; ?></option>
+					  <?php } ?>
+					  <?php } ?>
+					</select></td>
+          </tr>
+		  <tr>
+					<td><?php echo $entry_oos_status; ?></td>
+					<td><select name="oos_status">
+					  <?php foreach($available_oos_statuses as $av_oos) { ?>
+					  <?php if ($oos_status == $av_oos) { ?>
+					  <option value="<?php echo $av_oos; ?>" selected="selected"><?php echo $av_oos; ?></option>
+					  <?php } else { ?>
+					  <option value="<?php echo $av_oos; ?>"><?php echo $av_oos; ?></option>
+					  <?php } ?>
+					  <?php } ?>
+					</select></td>
+			</tr>
+		  <tr>
+            <td><?php echo $entry_availability_date; ?></td>
+            <td><input type="text" name="gpf_availability_date" placeholder="YYYY-MM-DD" value="<?php echo $gpf_availability_date; ?>" size="12" class="date" style="margin-right: 60px;" />
+			<input type="text" name="gpf_availability_time" placeholder="hh:mm" value="<?php echo $gpf_availability_time; ?>" size="12" class="time" style="margin-right: 60px;" />
+			</td>
+          </tr>
+			
+          <tr>
+            <td width="40%"><?php echo $entry_is_bundle; ?></td>
+            <td width="60%"><select name="gpf_is_bundle">
+                <?php if ($gpf_is_bundle == 'TRUE') { ?>
+                <option value="TRUE" selected="selected"><?php echo $text_true; ?></option>
+                <option value="FALSE"><?php echo $text_false; ?></option>
+                <?php } else { ?>
+                <option value="TRUE"><?php echo $text_true; ?></option>
+                <option value="FALSE" selected="selected"><?php echo $text_false; ?></option>
+                <?php } ?>
+              </select></td>
+			</td>
+          </tr>
+		  <tr>
+			<td><?php echo $entry_identifier_exists; ?></td>
+			<td><select name="identifier_exists" style="float: left; margin-right: 50px;">
+			  
+			  <?php if ($identifier_exists == 'FALSE') { ?>
+				  <option value="TRUE"><?php echo $text_true; ?></option>
+				  <option value="FALSE" selected="selected"><?php echo $text_false; ?></option>
+			  <?php } else { ?>
+				  <option value="TRUE" selected="selected"><?php echo $text_true; ?></option>
+				  <option value="FALSE"><?php echo $text_false; ?></option>
+			  <?php } ?>
+			</select>
+			</td>
+		  </tr>
+			
+        </table>
+ 
+        <table class="form">
+          <tr>
+            <td><?php echo $entry_variant; ?></td>
+          </tr>
+		</table>
+		
+        <table id="variants" class="list">
+		  <thead>
+			<tr>
+				<td width="14%" style="text-align:center">MPN</td>
+				<td width="14%" style="text-align:center">Size</td>
+				<td width="14%" style="text-align:center">Colour</td>
+				<td width="14%" style="text-align:center">Pattern</td>
+				<td width="14%" style="text-align:center">Material</td>
+				<td width="14%" style="text-align:center">Image</td>
+				<td width="14%" style="text-align:center">&nbsp;</td>
+			</tr>
+			</thead>
+			
+			<?php $variants_row = 0; 
+			if ($product_variants){
+			
+			?>
+			
+			<?php foreach ($product_variants as $product_variant) { ?>
+
+			<tbody id="variants_row<?php echo $variants_row; ?>">
+			<tr>
+				<td width="14%" style="text-align:center"><input type="text" name="product_variants[<?php echo $variants_row; ?>][mpn]" tabindex="<?php echo ($variants_row*5+12); ?>" value="<?php echo (isset($product_variant['mpn']) ? $product_variant['mpn'] : ''); ?>" /></td>
+				<td width="14%" style="text-align:center"><input type="text" name="product_variants[<?php echo $variants_row; ?>][size]" tabindex="<?php echo ($variants_row*5+13); ?>" value="<?php echo $product_variant['size']; ?>" /></td>
+				<td width="14%" style="text-align:center"><input type="text" name="product_variants[<?php echo $variants_row; ?>][colour]" tabindex="<?php echo ($variants_row*5+14); ?>" value="<?php echo $product_variant['colour']; ?>" /></td>
+				<td width="14%" style="text-align:center"><input type="text" name="product_variants[<?php echo $variants_row; ?>][pattern]" tabindex="<?php echo ($variants_row*5+15); ?>" value="<?php echo $product_variant['pattern']; ?>" /></td>
+				<td width="14%" style="text-align:center"><input type="text" name="product_variants[<?php echo $variants_row; ?>][material]" tabindex="<?php echo ($variants_row*5+16); ?>" value="<?php echo $product_variant['material']; ?>" /></td>
+              <td valign="top" width="14%" style="text-align:center"><div class="image"><img src="<?php echo $product_variant['thumb']; ?>" alt="" id="product_variants_thumb<?php echo $variants_row; ?>" />
+                <input type="hidden" name="product_variants[<?php echo $variants_row; ?>][image]" value="<?php echo $product_variant['image']; ?>" id="product_variants_image<?php echo $variants_row; ?>" />
+                <br /><a onclick="image_upload('product_variants_image<?php echo $variants_row; ?>', 'product_variants_thumb<?php echo $variants_row; ?>');"><?php echo $text_browse; ?></a><br /><a onclick="$('#product_variants_thumb<?php echo $variants_row; ?>').attr('src', '<?php echo $no_image; ?>'); $('#product_variants_image<?php echo $variants_row; ?>').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+		        <td class="left" width="14%"><a onclick="$('#variants_row<?php echo $variants_row; ?>').remove();" class="button"><span><?php echo $button_remove; ?></span></a></td>
+			</tr>
+			</tbody>
+			<?php $variants_row++; ?>
+			<?php } 
+			} ?>
+		  <tfoot>
+			<tr>
+			  <td colspan="5"></td>
+			  <td class="left"><a onclick="addVariant();" class="button"><span><?php echo $button_add_variant; ?></span></a></td>
+			</tr>
+		  </tfoot>
+		</table>
+
+		<table class="form">
+          <tr>
+            <td ><?php echo $entry_adwords; ?></td>
+            <td >&nbsp;</td>
+          </tr>
+		<tr>
+            <td width="40%"><?php echo $entry_custom_labels; ?></td>
+            <td width="60%">
+				<?php for ($i=0; $i<=4; $i++) { ?>
+				<strong><?php echo $text_custom_labels_group . $i . ' : ' . $custom_labels_group[$i]; ?></strong><br />
+				<select name="custom_labels[<?php echo $i; ?>]">
+				<?php foreach ($custom_labels[$i] as $label) { ?>
+				<?php if($label == $product_custom_labels[$i]) { ?>
+					<option value="<?php echo $label; ?>" selected ="selected"><?php echo $label; ?></option>
+				<?php } else { ?>
+					<option value="<?php echo $label; ?>"><?php echo $label; ?></option>
+				<?php } ?>
+				<?php } ?>
+              </select><br /><br />
+				<?php } ?>
+			  </td>
+			</td>
+          </tr>
+		<tr>
+            <td width="40%"><?php echo $entry_adwords_grouping; ?></td>
+            <td width="60%">
+                <input type="text" name="adwords_grouping" id="adwords_grouping" style="width:400px;" value="<?php echo $adwords_grouping; ?>" />
+              </td>
+			</td>
+          </tr>
+		<tr>
+            <td width="40%"><?php echo $entry_adwords_labels; ?></td>
+            <td width="60%">
+                <input type="text" name="adwords_labels" id="adwords_labels" style="width:400px;" value="<?php echo $adwords_labels; ?>" />
+              </td>
+			</td>
+          </tr>
+		<tr>
+            <td width="40%"><?php echo $entry_adwords_redirect; ?></td>
+            <td width="60%"><select name="adwords_redirect">
+                <?php if ($adwords_redirect=='1') { ?>
+                <option value="1" selected="selected"><?php echo $text_yes; ?></option>
+                <option value="0"><?php echo $text_no; ?></option>
+                <?php } else { ?>
+                <option value="1"><?php echo $text_yes; ?></option>
+                <option value="0" selected="selected"><?php echo $text_no; ?></option>
+                <?php } ?>
+              </select>
+			</td>
+          </tr>
+		</table>
+
+
+		<table>
+          <tr>
+            <td style="background: #ffffcc"><?php echo $entry_information; ?></td>
+          </tr>
+		</table>
+
+
+	</div>
+			]]></add>
+        </operation>
+
+		<!-- Time Picker Fix -->
+        <operation error="skip">
+            <search position="replace"><![CDATA['h:m']]></search>
+            <add><![CDATA['hh:mm']]></add>
+        </operation>
+
+		<!-- Manufacturer "Onchange" Code -->
+        <operation error="skip">
+            <search position="replace"><![CDATA[
+              <input type="text" name="manufacturer" value="<?php echo $manufacturer ?>" />
+            ]]></search>
+            <add><![CDATA[
+              <input type="text" name="manufacturer" value="<?php echo $manufacturer ?>" onchange="copyManufacturer()" />
+			]]></add>
+        </operation>
+
+		<!-- Manufacturer "Onchange" Code -->
+        <operation error="skip">
+            <search position="replace"><![CDATA[
+              <td><select name="manufacturer_id">
+            ]]></search>
+            <add><![CDATA[
+              <td><select name="manufacturer_id" id="manufacturer_id" onchange="copyManufacturer()">
+			]]></add>
+        </operation>
+
+		<!-- Add Javascript Function "addVariant" -->
+		<operation>
+            <search position="before" offset="3"><![CDATA[
+function addDiscount() {
+            ]]></search>
+            <add><![CDATA[
+	
+<script type="text/javascript"><!--
+var variants_row = <?php echo $variants_row; ?>;
+
+function addVariant() {
+	html  = '<tbody id="variants_row' + variants_row + '">';
+	html += '<tr>'; 
+    html += '<td width="14%" style="text-align:center"><input type="text" name="product_variants[' + variants_row +'][mpn]" tabindex="' + (variants_row*5+12) +'" /></td>';
+    html += '<td width="14%" style="text-align:center"><input type="text" name="product_variants[' + variants_row +'][size]" tabindex="' + (variants_row*5+13) +'" /></td>';
+	html += '<td width="14%" style="text-align:center"><input type="text" name="product_variants[' + variants_row +'][colour]" tabindex="' + (variants_row*5+14) +'" /></td>';
+    html += '<td width="14%" style="text-align:center"><input type="text" name="product_variants[' + variants_row +'][pattern]" tabindex="' + (variants_row*5+15) +'" /></td>';
+	html += '<td width="14%" style="text-align:center"><input type="text" name="product_variants[' + variants_row +'][material]" tabindex="' + (variants_row*5+16) +'" /></td>';
+	html += '<td valign="top" width="14%" style="text-align:center"><div class="image"><img src="<?php echo $no_image; ?>" alt="" id="product_variants_thumb' + variants_row +'" /><input type="hidden" name="product_variants[' + variants_row +'][image]" value="" id="product_variants_image' + variants_row +'" /><br /><a onclick="image_upload(\'product_variants_image' + variants_row +'\', \'product_variants_thumb' + variants_row +'\');"><?php echo $text_browse; ?></a><br /><a onclick="$(\'#product_variants_thumb' + variants_row +'\').attr(\'src\', \'<?php echo $no_image; ?>\'); $(\'#product_variants_image' + variants_row +'\').attr(\'value\', \'\');"><?php echo $text_clear; ?></a></div></td>';
+	html += '<td class="left" width="14%"><a onclick="$(\'#variants_row' + variants_row +'\').remove();" class="button"><span><?php echo $button_remove; ?></span></a></td>';
+	html += '</tr>';	
+    html += '</tbody>';
+	$('#variants tfoot').before(html);
+		
+	variants_row++;
+}
+
+//--></script>
+
+<script type="text/javascript">
+<!--
+function googleTaxonomy() {
+	if (document.form.google_product_feed_lang.value == 'ch-US') {
+		var href='http://www.google.com/basepages/producttype/taxonomy.en-US.txt';
+	} else {
+		var href='http://www.google.com/basepages/producttype/taxonomy.' + document.form.google_product_feed_lang.value + '.txt';
+	}
+	window.open(href,"GoogleTaxonomy");
+}
+</script>
+	
+<script type="text/javascript">
+<!--
+function copyManufacturer() {
+	if(document.form.config_copy_manufacturer.value == 'Yes') {
+		var el = document.getElementById("manufacturer_id");
+		var txt = el.options[el.selectedIndex].text;
+		document.form.brand.value = txt;
+	}
+}
+</script>
+	
+		]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/controller/catalog/product.php">
+
+		<!-- Include Product Feed Tab -->
+		<operation>
+            <search position="after"><![CDATA[
+    	$this->data['tab_data'] = $this->language->get('tab_data');
+            ]]></search>
+            <add><![CDATA[
+		$this->data['tab_feed'] = $this->language->get('tab_feed');
+		$this->data['text_browse'] = $this->language->get('text_browse');
+		$this->data['text_clear'] = $this->language->get('text_clear');
+		]]></add>
+        </operation>
+
+		<!-- Include Labels for Feed Tab -->
+		<operation>
+            <search position="before"><![CDATA[
+		$this->data['tab_design'] = $this->language->get('tab_design');
+            ]]></search>
+            <add><![CDATA[
+		$this->data['entry_google_product_category'] = $this->language->get('entry_google_product_category');
+		$this->data['entry_brand'] = $this->language->get('entry_brand');
+		$this->data['entry_gtin'] = $this->language->get('entry_gtin');
+		$this->data['entry_mpn'] = $this->language->get('entry_mpn');
+		$this->data['entry_list'] = $this->language->get('entry_list');
+		$this->data['entry_gender'] = $this->language->get('entry_gender');
+		$this->data['entry_agegroup'] = $this->language->get('entry_agegroup');
+		$this->data['entry_colour'] = $this->language->get('entry_colour');
+		$this->data['entry_size'] = $this->language->get('entry_size');
+		$this->data['entry_condition'] = $this->language->get('entry_condition');
+		$this->data['entry_oos_status'] = $this->language->get('entry_oos_status');
+		$this->data['entry_availability_date'] = $this->language->get('entry_availability_date');
+		$this->data['entry_size_system'] = $this->language->get('entry_size_system');
+		$this->data['entry_size_type'] = $this->language->get('entry_size_type');
+		$this->data['entry_is_bundle'] = $this->language->get('entry_is_bundle');
+		$this->data['entry_identifier_exists'] = $this->language->get('entry_identifier_exists');
+		$this->data['entry_variant'] = $this->language->get('entry_variant');
+		$this->data['entry_adwords'] = $this->language->get('entry_adwords');
+		$this->data['entry_adwords_grouping'] = $this->language->get('entry_adwords_grouping');
+		$this->data['entry_adwords_labels'] = $this->language->get('entry_adwords_labels');
+		$this->data['entry_adwords_redirect'] = $this->language->get('entry_adwords_redirect');
+		$this->data['entry_information'] = $this->language->get('entry_information');
+		$this->data['entry_custom_labels'] = $this->language->get('entry_custom_labels');
+		$this->data['button_add_variant'] = $this->language->get('button_add_variant');
+		$this->data['text_general'] = $this->language->get('text_general');
+		$this->data['text_true'] = $this->language->get('text_true');
+		$this->data['text_false'] = $this->language->get('text_false');
+		$this->data['text_custom_labels_group'] = $this->language->get('text_custom_labels_group');
+		$this->data['text_do_not_change'] = $this->language->get('text_do_not_change');
+		$this->data['error_warning_gpf_disabled'] = $this->language->get('error_warning_gpf_disabled');
+        $this->data['google_product_feed_copy_manufacturer'] = $this->config->get('google_product_feed_copy_manufacturer');		
+		]]></add>
+        </operation>
+
+		<!-- Add Additional Fields to Product Controller File -->
+		<operation>
+            <search position="after" offset="7"><![CDATA[
+		if (isset($this->request->post['price'])) {
+            ]]></search>
+            <add><![CDATA[
+		$this->load->model('setting/setting');
+
+        $this->data['google_product_feed_currency'] = $this->config->get('google_product_feed_currency');
+		$this->data['google_product_feed_status'] = $this->config->get('google_product_feed_status');
+		$this->data['google_product_feed_lang'] = $this->config->get('google_product_feed_lang');
+
+		if (isset($this->request->post['google_product_category'])) {
+      		$this->data['google_product_category'] = $this->request->post['google_product_category'];
+    	} else if (!empty($product_info)) {
+			if($product_info['google_product_category'] !="") {
+				$this->data['google_product_category'] = $product_info['google_product_category'];
+			} else {
+				$this->data['google_product_category'] = $this->config->get('default_google_product_category');
+			}
+		} else {
+      		$this->data['google_product_category'] = $this->config->get('default_google_product_category');
+    	}
+
+		if (isset($this->request->post['gpf_status'])) {
+      		$this->data['gpf_status'] = $this->request->post['gpf_status'];
+    	} else if (!empty($product_info)) {
+			$this->data['gpf_status'] = $product_info['gpf_status'];
+		} else {
+      		$this->data['gpf_status'] = '0';
+    	}
+
+		if (isset($this->request->post['brand'])) {
+      		$this->data['brand'] = $this->request->post['brand'];
+    	} else if (!empty($product_info)) {
+			$this->data['brand'] = $product_info['brand'];
+		} else {
+      		$this->data['brand'] = '';
+    	}
+
+		if (isset($this->request->post['gtin'])) {
+      		$this->data['gtin'] = $this->request->post['gtin'];
+    	} else if (!empty($product_info)) {
+			$this->data['gtin'] = $product_info['gtin'];
+		} else {
+      		$this->data['gtin'] = '';
+    	}
+
+		if (isset($this->request->post['mpn'])) {
+      		$this->data['mpn'] = $this->request->post['mpn'];
+    	} else if (!empty($product_info)) {
+			$this->data['mpn'] = $product_info['mpn'];
+		} else {
+      		$this->data['mpn'] = '';
+    	}
+
+		$this->data['available_genders'] = array('Not Applicable', 'Male', 'Female', 'Unisex');
+		if (isset($this->request->post['gender'])) {
+      		$this->data['gender'] = $this->request->post['gender'];
+    	} else if (!empty($product_info)) {
+			$this->data['gender'] = $product_info['gender'];
+		} else {
+      		$this->data['gender'] = 'Not Applicable';
+    	}
+
+
+		$this->data['available_agegroup'] = array('Not Applicable', 'Newborn', 'Infant', 'Toddler', 'Kids', 'Adult');
+		if (isset($this->request->post['agegroup'])) {
+      		$this->data['agegroup'] = $this->request->post['agegroup'];
+    	} else if (!empty($product_info)) {
+			$this->data['agegroup'] = $product_info['agegroup'];
+		} else {
+      		$this->data['agegroup'] = 'Not Applicable';
+    	}
+
+
+		if (isset($this->request->post['colour'])) {
+      		$this->data['colour'] = $this->request->post['colour'];
+    	} else if (!empty($product_info)) {
+			$this->data['colour'] = $product_info['colour'];
+		} else {
+      		$this->data['colour'] = '';
+    	}
+
+		if (isset($this->request->post['size'])) {
+      		$this->data['size'] = $this->request->post['size'];
+    	} else if (!empty($product_info)) {
+			$this->data['size'] = $product_info['size'];
+		} else {
+      		$this->data['size'] = '';
+    	}
+
+		$this->data['available_conditions'] = array('New', 'Refurbished', 'Used');
+    	if (isset($this->request->post['condition'])) {
+      		$this->data['condition'] = $this->request->post['condition'];
+    	} else if (!empty($product_info['condition'])) {
+			$this->data['condition'] = $product_info['condition'];
+		} else {
+      		$this->data['condition'] = $this->config->get('condition');
+    	}
+
+		
+		$this->data['available_oos_statuses'] = array('Out of Stock', 'Preorder', 'In Stock');
+    	if (isset($this->request->post['oos_status'])) {
+      		$this->data['oos_status'] = $this->request->post['oos_status'];
+    	} else if (!empty($product_info['oos_status'])) {
+			$this->data['oos_status'] = $product_info['oos_status'];
+		} else {
+      		$this->data['oos_status'] = $this->config->get('oos_status');
+    	}
+		
+		
+    	if (isset($this->request->post['gpf_availability_date'])) {
+      		$this->data['gpf_availability_date'] = $this->request->post['gpf_availability_date'];
+    	} else if (!empty($product_info['gpf_availability_date'])) {
+			$this->data['gpf_availability_date'] = $product_info['gpf_availability_date'];
+		} else {
+      		$this->data['gpf_availability_date'] = '';
+    	}
+		
+		
+    	if (isset($this->request->post['gpf_availability_time'])) {
+      		$this->data['gpf_availability_time'] = $this->request->post['gpf_availability_time'];
+    	} else if (!empty($product_info['gpf_availability_time'])) {
+			$this->data['gpf_availability_time'] = $product_info['gpf_availability_time'];
+		} else {
+      		$this->data['gpf_availability_time'] = '';
+    	}
+		
+		
+		$this->data['available_size_systems'] = array('Not Applicable', 'US', 'UK', 'EU', 'DE', 'FR', 'JP', 'CN', 'IT', 'BR', 'MEX', 'AU');
+    	if (isset($this->request->post['gpf_size_system'])) {
+      		$this->data['gpf_size_system'] = $this->request->post['gpf_size_system'];
+    	} else if (!empty($product_info['gpf_size_system'])) {
+			$this->data['gpf_size_system'] = $product_info['gpf_size_system'];
+		} else {
+      		$this->data['gpf_size_system'] = '';
+    	}
+		
+		
+		$this->data['available_size_types'] = array('Not Applicable', 'Regular', 'Petite', 'Plus', 'Big and Tall', 'Maternity');
+    	if (isset($this->request->post['gpf_size_type'])) {
+      		$this->data['gpf_size_type'] = $this->request->post['gpf_size_type'];
+    	} else if (!empty($product_info['gpf_size_type'])) {
+			$this->data['gpf_size_type'] = $product_info['gpf_size_type'];
+		} else {
+      		$this->data['gpf_size_type'] = $this->config->get('gpf_size_type');
+    	}
+		
+		
+		if (isset($this->request->post['gpf_is_bundle'])) {
+      		$this->data['gpf_is_bundle'] = $this->request->post['gpf_is_bundle'];
+    	} else if (!empty($product_info['gpf_is_bundle'])) {
+			$this->data['gpf_is_bundle'] = $product_info['gpf_is_bundle'];
+		} else {
+      		$this->data['gpf_is_bundle'] = '0';
+    	}
+
+
+    	if (isset($this->request->post['identifier_exists'])) {
+      		$this->data['identifier_exists'] = $this->request->post['identifier_exists'];
+    	} else if (!empty($product_info['identifier_exists'])) {
+			$this->data['identifier_exists'] = $product_info['identifier_exists'];
+		} else {
+      		$this->data['identifier_exists'] = $this->config->get('identifier_exists');
+    	}
+		
+		
+		if (isset($this->request->post['adwords_grouping'])) {
+      		$this->data['adwords_grouping'] = $this->request->post['adwords_grouping'];
+    	} else if (!empty($product_info)) {
+			$this->data['adwords_grouping'] = $product_info['adwords_grouping'];
+		} else {
+      		$this->data['adwords_grouping'] = '';
+    	}
+
+		if (isset($this->request->post['adwords_labels'])) {
+      		$this->data['adwords_labels'] = $this->request->post['adwords_labels'];
+    	} else if (!empty($product_info)) {
+			$this->data['adwords_labels'] = $product_info['adwords_labels'];
+		} else {
+      		$this->data['adwords_labels'] = '';
+    	}
+
+		if (isset($this->request->post['adwords_redirect'])) {
+      		$this->data['adwords_redirect'] = $this->request->post['adwords_redirect'];
+    	} else if (!empty($product_info)) {
+			$this->data['adwords_redirect'] = $product_info['adwords_redirect'];
+		} else {
+      		$this->data['adwords_redirect'] = '';
+    	}
+
+		$this->data['custom_labels_group'] = $this->config->get('custom_labels_group');
+		if(!$this->data['custom_labels_group']) {
+      		$this->data['custom_labels_group'] = array('','','','','');
+    	}
+
+        $this->data['custom_labels'] = array();
+		$custom_labels = $this->config->get('custom_labels');
+		
+		for($i=0; $i<=4; $i++) {
+			$this->data['custom_labels'][$i] = array();
+			$this->data['custom_labels'][$i][] = 'Not Applicable';
+			if($custom_labels) {
+				$labels = explode(',', $custom_labels[$i]);
+				foreach($labels as $label) {
+					$this->data['custom_labels'][$i][] = $label;
+				}
+			}
+		}
+
+		if (isset($this->request->post['custom_labels'])) {
+      		$this->data['product_custom_labels'] = $this->request->post['custom_labels'];
+    	} else if (!empty($product_info['custom_labels'])) {
+			$this->data['product_custom_labels'] = explode(',', $product_info['custom_labels']);
+		} else {
+			$this->data['product_custom_labels'] = array('','','','','');
+		}
+		
+		if (isset($this->request->post['product_variants'])) {
+      		$product_variants = $this->request->post['product_variants'];
+    	} elseif (isset($this->request->get['product_id'])) {
+			$product_variants = $this->model_catalog_product->getProductVariants($this->request->get['product_id']);
+		} else {
+			$product_variants = array();
+		}
+
+		$this->data['product_variants'] = array();
+		
+		if($product_variants) {
+			foreach ($product_variants as $product_variant) {
+				if ($product_variant['image'] && file_exists(DIR_IMAGE . $product_variant['image'])) {
+					$image = $product_variant['image'];
+				} else {
+					$image = 'no_image.jpg';
+				}
+				
+				$this->data['product_variants'][] = array(
+					'image'      => $image,
+					'thumb'      => $this->model_tool_image->resize($image, 100, 100),
+					'size' 		 => $product_variant['size'],
+					'colour' 	 => $product_variant['colour'],
+					'material' 	 => $product_variant['material'],
+					'pattern' 	 => $product_variant['pattern']
+				);
+			}
+		}
+		
+		]]></add>
+        </operation>
+
+	</file>
+	
+	<file name="admin/model/catalog/product.php">
+
+		<!-- Add Additional Fields to Mysql Query - Add -->
+		<operation>
+            <search position="after"><![CDATA[
+		$product_id = $this->db->getLastId();
+            ]]></search>
+            <add><![CDATA[
+		// Google Product Feed
+		$data['adwords_grouping'] = str_replace(" ", "-", trim($data['adwords_grouping']));
+
+		$this->db->query("UPDATE " . DB_PREFIX . "product SET gpf_status = '" . (int)$data['gpf_status'] . "', gtin = '" . $this->db->escape($data['gtin']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', google_product_category = '" . $this->db->escape($data['google_product_category']) . "', brand = '" . $this->db->escape($data['brand']) . "', gender = '" . $this->db->escape($data['gender']) . "', agegroup = '" . $this->db->escape($data['agegroup']) . "', colour = '" . $this->db->escape($data['colour']) . "', `size` = '" . $this->db->escape($data['size']) . "', `condition` = '" . $this->db->escape($data['condition']) . "', `oos_status` = '" . $this->db->escape($data['oos_status']) . "', `gpf_size_system` = '" . $this->db->escape($data['gpf_size_system']) . "', `gpf_size_type` = '" . $this->db->escape($data['gpf_size_type']) . "', `gpf_availability_date` = '" . $this->db->escape($data['gpf_availability_date']) . "', `gpf_availability_time` = '" . $this->db->escape($data['gpf_availability_time']) . "', `gpf_is_bundle` = '" . $this->db->escape($data['gpf_is_bundle']) . "', identifier_exists  ='" . $this->db->escape($data['identifier_exists']) . "', adwords_grouping = '" . $this->db->escape($data['adwords_grouping']) ."', adwords_labels = '" . $this->db->escape($data['adwords_labels']) ."', adwords_redirect = '" . (int)$data['adwords_redirect'] ."' WHERE product_id = '" . $product_id . "'"); 
+		
+		if (isset($data['product_variants'])) {
+			$this->db->query("INSERT INTO " . DB_PREFIX . "product_variants SET product_id='" . (int)$product_id . "', variants = '" . $this->db->escape(serialize($data['product_variants'])) . "'");
+		}
+
+		// Custom Labels
+			
+		for ($i=0; $i<=4; $i++) {
+			$labels[$i] = $data['custom_labels'][$i];
+		}
+		$custom_labels = implode(',', $labels);
+		
+		$query = $this->db->query("UPDATE " . DB_PREFIX . "product SET `custom_labels` = '" . $this->db->escape($custom_labels) . "' WHERE product_id = '" . (int)$product_id . "'");
+		
+		
+		// End of Google Product Feed
+			]]></add>
+        </operation>
+
+		<!-- Add Additional Fields to Mysql Query - Update -->
+		<operation>
+            <search position="after"><![CDATA[
+	public function editProduct($product_id, $data) {
+            ]]></search>
+            <add><![CDATA[
+		// Google Product Feed
+		$data['adwords_grouping'] = str_replace(" ", "-", trim($data['adwords_grouping']));
+		
+		$this->db->query("UPDATE " . DB_PREFIX . "product SET gpf_status = '" . (int)$data['gpf_status'] . "', gtin = '" . $this->db->escape($data['gtin']) . "', mpn = '" . $this->db->escape($data['mpn']) . "', google_product_category = '" . $this->db->escape($data['google_product_category']) . "', brand = '" . $this->db->escape($data['brand']) . "', gender = '" . $this->db->escape($data['gender']) . "', agegroup = '" . $this->db->escape($data['agegroup']) . "', colour = '" . $this->db->escape($data['colour']) . "', `size` = '" . $this->db->escape($data['size']) . "', `condition` = '" . $this->db->escape($data['condition']) . "', `oos_status` = '" . $this->db->escape($data['oos_status']) . "', `gpf_size_system` = '" . $this->db->escape($data['gpf_size_system']) . "', `gpf_size_type` = '" . $this->db->escape($data['gpf_size_type']) . "', `gpf_availability_date` = '" . $this->db->escape($data['gpf_availability_date']) . "', `gpf_availability_time` = '" . $this->db->escape($data['gpf_availability_time']) . "', `gpf_is_bundle` = '" . $this->db->escape($data['gpf_is_bundle']) . "', identifier_exists  ='" . $this->db->escape($data['identifier_exists']) . "', adwords_grouping = '" . $this->db->escape($data['adwords_grouping']) ."', adwords_labels = '" . $this->db->escape($data['adwords_labels']) ."', adwords_redirect = '" . (int)$data['adwords_redirect'] ."' WHERE product_id = '" . $product_id . "'");
+		
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product_variants WHERE product_id = '" . (int)$product_id . "'");
+
+
+		if (isset($data['product_variants'])) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_variants SET product_id='" . (int)$product_id . "', variants = '" . $this->db->escape(serialize($data['product_variants'])) . "'");
+		}
+
+		// Custom Labels
+		$change_custom_labels = false;
+		foreach($data['custom_labels'] as $custom_label) {
+			if($custom_label != 'Do Not Change') {
+				$change_custom_labels = true;
+			}
+		}
+		if ($change_custom_labels) {
+			$query = $this->db->query("SELECT custom_labels FROM ". DB_PREFIX . "product WHERE product_id = '" . (int)$product_id . "'"); 
+			$custom_labels = $query->row['custom_labels'];
+			if($custom_labels == '') {
+				$custom_labels = "'','','','',''";
+			}
+			$labels = explode(',', $custom_labels);
+			
+			for ($i=0; $i<=4; $i++) {
+				if($data['custom_labels'][$i] != 'Do Not Change') {
+					$labels[$i] = $data['custom_labels'][$i];
+				}
+			}
+			$custom_labels = implode(',', $labels);
+			
+			$query = $this->db->query("UPDATE " . DB_PREFIX . "product SET `custom_labels` = '" . $this->db->escape($custom_labels) . "' WHERE product_id = '" . (int)$product_id . "'");
+		}
+		
+		// End of Google Product Feed
+		]]></add>
+        </operation>
+
+
+		<!-- Add to copyProduct" -->
+		<operation>
+            <search position="after"><![CDATA[
+			$data = array_merge($data, array('product_store' => $this->getProductStores($product_id)));
+            ]]></search>
+            <add><![CDATA[
+			$data = array_merge($data, array('product_variants' => $this->getProductVariants($product_id)));
+			
+		]]></add>
+        </operation>
+		<operation>
+            <search position="before"><![CDATA[
+			$data['keyword'] = '';
+            ]]></search>
+            <add><![CDATA[
+			$data['custom_labels'] = explode(',', $data['custom_labels']);			
+		]]></add>
+        </operation>
+
+		<!-- Add to "deleteProduct" -->
+		<operation>
+            <search position="after" offset="15"><![CDATA[
+	public function deleteProduct($product_id) {
+            ]]></search>
+            <add><![CDATA[
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product_variants WHERE product_id = '" . (int)$product_id . "'");
+	 
+		]]></add>
+        </operation>
+
+		<!-- Add Function "getProductVariants()" -->
+		<operation>
+            <search position="before"><![CDATA[
+	public function getProductCategories($product_id) {
+            ]]></search>
+            <add><![CDATA[
+	public function getProductVariants($product_id) {
+		$query = $this->db->query("SELECT variants FROM " . DB_PREFIX . "product_variants WHERE product_id = '" . (int)$product_id . "'");	
+		
+		if ($query->num_rows) {
+			foreach ($query->rows as $result){
+				$data = array();
+				$data = unserialize($result['variants']);
+			}
+			
+		} else {
+			$data = FALSE;
+		}
+		return $data;
+	}
+	 		
+		]]></add>
+        </operation>
+
+	</file>
+
+	<file name="catalog/model/catalog/product.php">
+
+		<!-- Get Additional Column Data-->
+		<operation error="skip">
+            <search position="before"><![CDATA[
+				'date_added'       => $query->row['date_added'],
+            ]]></search>
+            <add><![CDATA[
+				'gpf_status'       	=> $query->row['gpf_status'],
+				'gtin'       		=> $query->row['gtin'],
+				'google_product_category'       => $query->row['google_product_category'],
+				'brand'       		=> $query->row['brand'],
+				'gender'       		=> $query->row['gender'],
+				'agegroup'       	=> $query->row['agegroup'],
+				'colour'       		=> $query->row['colour'],
+				'size'       		=> $query->row['size'],
+				'condition'       	=> $query->row['condition'],
+				'oos_status'       	=> $query->row['oos_status'],
+				'gpf_size_system'  	=> $query->row['gpf_size_system'],
+				'gpf_size_type'     => $query->row['gpf_size_type'],
+				'gpf_availability_date'  => $query->row['gpf_availability_date'],
+				'gpf_availability_time'  => $query->row['gpf_availability_time'],
+				'gpf_is_bundle'      => $query->row['gpf_is_bundle'],
+				'identifier_exists'	=> $query->row['identifier_exists'],
+				'adwords_grouping'  => $query->row['adwords_grouping'],
+				'adwords_labels'    => $query->row['adwords_labels'],
+				'adwords_redirect'  => $query->row['adwords_redirect'],
+				'custom_labels'  	=> $query->row['custom_labels'],
+			]]></add>
+        </operation>
+
+		<operation>
+            <search position="before"><![CDATA[
+	public function getTotalProductSpecials() {
+            ]]></search>
+            <add><![CDATA[
+	public function track($source, $grouping, $product_id) {
+		$visitor_ip = $_SERVER['REMOTE_ADDR'];
+		$visitor_user_agent = $_SERVER['HTTP_USER_AGENT'];
+		$visitor_hour = date("H");
+		$visitor_minute = date("i");
+		$visitor_day = date("d");
+		$visitor_date = date("Y-m-d");
+		$visitor_month = date("m");
+		$visitor_year = date("Y");
+		if (isset($_SERVER['HTTP_REFERER'])) {
+			$visitor_referrer = $_SERVER['HTTP_REFERER'];
+		} else {
+			$visitor_referrer = '';
+		}
+
+
+		//write the required data to database
+		$this->db->query("INSERT INTO " . DB_PREFIX . "google_shopping_tracker (visitor_ip, visitor_user_agent, visitor_hour,
+		 visitor_minute, visitor_date, visitor_day, visitor_month, visitor_year, 
+		 visitor_referrer, product_id, source, grouping) VALUES ('$visitor_ip', '$visitor_user_agent', 
+		 '$visitor_hour', '$visitor_minute', '$visitor_date', '$visitor_day', '$visitor_month', 
+		 '$visitor_year', '$visitor_referrer', '$product_id', '$source', '$grouping')");
+
+	}
+			]]></add>
+        </operation>
+
+	</file>
+
+	<file name="catalog/controller/product/product.php">
+
+		<!-- Get Additional Column Data-->
+		<operation>
+            <search position="after"><![CDATA[
+		$this->load->model('catalog/category');	
+            ]]></search>
+            <add><![CDATA[
+		$this->load->model('catalog/product');
+
+		if (isset($this->request->get['source']) && isset($this->request->get['product_id'])) {
+			$result = $this->model_catalog_product->track($this->request->get['source'], $this->request->get['grouping'], $this->request->get['product_id']);
+		}
+			]]></add>
+        </operation>
+
+	</file>
+	
+	<file name="admin/view/template/common/header.tpl">
+
+		<operation>
+            <search position="after"><![CDATA[
+          <li><a href="<?php echo $error_log; ?>"><?php echo $text_error_log; ?></a></li>
+            ]]></search>
+            <add><![CDATA[
+          <li><a href="<?php echo $google_product_feed_csv; ?>"><?php echo $text_google_product_feed_csv; ?></a></li>
+			]]></add>
+        </operation>
+
+	</file>
+	
+	<file name="admin/language/*/common/header.php">
+
+		<operation>
+            <search position="after"><![CDATA[
+$_['text_contact']
+            ]]></search>
+            <add><![CDATA[
+$_['text_google_product_feed_csv']		= 'Google Shopping Log';
+			]]></add>
+        </operation>
+
+	</file>
+	
+	<file name="admin/controller/common/header.php">
+
+		<operation>
+            <search position="after"><![CDATA[
+		$this->data['text_geo_zone'] = $this->language->get('text_geo_zone');
+            ]]></search>
+            <add><![CDATA[
+		$this->data['text_google_product_feed_csv'] = $this->language->get('text_google_product_feed_csv');
+			]]></add>
+        </operation>
+
+		<operation>
+            <search position="after"><![CDATA[
+			$this->data['geo_zone'] = $this->url->link('localisation/geo_zone', 'token=' . $this->session->data['token'], 'SSL');
+            ]]></search>
+            <add><![CDATA[
+			$this->data['google_product_feed_csv'] = $this->url->link('tool/google_product_feed_csv', 'token=' . $this->session->data['token'], 'SSL');
+			]]></add>
+        </operation>
+
+	</file>
+	
+	
+</modification>

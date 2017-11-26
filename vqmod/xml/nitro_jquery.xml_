@@ -1,0 +1,28 @@
+<modification>
+	<id>Nitro jQuery modification.</id>
+	<version>1.0</version>
+	<vqmver>2.X</vqmver>
+	<author>iSenseLabs Team | http://isenselabs.com</author>
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>]]></search>
+			<add><![CDATA[
+			<?php if (getNitroPersistence('GoogleJQuery') == 'yes') { ?>
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+			<?php } else { ?>
+			<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
+			<?php } ?>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.1.min.js"></script>]]></search>
+			<add><![CDATA[
+			<?php if (getNitroPersistence('GoogleJQuery') == 'yes') { ?>
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+			<?php } else { ?>
+			<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.1.min.js"></script>
+			<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+</modification>

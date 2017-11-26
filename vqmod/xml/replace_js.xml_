@@ -1,0 +1,3317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id><![CDATA[Load jQuery from Google CDN]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[2.1.7]]></vqmver>
+	<author><![CDATA[TransPacific Software]]></author> 
+           <file name="catalog/view/theme/*/template/common/header.tpl">
+		         <operation info="replace js files" error="skip">
+				    <search position="replace"><![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>]]></search>
+                        <add><![CDATA[
+						<?php
+                        if(isset($change_url)) 
+                        { 
+                        $flag='false';						
+						foreach($change_url as $url){
+						if(preg_match('|jquery\-1\.7\.1\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+						<script>
+                		if (!window.jQuery) {
+				 			document.write('<script src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"><\/script>');
+               			}
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
+						 <?php } ?>
+						
+			         <?php } else {?>
+					  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
+                      <?php } ?>					  
+				   
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-2.0.3.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+						 $flag='false';
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-2\.0\.3\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-2.0.3.min.js"><\/script>');
+                        }
+			             </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-2.0.3.min.js"></script>
+						 <?php } ?>
+					
+			   <?php } else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-2.0.3.min.js"></script>
+				<?php } ?>
+			   ]]>
+                </add>
+				</operation>	
+                
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-2.0.2.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						if(isset($change_url)) 
+                        { 	
+						$flag='false';
+						foreach($change_url as $url){
+						if(preg_match('|jquery\-2\.0\.2\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> 
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-2.0.2.min.js"><\/script>');
+                        }
+			            </script> 
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-2.0.2.min.js"></script>
+						 <?php } ?>
+						
+			   <?php } else {?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-2.0.2.min.js"></script>
+			   <?php } ?>
+			   ]]>
+                </add>
+				</operation>		
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-2.0.1.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+                        if(isset($change_url)) 
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						if(preg_match('|jquery\-2\.0\.1\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.1/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-2.0.1.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-2.0.1.min.js"></script>
+						 <?php } ?>
+						
+			    <?php } else {?>
+				 <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-2.0.1.min.js"></script>
+				 <?php }?>
+				]]>
+                </add>
+				</operation>	
+
+                 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-2.0.0.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						if(isset($change_url))
+						{
+						$flag='false'; 
+						foreach($change_url as $url){
+						if(preg_match('|jquery\-2\.0\.0\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-2.0.0.min.js"><\/script>');
+                        }
+			            </script>
+
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-2.0.0.min.js"></script>
+						 <?php } ?>
+			   <?php } else {?>
+			   <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-2.0.0.min.js"></script>
+			   <?php } ?>
+			    ]]>
+                </add>
+				</operation>	
+				
+                  <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.10.1.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+                        if(isset($change_url)) 
+                        {	
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.10\.1\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.10.1.min.js"><\/script>');
+                          }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.10.1.min.js"></script>
+						 <?php } ?>
+						
+			    <?php } else {?>
+				<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.10.1.min.js"></script>
+				<?php } ?>
+			   ]]>
+                </add>
+				</operation>
+				
+                 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.10.2.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+                        if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.10\.2\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.10.2.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.10.2.min.js"></script>
+						 <?php } ?>
+						
+			   <?php } else {?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.10.2.min.js"></script>
+			   <?php } ?>
+			   ]]>
+                </add>
+				</operation>
+                 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.10.0.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+                        if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.10\.0\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.10.0.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.10.0.min.js"></script>
+						 <?php } ?>
+						
+			    <?php } else {?>
+			     <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.10.0.min.js"></script>
+			   <?php } ?>
+			   ]]>
+                </add>
+				</operation>
+               
+			     <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.9.1.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.9\.1\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.9.1.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.9.1.min.js"></script>
+						 <?php } ?>
+						
+			     <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.9.1.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				  <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.9.0.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+                        if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.9\.0\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.9.0.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.9.0.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.9.0.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				  <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.3.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.8\.3\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.8.3.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.3.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.3.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				  <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.2.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						$flag='false';
+                        if(preg_match('|jquery\-1\.8\.2\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.8.2.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.2.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.2.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.1.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+                        if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.8\.1\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				       document.write('<script src="catalog/view/javascript/jquery/jquery-1.8.1.min.js"><\/script>');
+                       }
+			           </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.1.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.1.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+               	
+                 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.0.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+                         if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						if(preg_match('|jquery\-1\.8\.0\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+						<script>
+                       if (!window.jQuery) {
+				      document.write('<script src="catalog/view/javascript/jquery/jquery-1.8.0.min.js"><\/script>');
+                      }
+			           </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.0.min.js"></script>
+						 <?php } ?>
+					
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.0.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>	
+
+                
+                <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.0.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.7\.0\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.7.0.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.0.min.js"></script>
+						 <?php } ?>
+					
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.0.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>				
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.4.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.6\.4\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.4.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.4.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.3.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url))
+                        {
+                         $flag='false'; 						
+						foreach($change_url as $url){
+						if(preg_match('|jquery\-1\.6\.3\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.6.3.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.3.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.3.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.2.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						if(preg_match('|jquery\-1\.6\.2\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+					    <script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.6.2.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.2.min.js"></script>
+						 <?php } ?>
+					
+			    <?php }else { ?>
+			     <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.2.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.1.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+                         if(isset($change_url))
+                        {
+                         $flag='false';							
+						foreach($change_url as $url){
+						if(preg_match('|jquery\-1\.6\.1\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+						<script>
+                       if (!window.jQuery) {
+				       document.write('<script src="catalog/view/javascript/jquery/jquery-1.6.1.min.js"><\/script>');
+                       }
+			           </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.1.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			   <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.1.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.0.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.6\.0\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.6.0.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.0.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.6.0.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.5.2.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.5\.2\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+						<script>
+                       if (!window.jQuery) {
+				       document.write('<script src="catalog/view/javascript/jquery/jquery-1.5.2.min.js"><\/script>');
+                        }
+			             </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.5.2.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.5.2.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.5.1.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.5\.1\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+						<script>
+                       if (!window.jQuery) {
+				       document.write('<script src="catalog/view/javascript/jquery/jquery-1.5.1.min.js"><\/script>');
+                        }
+			           </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.5.1.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.5.1.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.5.0.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+                        if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						$flag='false';
+                        if(preg_match('|jquery\-1\.5\.0\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+						<script>
+                       if (!window.jQuery) {
+				       document.write('<script src="catalog/view/javascript/jquery/jquery-1.5.0.min.js"><\/script>');
+                       }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.5.0.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.5.0.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.4.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.4\.4\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+						<script>
+                         if (!window.jQuery) {
+				         document.write('<script src="catalog/view/javascript/jquery/jquery-1.4.4.min.js"><\/script>');
+                         }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.4.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.4.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.3.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+                        if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.4\.3\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.4.3.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.3.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.3.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.2.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						if(isset($change_url))
+                        {
+                        $flag='false';						
+						foreach($change_url as $url){
+						if(preg_match('|jquery\-1\.4\.2\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.4.2.min.js"><\/script>');
+                         }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.2.min.js"></script>
+						 <?php } ?>
+					
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.2.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.1.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						if(isset($change_url))
+                        {
+                         $flag='false'; 						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.4\.1\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.4.1.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.1.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.1.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.0.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						if(preg_match('|jquery\-1\.4\.0\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.4.0.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.0.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.0.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.3.2.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.3\.2\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.3.2.min.js"><\/script>');
+                        }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.3.2.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			   <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.3.2.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.3.1.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.3\.1\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+						<script>
+                        if (!window.jQuery) {
+				        document.write('<script src="catalog/view/javascript/jquery/jquery-1.3.1.min.js"><\/script>');
+                        }
+			           </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.3.1.min.js"></script>
+						 <?php } ?>
+					
+			    <?php }else { ?>
+			    <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.3.1.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.3.0.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						if(isset($change_url))
+                        {
+                         $flag='false';						
+						foreach($change_url as $url){
+						
+                        if(preg_match('|jquery\-1\.3\.0\.min\.js|',$url['url']))
+						{?>
+						<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+						<script>
+                     if (!window.jQuery) {
+				       document.write('<script src="catalog/view/javascript/jquery/jquery-1.3.0.min.js"><\/script>');
+                       }
+			            </script>
+						<?php $flag='true';
+							   break;
+					        }
+						 }
+						 if($flag=='false')
+						 { ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.3.0.min.js"></script>
+						 <?php } ?>
+						
+			    <?php }else { ?>
+			   <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.3.0.min.js"></script>
+				<?php }?>
+			   ]]>
+                </add>
+				</operation>
+				
+				<!-- replace jquery_ui files -->
+				
+				 <operation info="replace js files" error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+                        if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						 foreach($change_url as $url)
+						 { 
+						     if(preg_match('|jquery\-ui\-1\.8\.16\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
+						 <?php 
+						 } 
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
+						 <?php } ?> 
+						 
+				]]>
+                </add>
+				 </operation>
+				 
+				 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.3.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 
+                          $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   
+						   if(preg_match('|jquery\-ui\-1\.10\.3\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.3.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.3.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.3.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation> 
+				 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.2.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 
+                           $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   
+						   if(preg_match('|jquery\-ui\-1\.10\.2\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.2.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.2.custom.min.js"></script>
+						 <?php 
+						 }
+						  }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.2.custom.min.js"></script>
+						 <?php } ?> 
+						
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.1.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						    
+						   if(preg_match('|jquery\-ui\-1\.10\.1\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.1.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.1.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.1.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.0.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                          $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						    if(preg_match('|jquery\-ui\-1\.10\.0\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
+							<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.0.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.0.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.10.0.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.9.2.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                           $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						     if(preg_match('|jquery\-ui\-1\.9\.2\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.9.2.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.9.2.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						   <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.9.2.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.9.1.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                          $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						    if(preg_match('|jquery\-ui\-1\.9\.1\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.9.1.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.9.1.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.9.1.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.9.0.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                           $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						    if(preg_match('|jquery\-ui\-1\.9\.0\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.9.0.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.9.0.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.9.0.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>				
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.24.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 
+                            $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   
+						   if(preg_match('|jquery\-ui\-1\.8\.24\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.24.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.24.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.24.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.23.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        {
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						    
+						   if(preg_match('|jquery\-ui\-1\.8\.23\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.23.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.23.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.23.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.22.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						    
+						   if(preg_match('|jquery\-ui\-1\.8\.22\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.22.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.22.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.22.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.21.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+                         if(isset($change_url)) 
+                        { 
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.21\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.21.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.21.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.21.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.20.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 
+                            $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						    
+						   if(preg_match('|jquery\-ui\-1\.8\.20\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.20/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.20.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.20.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.20.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.19.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 
+                            $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   
+						   if(preg_match('|jquery\-ui\-1\.8\.19\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.19/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.19.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.19.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.19.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.18.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+                          if(isset($change_url)) 
+                        { 
+                            $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						    if(preg_match('|jquery\-ui\-1\.8\.18\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.18.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.18.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.18.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.17.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.17\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.17.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.17.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.17.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+					<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.15.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.15\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.15.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.15.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.15.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+					<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.14.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.14\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.14.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.14.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.14.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+					<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.13.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.13\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.13.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.13.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.13.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+					<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.12.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.12\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.12.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.12.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.12.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.11.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.11\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.11.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.11.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.11.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                        </add>
+				</operation>
+				
+					<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.10.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.10\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.10.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.10.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.10.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                        </add>
+				</operation>
+				
+					<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.9.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.9\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.9.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.9.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.9.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                        </add>
+				</operation>
+				
+					<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.8.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.8\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.8.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.8.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.8.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                        </add>
+				</operation>
+				
+					<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.7.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.7\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.7.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.7.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.7.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                        </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.6.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.6\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.6.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.6.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.6.custom.min.js"></script>
+						 <?php } ?> 
+				    ]]>
+                        </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.5.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.5\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.5.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.5.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.5.custom.min.js"></script>
+						 <?php } ?> 
+				    ]]>
+                        </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.4.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.4\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.4.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.4.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.4.custom.min.js"></script>
+						 <?php } ?> 
+				    ]]>
+                        </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.2.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.2\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.2.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.2.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.2.custom.min.js"></script>
+						 <?php } ?> 
+				    ]]>
+                        </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.1.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.1\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.1.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.1.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.1.custom.min.js"></script>
+						 <?php } ?> 
+				    ]]>
+                        </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.0.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.8\.0\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.0.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.0.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.0.custom.min.js"></script>
+						 <?php } ?> 
+				    ]]>
+                        </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.3.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.7\.3\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.7.3/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.3.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.3.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.3.custom.min.js"></script>
+						 <?php } ?> 
+				    ]]>
+                        </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.2.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.7\.2\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.2.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.2.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.2.custom.min.js"></script>
+						 <?php } ?> 
+				    ]]>
+                        </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.1.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.7\.1\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.1.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.1.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.1.custom.min.js"></script>
+						 <?php } ?> 
+				    ]]>
+                        </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.0.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.7\.0\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.0.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.0.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.7.0.custom.min.js"></script>
+						 <?php } ?> 
+				    ]]>
+                        </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.6.0.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.6\.0\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.6.0/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.6.0.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.6.0.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.6.0.custom.min.js"></script>
+						 <?php } ?> 
+				    ]]>
+                        </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.5.3.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php 
+						 if(isset($change_url)) 
+                        { 	
+                             $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						   if(preg_match('|jquery\-ui\-1\.5\.3\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.5.3/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.5.3.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.5.3.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.5.3.custom.min.js"></script>
+						 <?php } ?> 
+				    ]]>
+                        </add>
+				</operation>
+				
+				 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.5.2.custom.min.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|jquery\-ui\-1\.5\.2\.custom\.min\.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.5.2/jquery-ui.min.js"></script>
+						<script>
+                		if (!window.jQuery.ui) {
+				 			document.write('<script src="catalog/view/javascript/jquery/ui/jquery-ui-1.5.2.custom.min.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.5.2.custom.min.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.5.2.custom.min.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				 
+				    <!-- replace mootools file-->  
+				
+				 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.5-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.4\.5\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.4.5-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.5-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.5-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>  
+				
+				 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.4-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.4\.4\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.4.4/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.4.4-server.js"><\/script>');
+               			}
+			   			</script>
+						
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.4-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.4-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+
+                 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.3-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.4\.3\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.4.3/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.4.3-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.3-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.3-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+               
+                 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.2-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.4\.2\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.4.2/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.4.2-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.2-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.2-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+               
+			    <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.1-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.4\.1\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.4.1/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.4.1-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.1-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.1-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+                
+                 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.1-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.4\.1\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.4.1/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.4.1-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.1-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.1-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.0-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.4\.0\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.4.0/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.4.0-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.0-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.4.0-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.3.2-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.3\.2\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.3.2/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.3.2-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.3.2-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.3.2-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.3.1-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.3\.1\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.3.1/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.3.1-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.3.1-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.3.1-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.3.0-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.3\.0\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.3.0/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.3.0-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.3.0-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.3.0-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				 <operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.5-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.2\.5\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.2.5/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.2.5-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.5-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.5-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.4-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.2\.4\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.2.4-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.4-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.4-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.3-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.2\.3\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.2.3/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.2.3-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.3-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.3-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.2-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.2\.2\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.2.2/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.2.2-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.2-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.2-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.1-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.2\.1\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.2.1/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.2.1-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.1-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.2.1-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.1.2-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.1\.2\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.1.2/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.1.2-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.1.2-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.1.2-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				<operation error="skip">
+				    <search position="replace">
+				    <![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.1.1-server.js"></script>]]>
+					</search>
+                        <add><![CDATA[
+						<?php
+						 if(isset($change_url)) 
+                        { 	
+                         $flag='false';						
+						foreach($change_url as $url)
+						 { 
+						  if(preg_match('|mootools\-core\-1\.1\.1\-server.js|',$url['url']))
+						    {
+						?>
+						<script src="//ajax.googleapis.com/ajax/libs/mootools/1.1.1/mootools-yui-compressed.js"></script>
+						<script>
+                		if (!window.MooTools) {
+						   	document.write('<script src="catalog/view/javascript/jquery/mootools-core-1.1.1-server.js"><\/script>');
+               			}
+			   			</script>
+						<?php
+						    $flag='true';
+							 break;
+					    	 }
+						 }
+						 if($flag=='false')
+						 {
+						 ?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.1.1-server.js"></script>
+						 <?php 
+						 }
+						 }
+						 else 
+						 {?>
+						  <script type="text/javascript" src="catalog/view/javascript/jquery/mootools-core-1.1.1-server.js"></script>
+						 <?php } ?> 
+				]]>
+                </add>
+				</operation>
+				
+				 
+				
+			         </file>
+				  <file name="catalog/controller/common/header.php">
+		         <operation info="replace in php files">
+                  <search position="after"><![CDATA[
+		            protected function index() {
+				  ]]></search>
+                        <add><![CDATA[
+						            ob_start(); 
+            						$this->load->model('module/replacelib');
+						             $this->data['rep_staus']=$this->model_module_replacelib->selecttable();
+									    if( $this->data['rep_staus'] == 1)
+                                        { 									   
+	                                      $this->data['change_url']=$this->model_module_replacelib->selectdata();
+									    }
+									   ]]>
+                       </add>
+				 </operation>
+                </file>
+</modification>

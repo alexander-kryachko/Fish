@@ -1,0 +1,220 @@
+* { margin: 0; padding: 0;
+	font-family: 'PT Sans Narrow', sans-serif;
+	font-size: 12pt;
+	line-height: 14pt;
+    color: #666666;
+ }
+b { font-size: 14pt;
+	font-weight: bold; 
+	color: #336699
+}
+p { margin-bottom: 13px; }
+body {
+/*	background-image: url(img/white_wave.png); */
+}
+#wrapper {
+/*	background-image: url(img/wrapper.png);  */
+    width: 840px;
+    
+	height: 880px;
+    margin: 0 auto;
+}
+#bott {
+	background-image: url(img/bott.png);
+    width: 840px;
+    height: 40px;
+    margin: 0 auto;
+}
+#header {
+    background-image: url(img/header.png);
+    background-repeat: no-repeat;
+    background-position: left center; 
+    width: 840px;
+    height: 150px;
+}
+#cont {
+    background-image: url(img/cont.png);
+    background-repeat: no-repeat;
+    background-position: left center; 
+    float: left;
+    width: 410px;
+    height: 355px;   
+    padding-top: 105px;
+    padding-left: 90px;
+    text-align: left;
+}
+#regist {
+    background-image: url(img/regist.png);
+    background-repeat: no-repeat;
+    background-position: left center; 
+    float: right;
+    width: 340px;
+    height: 460px;   
+}
+#predlog {
+    background-image: url(img/predlog.png);
+    background-repeat: no-repeat;
+    background-position: left center; 
+    float: left;
+    padding-top: 80px;
+    padding-left: 20px;
+    width: 480px;
+    height: 210px;    
+}
+#tovar {
+	margin-left: 10px;
+	float: left;
+	width: 150px;
+	height: 100px;
+}
+#tovar p { 
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: center;
+	height:40px;
+}
+#tovar img { 
+	width: 110px;
+	height: 90px;
+	margin-left: 20px; }
+#tovar span { 
+	padding-left: 50px;
+	color: #FFFFFF; }
+#tovar span b { 
+	margin-left: 6px;
+	margin-right: 6px; 
+	color: #FFFFFF; }
+#brands {
+    background-image: url(img/brands.png);
+    background-repeat: no-repeat;
+    background-position: left center; 
+    float: right;
+    padding-top: 230px;
+    padding-right: 20px;
+    width: 320px;
+    height: 60px;   
+	text-align: center;
+	color: #336699;
+}
+#brands span { color: #339999; }
+form {
+	width: 210px;
+	margin-left: 55px;
+	margin-top: 95px;
+    color: #FFFFFF;
+}
+form div{ color: #FFFFFF; }
+form p { 
+	text-align: center;
+	font-family: 'PT Sans', sans-serif;
+	font-size: 14pt;
+	font-style: italic;
+	color: #FFFFFF;
+}
+input.text {
+	padding-left: 10px;
+   	padding-right: 10px;
+   	width: 190px;
+   	height: 31px;
+   	outline: none;
+   	border: none;
+   	margin-bottom: 11px;
+   	background: none;
+   	text-align: left;
+   	font-family: 'PT Sans', sans-serif;
+	font-size: 12pt;
+	font-style: italic;
+}
+input.checkbox {
+	width: 14px;
+	height: 14px;
+	margin-right: 10px;
+	background: none;
+}
+input.button {
+/*	margin-top: 21px; */
+    width: 210px;
+    height: 40px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+input.button:hover {
+    background-image: url(img/button_hover.png);
+    background-repeat: no-repeat;
+    background-position: left center; 
+    width: 210px;
+    height: 40px;
+}
+#help {
+	position: absolute;
+	margin-left: 250px;
+	margin-top: 50px;
+}
+.thumbnail{  
+	width: 20px;
+	height: 20px;
+	float: left;
+	position: relative;  
+	z-index: 0;
+}  
+.thumbnail:hover{  
+	background-color: transparent;  
+	z-index: 50;  
+}  
+.thumbnail span{
+	position: absolute;  
+	background-color: #CCFFFF;  
+	padding: 10px;
+	width: 200px;
+	left: -1000px;  
+	border: 1px solid #339999;  
+	visibility: hidden;  
+	color: #339999;
+	text-align: left;  
+	text-decoration: none;  
+
+}  
+.thumbnail:hover span{ 
+	visibility: visible;  
+	top: 0;  
+	left: 30px;
+}  
+/*---------------------*/
+
+/*-- 1. Фон страницы: цвет, картинка,  её позиционирование и повторение --*/
+body#reformal_body {background-color:#323D42; /*background-repeat:repeat-x;  background-image:url(/i/body_bg.jpg); background-position: 0 0;*/}
+
+/*-- 2.Тип основного шрифта, цвет и его размер--*/
+#reformal_container {font-family:  Verdana, Geneva, sans-serif; color:#000;  font-size: 11px;}
+
+/*-- 3. Основной цвет ссылок---*/
+a {color:#336699;}
+
+/*-- 4. Цвет и размер заголовков идей---*/
+.reformal_idea h2 a {
+font-size:1.3em; 
+color: #336699;
+text-decoration: none;
+}
+
+/*-- 5. Цвет сервисного текста вверху---*/
+.reformal_service_block {color:#FFFFFF;}
+
+/*-- 6. Цвет ссылок сервисного текста вверху---*/
+.reformal_service_block a {color:#F9502F;}
+
+/*-- 7. Цвет серсисного текста внизу---*/
+.reformal_copy {color:#FFFFFF;}
+
+/*-- 8. Размер, цвет и жирность шрифта названия проекта--*/
+.reformal_proj_title h1 {font-size:26px; font-weight:bold; color:#ff3600;}
+
+/*-- 9. Цвет счетчика кол-ва голосов---*/
+.reformal_idea_counter {color:#C30808;}
+
+
+#reformal_form {background: #F7921E url(/i/reformal_search_bg.png) 0 0 no-repeat; height:97px; margin-bottom:6px; _background-image:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/i/reformal_search_bg.png');}
+
+
+
